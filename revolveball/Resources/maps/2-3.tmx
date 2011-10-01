@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="name" value="Narrow Roads"/>
+  <property name="time" value="120"/>
+ </properties>
+ <tileset firstgid="1" name="texture" tilewidth="32" tileheight="32">
+  <image source="world-2-tileset.png"/>
+ </tileset>
+ <layer name="Border" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+2d0W4cIQxFSdq0z63U9jlK1LT//4MV2kXLUjDYGDDLPRKajAZshhsb4qYb5/g8CZuGHwmS+UnfUTrHHrzPF0b/z06uB3XPsUPNNzc/7juW7Mwg+Pzk6t8rz8kYiZ+vHTbicbn5lubHecfe9+zlKblq9S2NLd1z7eTGl55x593znr14n78bfe+gR+5dJHq0rok2M+Mj5IGQNyRw4yPeO1r3hNXx0eq7d54a7ynRI9dH6mM0s/XozQM9erTG5Ul69Iyv2aD0iM9WPT5Gc4oe8Xm2x8dooAfPx2hO0SOcraCH3viajdp+jvOu7viaDZx3x/mS2Cjpwf05FHro2Cg94/qFHjo2NPTwfbj1FU2gR75v6X400CPf1/OrcYwmj6IHlWd20YObK/3zvw39qPHxVdMGdb+THtR9qb9lPV4zz3fS4/u1pXMp9W/pN2o8ZeO0+NA4B87S49WdoUdr35qNUXq8Zvpx/a4870r0yOVnrj/r+Urj3/klPFp8eHr3c0l/LYK/sKe36pHmZ64/y/Eh6a8FNz5K+Znrb5QepTyzkx6tudJ6vqKe7aIHx7f1/Zx69sh6lO41fUltnKZH7zlQS49SDY3Sg1N320EPbt8R42s2TooPbl9qfPy7N9z2kthqsU+NoeZ5gh7P1V51SvmSss/JsSfpodkk9lvnGV9noqGH9L2tspMeuXNKuP/GsNXiS+v7XeI7vs5EEh+5/Tjt19v8Hvx2tVe69pwLpGeG0XD1oPbj3fOU5+N6nV1rD3D1mNW87j8cHSOt/3+5p81mZa6ksLpeo7Gqx6mcrIfFeFulh4V8FOxrntN7CXMYdXasnSk9fm9+j74OzJhTbi1WEs4ygT8L5vCWtNlYytkzYyJuLXXFGefZOE4s6LGKmftHmh9zz+MrGEtY51y85fqBsZS+/8O9pfPVCVB6jMiPgAb7gy28Dqs+7w38D+LDFtDDFtDDFtg/bIH4kDOijgI97uHU9UKd6WeheSR1eOegR6BWzxvBR/Q19LiHqueNrsO7zPV0OOuhtX/EMQk97pm9HrEW8e+1QY8LM9cjpwX0uGfWetTiAnpcmLEeJS1m+d+FeJ1GfT4kpYVz0COmtDbaPsI5ufT3vEb53o0ZegS7JU2gxw2/Bl+iNnoPyWkCPW7M1CP4SzWBHjdm6xF8UnFyMr218h6/6d91hB5rwf5hB9QT7YB6oh1QT7QD6ol2qNUTe/4OAOCBeqItUE+0B+qJ9kA90R6oJ9oj1WTl51mBC7EmnlWfZwVurKotAwAAAAAAAAAAwA7/AK3IRN5AnAAA
+  </data>
+ </layer>
+ <layer name="Extras" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3cOwoAIQxAQUs/97+vrSxsJZIoMyd4jSFNLIWXtegAAAAAIK0RHQAAgJ3sR40OALZ5x8Bp5gwAAAAAAADuqAEAuEWPDlhkagEAAAAAAACAjPxrAgAAAAAAAAAAAAAAwNcE3ejxsUCcAAA=
+  </data>
+ </layer>
+</map>

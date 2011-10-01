@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="name" value="Claustrophobic"/>
+  <property name="time" value="100"/>
+ </properties>
+ <tileset firstgid="1" name="texture" tilewidth="32" tileheight="32">
+  <image source="world-3-tileset.png"/>
+ </tileset>
+ <layer name="Border" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+2c627kIAyFZ2a729/zDn3/Z1xFLRJFYAy+YMj5pKhJJ2DiAzaQTh8PAAAAYG+e2QF+4+mb0s67sD9ynEj5XJbPqVl30vE00jN9FtecctI+LfXnyXq0rjllRsn7tkTTU/V4/Zz/efjoISl/uh4Xo301MZuLNdpanp/E7HOt8Af00CujwR30uNhl7l+bf5ysS3Ravocu67j8/iY+gzb+cHwOTfxJulDjBfhDxSloshZoEg/PfWvAo7VWibq2Op0Z3576XiUK1NyLKgPsmHmvIjmAHE0/QhM50CMerfjzogoRdQEbkm/T+2xuDgI2PIufvfs494J5oMcaenEIevjB8d9KPe627uGuB7l11K4lcGxL17aR0OrbVppw65HM8yLpohlrLOIW1ec17X8Q9Xqymx75OTUmnpX7uLFqpSa76lG7p6VHr/7aXsSqvHPV+5WdS+uqnVvXKdEjv38m51jMJ1/F9aytCHqUbZ95hpF9u5R3NNGKo6v1GP2MKkMdNb00NWnZk+qhEf+4etR8xP1ezyit+GGVV7hzE06Ok7QvL0v5dkXezW232mNpY7aclh4r56A9auNTM69o1DObT1vtiKzHBRUfpONlJk7VYumj8vvRdryz8x1o+d5iHtZrR6L8HrFGnbvokfCYh/XsJ6DHN73YYW27bMeX0PbueuTk7feIXTU9NPJY7XxXPJ/Hwlaq56S/LdaI41TdlvHxtPFxYfVMVF3Qo00579Ja6/0lPoMeNLXcPuu3skztbxe1OFWPi9m9uPIox4Wln6g5m7b2K2itGSX1WULVf8qcS9q38vhkTa//nKBHjsa+4Yr25Z+DtUCPWEAPf7ixEnr4wPUz9PCB4+dT5rs7wFkHnrAe3AXk7FhAj1hAj1hAj1hAj1hAj1ho6NGbI8/upUbab/VCS48a6f1o632zBl7vIrz6w8h60LNd+buf3ns967HS62/atkb/1yBVl0Us4u53roiJ0fXwRNMexwetvqLJ7vnV0mauUf6dMUs9TsAyVvXGBPRYD/TwZ2asABsuH3PXTNDDHq6Prb5zD37DWfusnFPeDeSHWNxNj+hrzTvqMbrn66nLHfVYUV66Fo+IRhwZnb/UbIzalWgYmat9/36OdK21F9SzK+m7M37dYX1R6qFRn6QMd4zOjMnoWlxE0KNW7qScMMJsfLLog6fmhJ0Z1XSHnHACXmMSAAAA8CTlrf+Gv3uTQJwAAA==
+  </data>
+ </layer>
+ <layer name="Extras" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3csRHAIAgAQMskI2SF7L9fBsidVTgQ/1sbCjxF1DEAANjdlR0ABJDXAPuyBgAAWZ7sAAAAAGjjmIypPwEAgG5mNRBrO7MDAABKubMDAIAgzjYAelCzAADAl74/M/74AQD4l/03AAAA7EnPhZXIVyLJr/68vwEAYGX2s1TkvhEA1GJthprMTQAgwgs93s34QJwAAA==
+  </data>
+ </layer>
+</map>

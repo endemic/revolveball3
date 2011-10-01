@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="64" tileheight="64">
+ <properties>
+  <property name="name" value="Squiggly"/>
+  <property name="time" value="60"/>
+ </properties>
+ <tileset firstgid="1" name="texture" tilewidth="64" tileheight="64">
+  <image source="world-3-tileset-hd.png"/>
+ </tileset>
+ <layer name="Border" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3a4W7DIAxG0bRrt/d/46k/kJBjjAETFXKPFKldM6/lG5hkOw7bo3LgOp/xfhuvvw4yuUoti4RM5pNZ1NYqMpnrIR5r80RmQB7zaOP85zwP8bzjXDqvtidjr9ZmJA/vPkCiB5X15tGbRUImOjnOT+WcH+W8t3jNe+T1vZncaQ2Un0N+Nuuzpiy88ySNf0smd7s20uaEZw1rzSJpyaS1/k6ZlJ5b64McK2vt0sZf+1qpfmvtlVl5eFnzxRp/rV9F1V7VaB6etas3k9HaKyr19JajtLb0rFOl2tqaZdVeOQ/PuuGh7Y3lz9Kyq/VtWbdWWzt/JRGZeMYsKotUW86H9Hzl9SrpWadq12SlnEtZlPZR1nuWGeTPcSYz0bLIc+ipnz/O1yzoUiZWFiO1k6j+4Z2fK7P2S6N1k4j+kb/HHfqQxdp7RdUc6R9aT9s9j+g9UFT/KH3vznl8RGfS0z9kb7CuXXbOo9RDRmsmnpzTz8/vDcj3I//nZlczrqFb+occ65fyfiL3ft9uxlpVGk/ZP+Rr3muinUXOj1oWtf4w85poJVHzo7Svyr2Ocm5a/8jPuYuoe0zePZDVH6S7ZfERdY+pZU+qrWfyPidZxK5XJVZveYqv3U3k/sqbR+1ab+d7hjXy93L0vl/+uPa/fHedAzVR93hlBvIeuaxLFme1fWlPPe/fmcnjLI3Jrzjy13pq1jJhrdLNyCN9b+3A2aw80Ic8votnX4prsb4DAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABc4x++g5umQJwAAA==
+  </data>
+ </layer>
+ <layer name="Extras" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3ZsQ2AMAwEwLTABrAB2X8/JCraSNgO6K62rJeLb9waAAAZtuoAhFqrAwBMRi+OczMgW1bv6DcgwjIwuwftBYC39OoAMBk/NQDg6awOAADcjuoAAHySHzwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPAHF1EjePRAnAAA
+  </data>
+ </layer>
+</map>

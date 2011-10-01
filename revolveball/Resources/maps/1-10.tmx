@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="name" value="Spiky End"/>
+  <property name="time" value="60"/>
+ </properties>
+ <tileset firstgid="1" name="texture" tilewidth="32" tileheight="32">
+  <image source="world-1-tileset.png"/>
+ </tileset>
+ <layer name="Border" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3a2W6DMBCFYafrdW+6vP+LVpFAOOBl7LEn2PyfZKlNQwg+YMYuzgEAAABHN0GDnXt/v0f+9ubIw1quv8nD1m33836MIg9bob4nj+chj3Mhj/Y09ao2D2rlo9Bxfy3NIo91X99Lk+57Vutxf3qv+X0iPYdjeeTauq/Qvq+o1XGH8qj10+hzRtTiuF/dYx4vys+7eh6pMaOkuYptGK8e+X3ytzSrPiGPox7nfM21FPo+CGvdN/vPYw65KTmfe+zTOfLwlR6/dowK7Zs8NjV5tNoPeRyVzqc1eYTu3aHvcGXWfUEeaeTRl3SseVbtL8nDstbr7f59JWvY/vtWFnPjXB4pIz6zkutnv50pD+ka5Ih5/Cq27722GsujZJwdyYh59NjmLEYdr2a+PiT97L/Pcp09lkfsudPU9iOoqW0ta0pNfeX/H3I0Z73Grzb/WI2cx0xGH69mzKP0fr7O4z+W1qNPUrXSlfNI1bu984i9NnseVvNByb03NQaSR15pHjX2Gc2eh9X8XJNH7PeZ80jNu1vMz0vnDaHrQlILjkw6hreod7XndYtrFJtY7VrSyKOdWB7StcGYKz/frpGb29UijzqSuTbjlR3t2keLGg+bFnloazxstHmgLfI4F/I4l9w6B3nYktyvYefe37HnPEd+FmRU0nVcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAUv8TAa0MQJwAAA==
+  </data>
+ </layer>
+ <layer name="Extras" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3bqQ0AMAwEQcM8/fcbHhnHsTTDjm0DFwEAAAAAvLKvPUoqAAAAAAAAgK5WdQAALc3qAAAAAAAAACDlfw4AAAAAAAAAAAAAAAAAAAAAAPC3AwXpEZ5AnAAA
+  </data>
+ </layer>
+</map>

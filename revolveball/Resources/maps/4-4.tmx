@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="name" value="Backtrack"/>
+  <property name="time" value="90"/>
+ </properties>
+ <tileset firstgid="1" name="texture" tilewidth="32" tileheight="32">
+  <image source="world-4-tileset.png"/>
+ </tileset>
+ <layer name="Border" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3XzU6EMBQG0NH4szcadWlc6Ps/oSHaBAgMUCi9yDkJi5pJe6ef9HYul3E3rYe6+hnIpK60/4+9MXV4P2KRRyzyiGUoj5IP1/X36LPgWq8D69Elj1j2zGNoPbpK94+p9egquT9D55M8rpNHLKX3Z+/79NHv4nv3i2Z8P/C575XfY+0cUe5+W9cwdT6l8fPG627hrHncZsz7lVfOovmi5fGROcfLyHxj40jPtVprmLtfbyvm64+H+seUM74fU5+bk9Hc/hFRhNpSDTlnVc4ZMPad3a9+la7hSP0kipK1TuXxtGLuLR3t/Via0fvfI49l1v7vL32vxvKo3T/uLvHyyOnpa9ZL4yj9Iloe7b+V6nWR7r+RaklK9Y++uf1kT5FqSVINOWfV0c+IyHmccf2IeTRq/laSR55SGcljOyXunHv6b3kcnTxiafb/ofXIoy55xBKtnwEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDXD30FHdZAnAAA
+  </data>
+ </layer>
+ <layer name="Extras" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3YsREAIAwDsZTA/gOzAp1DTprgS5+rAAAAejjpAAAAAEZa6QAAgOH8+0DKTgcA8CX7FQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeHUBrVQ8yECcAAA=
+  </data>
+ </layer>
+</map>

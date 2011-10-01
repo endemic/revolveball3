@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="name" value="Barbell"/>
+  <property name="time" value="60"/>
+ </properties>
+ <tileset firstgid="1" name="texture" tilewidth="32" tileheight="32">
+  <image source="world-4-tileset.png"/>
+ </tileset>
+ <layer name="Border" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3dTWrDMBQAYTvpzzqXCL3/CYuhBSNiSe9JsWcxHxhctc1Cg1RhCl6XZVnfcClnm7vv3f1n8f2P5Lhy1oP7o58ZGVfbUY/W/bNzXDHZHr33iunZc+xxnm3ubsXYfbHHVXrOrPY4T8/c2eM8rbkb3bsUU87j7L1LMdG5s8d7vTpfHcnsXYoZeVZoj/lePROM/G7rXjHZuevduxTTe77K7l2KmTV39phjf776SX5Gbe9STGaPiuxdukbZwCbXswmPTXhswmMTHpvw2IRna/Aovta1XCc8NuGxCY9NeGzCYxOefYPHYhMC1wmPTXhswmMTHpvw2ITH58I8rhMem/DYhMcmPDbhsQmPTXhswmMTHpvw2ITHJjw24bEJj014/F8iHtcJj014bMJjEx6b8NiExyY8NuGxCY9NeGzCYxMe/4ebx3XCYxMem/DYhMcmPDbhsQmPTXhswlO+P2DWpZxt7p67+/93PmXf2eF748eU62P2ZyrmqMfIHmWPvFqPGe+rU0ytR0b5zifF1Hrs/857vjpHz/qI7F2er8b09sh+pmKiPTxfvVemR2vvskdepkeN56sxIz08X8032qPk+WrM7B61cbXN6uH5ao6ZDb7+LnvkRfec2rg9xm1zdyvG7slxe4zLPCvsuX4BDF7CsECcAAA=
+  </data>
+ </layer>
+ <layer name="Extras" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3YsRHAIAwEQVKgFPrvz0MJloOH8W6o6FJ9awAAAFAz0wHAr410AAAAAPDZSgcAAAAAXMy2AgAAAFBnWwEAAE7hPwEAAE7hPwEAAACos60AAAAAALD1dAAAwEXmyzsAAEDaA7d96+VAnAAA
+  </data>
+ </layer>
+</map>

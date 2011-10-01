@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="64" tileheight="64">
+ <properties>
+  <property name="name" value="In The Woods"/>
+  <property name="time" value="90"/>
+ </properties>
+ <tileset firstgid="1" name="texture" tilewidth="64" tileheight="64">
+  <image source="world-2-tileset-hd.png"/>
+ </tileset>
+ <layer name="Border" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+2d65LbIAyFk7qX3/sS277/E7aeXaasRqALIOT4fDNMhthGoBMQ4Dh5Ph6PZ9KkZXc9V7b7zP8w+MLDd8FOOa4los6rKW0u7f71+WrxwwiSHaser0Crf6zg+Je+GexAj//v1RwP3xjIpXpMkeyO6LF7/B+JFTP9Us7XjOWr9cgeT7gYSfU4Oud4+kCP1Xr0+GMoeyWSHqdm1J8rxuaW7l67UTFwNprxSrpGiybuSHXToilrRyrzl4PkpXrS8wrc51hDuc4yhq/WY0Y88ayLuFd6vM5b5wDa+Za1/aOfaamsHnQuTvPeehUftNa/rTZbfMfFmFG8/bBFTw/O17RNNF9fM6uv0XqV/MrYZ127zKKnh+fzVF+zup6r9DiM5/fimNXuSCySmFVWb23BvXf1RNukpRc7uLJm15N7L/va1ooUP2q48YzGj1V4P0tZ1rdaevFD0odek1GPKyHN3azxfVaca5Ut6bE7DqyIJy00fWV1nNPo8UrxpOdzz1g2glePK/BbeZ5lfJq99pXuyb2SHjuw7LOcUH1n6LE7DuyMP9Tf0j4Ldw315cl7lffocTdKm0f3Wlrl1nnoIbOqzdDDh6XNUgzprfWhh45em6WY0juu0UOqC/T4ihRTRuOH5pq7ER0/LPfP767HzDW7dy3RK+MO1G3WrjG0e2E0/2TKt5RxB6Q2cxppdPPED2vdXpFZbfbsl/SY/T2Qq7B7PWiJJ3fAsv4YKTdzvF5538HKyPrjpKXZlfTIhGW+q/m+Xc8O9JCR5rsPw3HJzqgekfFmV2zrrZlnUX+Xk9rWYrnvOUqkLYp23TwrUdsaPPdlvETa4rCumT3Q551r2xLeunn8FGmrRVRM9ejB7QH0+h4319ASaavHbj1aifOPBs5P0hgaacsyps+OFW+fqS7bg/V5gpH5SaQtidnzRZr3lG/1T8Hjp0hbGiL0sNTd659CVlsaIp6rG5kbj9Qjm61oH5S69fIgFuiRC+iRi+L/MueFHntB/8gF9MgF9MgF9MgF9MgF9MgFt78L9oH+kQvokQvokQvokQvokQvokQvs7+YC/SMX0CMX0CMX0CMX0CMX0CMX2N/NBfpHLqBHLqBHLqBHLqBHLqBHLrC/G4fnWRLosQ6Nb6FHHNAjF9S33O/+QI84OF9r/g8SrEHja+gRh+Tr8uw09ndjkPSI+m9z8IFnLIIe64AeueD0iPztB/AVj2+hxzqgRy5O31p/Xwh6rAP7u9cDeuTi9P/PKkGPvUCPXECPXECPXHDzrb9juJ2vQJwAAA==
+  </data>
+ </layer>
+ <layer name="Extras" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3cQQ7CIBAAQI0xsfr//+rBXnoopW7BpTOJ8QIsBS1bJF4uwBGevTuwQ48+ZxwnANqzXgAAJdP3vXfe0Dv+VlO5CB+P3h0AhpVlvViq7bf7KJDZ8h72Cmx7tHx8tOsBAPrwDAkAAOOL3GeNcO/dAQCaKv2mVbs/dfu8rhvLbi0X0UZErGxq5mL2yzi1jJXN2lyUzh3tGae1OmvxzjAne74XSzX1W8b6VeuzexFzMdvSTstYIyldb+R4tIyVkfzqf0TnPJFrc235rOe2Z3s/g9H51RH1sjl7fmU/FQAAAAAAAAAAAAAAAAAAyML/3gMAAAAAR3kDbf4VI0CcAAA=
+  </data>
+ </layer>
+</map>

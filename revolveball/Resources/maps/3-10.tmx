@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="name" value="Symmetry"/>
+  <property name="time" value="90"/>
+ </properties>
+ <tileset firstgid="1" name="texture" tilewidth="32" tileheight="32">
+  <image source="world-3-tileset.png"/>
+ </tileset>
+ <layer name="Border" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3XwW7CMAyA4TK2cUeCbccJDnv/JwSkVoqs1EmoU2b3/6Ro7ZK6OIZihgEAAAAAAAAA+tk5HhFpeZVyXjLfM7ZnXurxmYya673aiWPrc6tYW6zHYbD9TMwdPxN7i/XInZfWa/OW9Viy1pOefU/u+UN/pWvJ63dB7Mfxd6fYkczl1bI/c2vn6mEdOxKtp5nIPdH2qLa/sowdyZL3sFxzzcSruc4ytncWz/j0/48YP+Ow+G6SsXPHkfTugdbo3SIp5XhR1tfEPo+jR+yIZD1OYt5qz3rGjkTrgWrPL+No6a8sY0ei5ZWbO4r56ftf9j+vjO1Zac/kM6a0Zycx/4rYnq3VA/W8TyRpXvv7eKu4Rlun1UP7bdNyDxk7kjSv9/v4yKyRezO3TsarrUdu77V7yNiR1OSl7Y3cy5r+qqW+uetl7EhyeWnPimc/K6mW+k6+hu3WQ9uvmveyFrtExr+Of7dYjx490Bq9WyQ98jpnhjXq8b94fd0lXvPy+rpL0rz+DOLth/xzX/ZMS+8VuR5eBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwNbdAGh1oDpAnAAA
+  </data>
+ </layer>
+ <layer name="Extras" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3BMQEAAADCoPVP7WULoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgBt5RKnmQJwAAA==
+  </data>
+ </layer>
+</map>

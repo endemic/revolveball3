@@ -1,0 +1,22 @@
+Revolve Ball v1.5
+-------------------------
+
+Planned new features
+	* Reworked vector-style graphics
+	* Reworked icon
+	* New music
+	* "Lite" version with 5 demo levels
+	* Updated level select
+	* "How to play" graphic on first run
+	* Additional "info" scene with rate/more games/reset data buttons
+	* Rework "ending"
+	* Add "Choose world" text to hub level
+
+Remove
+	* "Appirator" rating crap
+
+Change
+	* Start playing music on start of level, then pause, then unpause to see if that fixes lag
+	* Add "ready" "go" beeps
+	* Add "choose level" text to hub stage
+	* Add "reset data" option

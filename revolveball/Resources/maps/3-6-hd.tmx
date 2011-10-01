@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="64" tileheight="64">
+ <properties>
+  <property name="name" value="Careful"/>
+  <property name="time" value="90"/>
+ </properties>
+ <tileset firstgid="1" name="texture" tilewidth="64" tileheight="64">
+  <image source="world-3-tileset-hd.png"/>
+ </tileset>
+ <layer name="Border" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3aXW6cMBgFUOe3O2iT90pN97/BCimWLGqDbQzDMOdICEYDBnzzYYckhO2eFhaONfX5W+G717Cc1ZaFvLRvXr4/P+98zj9BJiWxX16S7b1qIm2fvHkf/djpPGlNyKMs9s1r2K8+YptvyTZ5ad/ETErje2u7P0O+JuRRtjR+xzFlyxhRWlM2cl46P0Yet1VbJxxrKQ9z4uNtqYv5XIDteuriueOYkXPyK+upj9y+X8OuqOxXuH6GLeNHri5K+46uiWnd8/vWvb2Da6mPvedisZ3f4f+x6Wm231XnG7U/66V9J/P3/VuvZelc8+21tu49j5Z9c8eMyqN0ztpzXCGPv6HtGTD6+aA+2u9zbT95bJPOm1qOietSDfVeS+4cpe9qr/He9MxBP8P4e5VHvz3uUx7nIo9zkce5LPW5PI6XyyA3Z5PHMWrm3un/n621la7ps5RJbRaxnXRNv7X3NbVtpGtuSx7nIo9zkcd2Pe/R1saaR8mjZYyt7b+Pna7z6qZ7fP9e4uej+7nWI+Yxuu1Ryx5/EzijnjxanvmjPEIWk9bn1aP0yy3pawAAAAAAAAAAAAAAAAAAAAAAAAAAAACAa/gHst4BCUCcAAA=
+  </data>
+ </layer>
+ <layer name="Extras" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3ZSwoAIQgA0Jbzuf99Zz2tSoLK3tsHYihapQCreWYHAItQC9Dnnh0AYdfsAADYntkZ2oysFXWXW8b7fQNn7CqcLGMfIKbuhXrjnzdJAHZS70WRPYl1mMsAAACAU/iPGU9OAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA6PEBeWUl3kCcAAA=
+  </data>
+ </layer>
+</map>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="name" value="Pipes"/>
+  <property name="time" value="90"/>
+ </properties>
+ <tileset firstgid="1" name="texture" tilewidth="32" tileheight="32">
+  <image source="world-1-tileset.png"/>
+ </tileset>
+ <layer name="Border" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3b3XKCMBCGYSy03v8dVw+YcTIh2Z8sbPB9ZjhQlhX8KIlKlwUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB38TAuiPF+b/+KRbINYvTyWF/LT2UbxOjlsb2W38o2XNtiWK5XUttCHlqReez9IWcZP7T9IRcxfpS1kBs93yUPn9GfB8kjF/LIhTxyIY9cyCOXVh7WuYP0uxf66z5/eP9WJMdTflaSkny3k7m/1Nl5fHN/7T5kP57Z+/esSzsPz7Wv5hv7e8aTEftH/TjZjmf2eq9sxzN7vVe245m93ivb8cxeb9Wab/C8/nmvq8+jqPr1ov3xGrV/j4P13v7ax29rY/2d86ht26qX3L9X6996zfLx2llf9qotre1LmfLQ1h/df+Ht/5nxFtC/dU3ImIfm/LX0l9QfZXL29dPLun+9ccTTXzvP2dUykbyf0vNJcv30umL+8zmOjO5fZiIZP6T9s+ehHc93n+PI6DwixidPP62z/j6O7m0d+X7Vfr9jPK+vq82tev01892j31Jb41BtTJp1vhs5nmsft37XPnu+53XFeH7neq8z5qPf9LyXNf/s5+nV9VbkEVNvRR4x9VbkEVNvNTKP3uJ53dn6W5V9n8LX9e6P9TyYpX9UX/KI2d7at5WH9X+ty3tV79jfSnvd1Gxn6XuX/lb/NEE+iUCcAAA=
+  </data>
+ </layer>
+ <layer name="Extras" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3asQ2AMAxFQacE9t+XjiZQ0OBPdDdAYuVJqVwFAAAAAAAAAAAAAAAAAAAAAAAAAAAAwKq27gEAAAAAFrI7P/IuAAAAZqN7AC6j9EgxSo8kevS6e3c9+jy9vR49/E9Z9MiiRRYt+MrRPQAAAMBLf9/HtYMLeU4QOOvAQJwAAA==
+  </data>
+ </layer>
+</map>

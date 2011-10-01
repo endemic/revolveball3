@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="name" value="Which Way Up?"/>
+  <property name="time" value="120"/>
+ </properties>
+ <tileset firstgid="1" name="texture" tilewidth="32" tileheight="32">
+  <image source="world-3-tileset.png"/>
+ </tileset>
+ <layer name="Border" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+2bwW7DIAxAu63bvmOn7f+/cOphUpORGGMbHHhPyqGCQOInMND2dgMAAADQ8xJwQTuP+L07tXW/4cOKd/zwYQMfudjHz5ov8GGjFM/afFLKF/iwYY0nPnzBRy6keGrzBT5saOPb4o/9Yz218f6srK+B/eN/vMeHtf/VwUcueucLqf/V6T0epP5XBx+5GOnjzbm9GRix32D/cczo9RVswUcs1vkCH7484uP1ffhfe5rPsCV6PYoPHdHrUXzoiF6Pst7VUYrXWT6R4hE5HlY4b9fGb6SPiPaycUUfM89vUvy+jOWl/jzz0RlXnN+077uPv9SetlxCe/9sPqT4l8bH60Fdj/PZ1X1o56fI+bxlfzO7D+n+lv689zeW5xtNbx/a/C+BD125tn/r/Sv4sF7PMD7OiR4f2vLofJKdHj4s8dSCD1u5tb50/+w+9vO/9rP2ebSs5iOa6HySnd7jY3Q+yc7o9ZQEPnT1vcut9Z+54u9LSz6OzmdL9b3LpfrWfJIdj/e15tuofDLD91HZ+++df3oz+nnxsWWfL3469t2Sb2vmu7P6o+mRDzLnk4w+jn7fdhfKe/C9++w9H2X0YSnvjaePjPuP1Xxk339I8+2I/cfIfDIarY9e1OYu7fjGRzs1feOjH/gYnz9a+ra8XzZafEj7lV7P4tFmNlp8aNqLfBaPNrOBj1xYfXi+Lz6u58N7jZAN63wU6aNUbj3bxEf7s2jLPfoYTSmemv+TXclHxvPcPS1ztPV+y+XRV2asz1eKUa/vr7LHtoUIH72Y1cfZ79vOqMknkczqw3tO92i/tg3YErHeGjnmrg4+coGPXOAjF/jIBT5yIcWq1cfH04WPevCRi7P9fet5Kj7aiThPZR8OAAAAAAAAAAAAAJn4BZDjT35AnAAA
+  </data>
+ </layer>
+ <layer name="Extras" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3aSwrAIAwFQJf93P++patCCxWhGFNndu4CEjRPSwEAACKs0QUAkJLzAwAAgNMWXQAAADTwvgFAD/ISAICx7ZX10quQZOQq/MG9v/U7AKORLQIAAK3MEQB8yZsgwHzMFPCU/T9J9vqBi34GYGaySqDGfTmnljzSHgMAAAAAAAAAAAC8OwA96H6BQJwAAA==
+  </data>
+ </layer>
+</map>
