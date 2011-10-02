@@ -7,7 +7,7 @@
 //
 
 #import "InfoScene.h"
-#import "TitleScene.h"
+#import "TitleLayer.h"
 
 #import "GameSingleton.h"
 #import "SimpleAudioEngine.h"
@@ -108,7 +108,7 @@
 			[[SimpleAudioEngine sharedEngine] playEffect:@"button.caf"];
 			
 			// Transition to title screen
-			CCTransitionTurnOffTiles *transition = [CCTransitionTurnOffTiles transitionWithDuration:0.5 scene:[TitleScene node]];
+			CCTransitionTurnOffTiles *transition = [CCTransitionTurnOffTiles transitionWithDuration:0.5 scene:[TitleLayer scene]];
 			[[CCDirector sharedDirector] replaceScene:transition];
 		}];
 		

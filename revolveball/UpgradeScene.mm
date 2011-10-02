@@ -7,7 +7,7 @@
 //
 
 #import "UpgradeScene.h"
-#import "LevelSelectScene.h"
+#import "LevelSelectLayer.h"
 
 #import "GameSingleton.h"
 #import "SimpleAudioEngine.h"
@@ -87,7 +87,7 @@
 			[[SimpleAudioEngine sharedEngine] playEffect:@"button.caf"];
 			
 			// Go back to level select
-			CCTransitionTurnOffTiles *transition = [CCTransitionTurnOffTiles transitionWithDuration:0.5 scene:[LevelSelectScene node]];
+			CCTransitionTurnOffTiles *transition = [CCTransitionTurnOffTiles transitionWithDuration:0.5 scene:[LevelSelectLayer scene]];
 			[[CCDirector sharedDirector] replaceScene:transition];
 		}];
 		
