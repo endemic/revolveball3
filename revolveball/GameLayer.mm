@@ -93,6 +93,16 @@
 			ptmRatio = 32;	// Set pixel-to-meter Box2D ratio
 		}
 		
+		// Determine if the player is on the "hub" level
+		if ([GameSingleton sharedGameSingleton].currentWorld != 0 && [GameSingleton sharedGameSingleton].currentLevel != 0)
+		{
+			isHubLevel = YES;
+		}
+		else
+		{
+			isHubLevel = NO;
+		}
+		
 		// Initialize values for rotational control
 		previousAngle = currentAngle = 0;
 		
@@ -116,28 +126,91 @@
 		[self addChild:background z:0];
 		
 		// Set up pause button
-		CCMenuItem *pauseButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"pause-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"pause-button%@.png", hdSuffix] target:self selector:@selector(pauseButtonAction:)];
+		CCMenuItem *pauseButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"pause-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"pause-button%@.png", hdSuffix] block:^(id sender) {
+			// Play SFX
+			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
+			
+			if (paused)
+			{
+				// Schedule regular game loop
+				[self schedule:@selector(update:)];
+				
+				// Schedule timer method for 1 second intervals
+				[self schedule:@selector(timer:) interval:1];
+				paused = NO;
+				
+				// Hide pause overlay
+				id action = [CCEaseBounce actionWithAction:[CCMoveTo actionWithDuration:0.1 position:ccp(windowSize.width / 2, windowSize.height + pauseOverlay.contentSize.height / 2)]];
+				[pauseOverlay runAction:action];
+			}
+			else 
+			{
+				// Unschedule the game loop & timer methods
+				[self unschedule:@selector(update:)];
+				[self unschedule:@selector(timer:)];
+				paused = YES;
+				
+				// Show pause overlay
+				id action = [CCEaseBounce actionWithAction:[CCMoveTo actionWithDuration:0.1 position:ccp(windowSize.width / 2, windowSize.height / 2)]];
+				[pauseOverlay runAction:action];
+			}
+		}];
 		CCMenu *pauseMenu = [CCMenu menuWithItems:pauseButton, nil];
 		[pauseMenu setPosition:ccp(pauseButton.contentSize.width / 1.5, windowSize.height - pauseButton.contentSize.height / 1.5)];
 		
 		// Don't add the pause button if on the level select screen
-		if ([GameSingleton sharedGameSingleton].currentWorld != 0 && [GameSingleton sharedGameSingleton].currentLevel != 0)
+		if (isHubLevel == NO)
+		{
 			[self addChild:pauseMenu z:4];
+		}
 		
 		// Create pause overlay
 		pauseOverlay = [CCSprite spriteWithFile:[NSString stringWithFormat:@"pause-overlay%@.png", hdSuffix]];
 		[pauseOverlay setPosition:ccp(windowSize.width / 2, windowSize.height + pauseOverlay.contentSize.height / 2)];
+		[pauseOverlay setVisible:NO];		// Hide initially
+		[self addChild:pauseOverlay z:3];
+		
+		// Create "paused" label
 		CCLabelBMFont *pauseText = [CCLabelBMFont labelWithString:@"PAUSED" fntFile:[NSString stringWithFormat:@"yoster-48%@.fnt", hdSuffix]];
 		[pauseText setPosition:ccp(pauseOverlay.contentSize.width / 2, pauseOverlay.contentSize.height / 1.5)];
 		[pauseOverlay addChild:pauseText];
-		CCMenuItem *pauseRetryButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"retry-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"retry-button-selected%@.png", hdSuffix] target:self selector:@selector(retryButtonAction:)];
-		CCMenuItem *pauseQuitButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"quit-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"quit-button-selected%@.png", hdSuffix] target:self selector:@selector(backButtonAction:)];
-		CCMenu *pauseOverlayMenu = [CCMenu menuWithItems:pauseRetryButton, pauseQuitButton, nil];
+		
+		CCMenuItem *pauseResumeButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"resume-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"resume-button-selected%@.png", hdSuffix] block:^(id sender) {
+			// Play SFX
+			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
+
+			// Schedule regular game loop
+			[self schedule:@selector(update:)];
+			
+			// Schedule timer method for 1 second intervals
+			[self schedule:@selector(timer:) interval:1];
+			paused = NO;
+			
+			// Hide pause overlay
+			id action = [CCEaseBounce actionWithAction:[CCMoveTo actionWithDuration:0.1 position:ccp(windowSize.width / 2, windowSize.height + pauseOverlay.contentSize.height / 2)]];
+			[pauseOverlay runAction:action];
+		}];
+		
+		CCMenuItem *pauseQuitButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"quit-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"quit-button-selected%@.png", hdSuffix] block:^(id sender) {
+			// Play SFX
+			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
+			
+			// Hide the pause overlay as well as the map
+			[pauseOverlay setVisible:NO];
+			[map setVisible:NO];
+			
+			// Stop the background music, if playing
+			[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+			
+			// Load the level select screen
+			CCTransitionRotoZoom *transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[LevelSelectLayer scene]];
+			[[CCDirector sharedDirector] replaceScene:transition];
+		}];
+		CCMenu *pauseOverlayMenu = [CCMenu menuWithItems:pauseResumeButton, pauseQuitButton, nil];
 		[pauseOverlayMenu alignItemsVertically];
 		[pauseOverlayMenu setPosition:ccp(pauseOverlay.contentSize.width / 2, pauseText.position.y - pauseText.contentSize.height * 2)];
 		[pauseOverlay addChild:pauseOverlayMenu];
-		[pauseOverlay setVisible:NO];		// Hide initially
-		[self addChild:pauseOverlay z:3];
+		
 		
 		// Create "this way up" icon
 		upIcon = [CCSprite spriteWithFile:[NSString stringWithFormat:@"this-way-up%@.png", hdSuffix]];
@@ -155,9 +228,13 @@
 		
 		// Set up timer
 		if ([map propertyNamed:@"time"])
+		{
 			secondsLeft = [[map propertyNamed:@"time"] intValue];
+		}
 		else
+		{
 			secondsLeft = 180;
+		}
 		
 		int minutes = floor(secondsLeft / 60);
 		int seconds = secondsLeft % 60;
@@ -166,16 +243,18 @@
 		[timerLabel setPosition:ccp(windowSize.width - timerLabel.contentSize.width, windowSize.height - timerLabel.contentSize.height)];
 		[self addChild:timerLabel z:2];
 		
-		// Hide the timer if on the level select screen
-		if ([GameSingleton sharedGameSingleton].currentWorld == 0 && [GameSingleton sharedGameSingleton].currentLevel == 0)
+		// If on world select hub...
+		if (isHubLevel == YES)
+		{
+			// Hide the timer
 			[timerLabel setVisible:NO];
+			
+			// Run a method which limits access to certain areas
+			[self blockHubEntrances];
+		}
 		
 		// Store the collidable tiles
 		border = [[map layerNamed:@"Border"] retain];
-		
-		// Run a method which limits access to certain areas in the "hub" world
-		if ([GameSingleton sharedGameSingleton].currentLevel == 0 && [GameSingleton sharedGameSingleton].currentWorld == 0)
-			[self blockHubEntrances];
 		
 		// Create Box2D world
 		b2Vec2 gravity(sin(CC_DEGREES_TO_RADIANS(map.rotation)) * 15, -cos(CC_DEGREES_TO_RADIANS(map.rotation)) * 15);
@@ -186,9 +265,9 @@
 		contactListener = new MyContactListener();
 		world->SetContactListener(contactListener);
 		
-		b2Vec2 vertices[3];
+		b2Vec2 vertices[3];			// For making triangle-shaped physics objects
 		int32 count = 3;
-		CGPoint startPosition;
+		CGPoint startPosition;		// Holds the starting position of the player
 		
 		bool sensorFlag;
 		bool toggleBlockFlag;
@@ -942,6 +1021,7 @@
 	[self addChild:bestTimeLabel z:1];
 	
 	// Add button which takes us back to level select
+	// TODO: Just have one button, "continue"
 	CCMenuItem *nextButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"next-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"next-button-selected%@.png", hdSuffix] target:self selector:@selector(nextButtonAction:)];
 	CCMenuItem *retryButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"retry-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"retry-button-selected%@.png", hdSuffix] target:self selector:@selector(retryButtonAction:)];
 	CCMenu *menu = [CCMenu menuWithItems:nextButton, retryButton, nil];
@@ -976,6 +1056,7 @@
 	[self addChild:finishLabel z:4];
 	
 	// Add button which takes us back to level select
+	// TODO: Change these buttons to "retry" and "quit"
 	CCMenuItem *nextButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"wide-back-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"wide-back-button-selected%@.png", hdSuffix] target:self selector:@selector(backButtonAction:)];
 	CCMenuItem *retryButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"retry-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"retry-button-selected%@.png", hdSuffix] target:self selector:@selector(retryButtonAction:)];
 	CCMenu *menu = [CCMenu menuWithItems:nextButton, retryButton, nil];

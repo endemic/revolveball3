@@ -70,7 +70,7 @@
 		[self addChild:titleMenu z:1];
 		
 		// Add copyright text
-		CCLabelBMFont *copyright = [CCLabelBMFont labelWithString:@"(c)2011 Ganbaru Games" fntFile:[NSString stringWithFormat:@"munro-small-20%@.fnt", hdSuffix]];
+		CCLabelBMFont *copyright = [CCLabelBMFont labelWithString:@"©2011 Ganbaru Games" fntFile:[NSString stringWithFormat:@"munro-small-20%@.fnt", hdSuffix]];
 		copyright.position = ccp(windowSize.width / 2, copyright.contentSize.height);
 		[self addChild:copyright z:1];
 				

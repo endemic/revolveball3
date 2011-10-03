@@ -62,7 +62,7 @@
 		[self addChild:title z:1];
 		
 		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Designed and programmed\nby Nathan Demick" dimensions:CGSizeMake(windowSize.width, 100 * fontMultiplier) alignment:CCTextAlignmentCenter fontName:@"pf_westa_seven.ttf" fontSize:14 * fontMultiplier];
+		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Designed and programmed\nby Nathan Demick" dimensions:CGSizeMake(windowSize.width, 100 * fontMultiplier) alignment:CCTextAlignmentCenter fontName:@"Helvetica" fontSize:14 * fontMultiplier];
 		label.color = ccc3(255, 255, 255);
 		label.position = ccp(windowSize.width / 2, title.position.y - label.contentSize.height);
 		[self addChild:label z:1];

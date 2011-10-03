@@ -52,7 +52,7 @@
 		}
 		
 		// Create/add background
-		CCSprite *bg = [CCSprite spriteWithFile:[NSString stringWithFormat:@"background%@.png", hdSuffix]];
+		CCSprite *bg = [CCSprite spriteWithFile:[NSString stringWithFormat:@"background-1%@.png", hdSuffix]];
 		bg.position = ccp(windowSize.width / 2, windowSize.height / 2);
 		[self addChild:bg z:0];
 		
@@ -62,13 +62,13 @@
 		[self addChild:title z:1];
 		
 		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"I hope you enjoyed this lite version of Nonogram Madness.\n\nGet the full version for:\n\t* 100 more puzzles to solve\n\t* Randomly generated puzzles\n\t* Game Center achievements" dimensions:CGSizeMake(windowSize.width - (20 * fontMultiplier), 175 * fontMultiplier) alignment:CCTextAlignmentLeft fontName:@"pf_westa_seven.ttf" fontSize:14 * fontMultiplier];
+		CCLabelTTF *label = [CCLabelTTF labelWithString:@"I hope you enjoyed this lite version of Revolve Ball.\n\nGet the full version for:\n\t* 40 unique new levels\n\t* Game Center leaderboards" dimensions:CGSizeMake(windowSize.width - (20 * fontMultiplier), 175 * fontMultiplier) alignment:CCTextAlignmentLeft fontName:@"Helvetica" fontSize:14 * fontMultiplier];
 		label.color = ccc3(255, 255, 255);
 		label.position = ccp(windowSize.width / 2, title.position.y - label.contentSize.height / 1.35);
 		[self addChild:label z:1];
 		
-		// Create "Buy Now" button
-		CCMenuItemImage *buyButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"buy-now-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"buy-now-button-selected%@.png", hdSuffix] block:^(id sender) {
+		// Create "Upgrade" button
+		CCMenuItemImage *buyButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"upgrade-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"upgrade-button-selected%@.png", hdSuffix] block:^(id sender) {
 			// Play SFX
 			[[SimpleAudioEngine sharedEngine] playEffect:@"button.caf"];
 			

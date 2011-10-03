@@ -20,3 +20,5 @@ Change
 	* Add "ready" "go" beeps
 	* Add "choose level" text to hub stage
 	* Add "reset data" option
+	* Genius idea - Crib level select from Nonogram Madness, display each completed level as a slowly rotating TMX
+	* Title screen - have ball fall into place then start spinning slowly

@@ -37,7 +37,7 @@
 	std::vector<b2Body *> toggleSwitchGroup;
 	
 	// Flag for whether or not the toggle block switch can be thrown
-	bool toggleSwitchTimeout;
+	BOOL toggleSwitchTimeout;
 	
 	// Vars for rotational touch controls
 	float previousAngle, currentAngle, touchEndedAngle;
@@ -52,6 +52,9 @@
 	// Determines whether or not user input is taken
 	BOOL levelComplete;
 	
+	// Boolean that determines if player is on the "world select" level
+	BOOL isHubLevel;
+	
 	// Pretty self-explanatory
 	BOOL paused;
 	CCSprite *pauseOverlay;
@@ -59,7 +62,7 @@
 	// If player tilts device, show icon pointing correct orientation
 	CCSprite *upIcon;
 	
-	// Base size of Box2D objects; doubles on iPad/iPhone 4 Retina Display
+	// "pixel-to-meter" ratio of Box2D objects; doubles on iPad/iPhone 4 Retina Display
 	int ptmRatio;
 	
 	// String to be appended to sprite filenames if required to use a high-rez file (e.g. iPhone 4 assests on iPad)
