@@ -20,4 +20,7 @@ maps.each { |filename|
 
   # Run ImageMagick shell command to sharpen image, then halve its' size before saving w/o the "-hd" extension
   `convert #{filename} -sharpen #{radius}x#{sigma} -filter #{filter} -resize 50% #{filename_base}.#{filename_extension}`
+	
+	# Just for sanity, print out what is being done here
+	puts "Downsampling #{filename} to #{filename_base}.#{filename_extension}"
 }
