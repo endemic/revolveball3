@@ -86,23 +86,63 @@
 			CCTransitionRotoZoom *transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[GameLayer scene]];
 			[[CCDirector sharedDirector] replaceScene:transition];
 		}];
-		CCMenu *titleMenu = [CCMenu menuWithItems:startButton, nil];
-		titleMenu.position = ccp(windowSize.width / 2, windowSize.height / 8);
+		
+#if kLiteVersion
+		// Add "upgrade" button to the menu
+		CCMenuItemImage *upgradeButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"upgrade-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"upgrade-button-selected%@.png", hdSuffix] block:^(id sender){
+			// Play sound effect
+			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
+			
+			// Create "go to App Store?" alert
+			UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"Go to App Store?"
+																 message:@"The full version has 35 more levels to beat, along with Game Center leaderboards!"
+																delegate:self
+													   cancelButtonTitle:@"Cancel"
+													   otherButtonTitles:@"Go", nil] autorelease];
+			[alertView show];
+		}];
+		
+		CCMenu *titleMenu = [CCMenu menuWithItems:startButton, upgradeButton, nil];
+		titleMenu.position = ccp(windowSize.width / 2, startButton.contentSize.height * 3);
+		[titleMenu alignItemsVerticallyWithPadding:11];
 		[self addChild:titleMenu z:1];
+#else
+		CCMenu *titleMenu = [CCMenu menuWithItems:startButton, nil];
+		titleMenu.position = ccp(windowSize.width / 2, startButton.contentSize.height * 2);
+		[titleMenu alignItemsVerticallyWithPadding:11];
+		[self addChild:titleMenu z:1];	
+#endif
+		
+		// Add "info" button
+		CCMenuItemImage *infoButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"info-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"info-button-selected%@.png", hdSuffix] block:^(id sender) {
+			// Play SFX
+			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
+			
+			// Transition to info scene
+//			CCTransitionTurnOffTiles *transition = [CCTransitionTurnOffTiles transitionWithDuration:0.5 scene:[InfoLayer scene]];
+			CCTransitionFlipX *transition = [CCTransitionFlipX transitionWithDuration:0.5 scene:[InfoLayer scene]];
+			[[CCDirector sharedDirector] replaceScene:transition];
+		}];
+		
+		CCMenu *infoMenu = [CCMenu menuWithItems:infoButton, nil];
+		infoMenu.position = ccp(windowSize.width - infoButton.contentSize.width / 2, infoButton.contentSize.height / 2);
+		[self addChild:infoMenu z:1];
 		
 		// Add copyright text
-//		CCLabelBMFont *copyright = [CCLabelBMFont labelWithString:@"©2011 Ganbaru Games" fntFile:[NSString stringWithFormat:@"munro-small-20%@.fnt", hdSuffix]];
-		CCLabelTTF *copyright = [CCLabelTTF labelWithString:@"©2011 Ganbaru Games" fontName:@"Helvetica" fontSize:14 * fontMultiplier];
+//		CCLabelTTF *copyright = [CCLabelTTF labelWithString:@"©2011 Ganbaru Games" fontName:@"MEgalopolisExtra.otf" fontSize:16 * fontMultiplier];
+//		copyright.color = ccc3(0, 0, 0);
+		CCLabelBMFont *copyright = [CCLabelBMFont labelWithString:@"©2011 Ganbaru Games" fntFile:[NSString stringWithFormat:@"megalopolis-16%@.fnt", hdSuffix]];
 		copyright.position = ccp(windowSize.width / 2, copyright.contentSize.height);
-		copyright.color = ccc3(0, 0, 0);
 		[self addChild:copyright z:1];
 				
 		[self preloadAudio];
 		
-		//[self performSelectorInBackground:@selector(preloadAudio) withObject:nil];
-		
-		// Try to authenticate local player; API check is built in
+#if kLiteVersion
+		[GameSingleton sharedGameSingleton].hasGameCenter = NO;
+#else
+		// Authenticate with Game Center
 		[[GameSingleton sharedGameSingleton] authenticateLocalPlayer];
+#endif
 	}
 	return self;
 }
@@ -137,5 +177,57 @@
 	[[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:0.75];
 	
 	//[pool release];
+}
+
+/**
+ * Handle clicking of the alert view
+ */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	switch (buttonIndex) 
+	{
+		case 0:
+			// Do nothing - dismiss
+			break;
+		case 1:
+#if TARGET_IPHONE_SIMULATOR
+			CCLOG(@"App Store is not supported on the iOS simulator. Unable to open App Store page.");
+#else
+			// they want to buy it
+			//[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=386461624"]];
+			[self openReferralURL:[NSURL URLWithString:@"http://click.linksynergy.com/fs-bin/stat?id=0VdnAOV054A&offerid=146261&type=3&subid=0&tmpid=1826&RD_PARM1=http%253A%252F%252Fitunes.apple.com%252Fus%252Fapp%252Fnonogram-madness%252Fid386461624%253Fmt%253D8%2526uo%253D4%2526partnerId%253D30"]];
+#endif
+			break;
+		default:
+			break;
+	}
+}
+
+// Process a LinkShare/TradeDoubler/DGM URL to something iPhone can handle
+- (void)openReferralURL:(NSURL *)referralURL 
+{
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:[NSURLRequest requestWithURL:referralURL] delegate:self startImmediately:YES];
+    [conn release];
+}
+
+// Save the most recent URL in case multiple redirects occur
+// "iTunesURL" is an NSURL property in your class declaration
+- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response 
+{
+    iTunesURL = [response URL];
+    return request;
+}
+
+// No more redirects; use the last URL saved
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection 
+{
+    [[UIApplication sharedApplication] openURL:iTunesURL];
+}
+
+// on "dealloc" you need to release all your retained objects
+- (void)dealloc
+{
+	// don't forget to call "super dealloc"
+	[super dealloc];
 }
 @end

@@ -6,13 +6,13 @@
 //  Copyright 2011 Ganbaru Games. All rights reserved.
 //
 
-#import "InfoScene.h"
+#import "InfoLayer.h"
 #import "TitleLayer.h"
 
 #import "GameSingleton.h"
 #import "SimpleAudioEngine.h"
 
-@implementation InfoScene
+@implementation InfoLayer
 
 + (CCScene *)scene
 {
@@ -20,10 +20,10 @@
 	CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
-	InfoScene *layer = [InfoScene node];
+	InfoLayer *layer = [InfoLayer node];
 	
 	// add layer as a child to scene
-	[scene addChild: layer];
+	[scene addChild:layer];
 	
 	// return the scene
 	return scene;
@@ -52,29 +52,29 @@
 		}
 		
 		// Create/add background
-		CCSprite *bg = [CCSprite spriteWithFile:[NSString stringWithFormat:@"background%@.png", hdSuffix]];
+		CCSprite *bg = [CCSprite spriteWithFile:[NSString stringWithFormat:@"background-0%@.png", hdSuffix]];
 		bg.position = ccp(windowSize.width / 2, windowSize.height / 2);
 		[self addChild:bg z:0];
 		
 		// Create/add title
-		CCSprite *title = [CCSprite spriteWithFile:[NSString stringWithFormat:@"info-title%@.png", hdSuffix]];
+		CCSprite *title = [CCSprite spriteWithFile:[NSString stringWithFormat:@"about%@.png", hdSuffix]];
 		title.position = ccp(windowSize.width / 2, windowSize.height - title.contentSize.height * 2);
 		[self addChild:title z:1];
 		
 		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Designed and programmed\nby Nathan Demick" dimensions:CGSizeMake(windowSize.width, 100 * fontMultiplier) alignment:CCTextAlignmentCenter fontName:@"Helvetica" fontSize:14 * fontMultiplier];
+		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Designed and programmed\nby Nathan Demick" dimensions:CGSizeMake(windowSize.width, 100 * fontMultiplier) alignment:CCTextAlignmentCenter fontName:@"MEgalopolisExtra.otf" fontSize:20 * fontMultiplier];
 		label.color = ccc3(255, 255, 255);
 		label.position = ccp(windowSize.width / 2, title.position.y - label.contentSize.height);
 		[self addChild:label z:1];
 		
 		// Create "rate on App Store" button
-		CCMenuItemImage *rateButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"rate-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"rate-button-selected%@.png", hdSuffix] block:^(id sender) {
+		CCMenuItemImage *rateButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"feedback-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"feedback-button-selected%@.png", hdSuffix] block:^(id sender) {
 			// Play SFX
-			[[SimpleAudioEngine sharedEngine] playEffect:@"button.caf"];
+			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
 			
 			// Create "go to App Store?" alert
 			UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"Rate on App Store?"
-																 message:@"I appreciate your feedback. Thanks for playing my game!"
+																 message:@"I appreciate your feedback. Thanks for playing Revolve Ball!"
 																delegate:self
 													   cancelButtonTitle:@"Cancel"
 													   otherButtonTitles:@"Rate", nil] autorelease];
@@ -85,7 +85,7 @@
 		// Create "more games" button
 		CCMenuItemImage *moreGamesButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"more-games-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"more-games-button-selected%@.png", hdSuffix] block:^(id sender) {
 			// Play SFX
-			[[SimpleAudioEngine sharedEngine] playEffect:@"button.caf"];
+			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
 			
 			// Create "go to App Store?" alert
 			UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"Go to App Store?"
@@ -103,12 +103,13 @@
 		[self addChild:iTunesMenu z:1];
 		
 		// Create back button/menu
-		CCMenuItemImage *backButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"back-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"back-button-selected%@.png", hdSuffix] block:^(id sender) {
+		CCMenuItemImage *backButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"back-title-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"back-title-button-selected%@.png", hdSuffix] block:^(id sender) {
 			// Play sound effect
-			[[SimpleAudioEngine sharedEngine] playEffect:@"button.caf"];
+			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
 			
 			// Transition to title screen
-			CCTransitionTurnOffTiles *transition = [CCTransitionTurnOffTiles transitionWithDuration:0.5 scene:[TitleLayer scene]];
+//			CCTransitionTurnOffTiles *transition = [CCTransitionTurnOffTiles transitionWithDuration:0.5 scene:[TitleLayer scene]];
+			CCTransitionFlipX *transition = [CCTransitionFlipX transitionWithDuration:0.5 scene:[TitleLayer scene]];
 			[[CCDirector sharedDirector] replaceScene:transition];
 		}];
 		

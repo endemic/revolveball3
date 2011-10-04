@@ -70,7 +70,7 @@
 		// Create "Upgrade" button
 		CCMenuItemImage *upgradeButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"upgrade-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"upgrade-button-selected%@.png", hdSuffix] block:^(id sender) {
 			// Play SFX
-			[[SimpleAudioEngine sharedEngine] playEffect:@"button.caf"];
+			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
 			
 			// Create "go to App Store?" alert
 			UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"Go to App Store?"
@@ -84,7 +84,7 @@
 		// Create "No thanks" button
 		CCMenuItemImage *noThanksButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"no-thanks-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"no-thanks-button-selected%@.png", hdSuffix] block:^(id sender) {
 			// Play SFX
-			[[SimpleAudioEngine sharedEngine] playEffect:@"button.caf"];
+			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
 			
 			// Go back to level select
 			CCTransitionTurnOffTiles *transition = [CCTransitionTurnOffTiles transitionWithDuration:0.5 scene:[LevelSelectLayer scene]];

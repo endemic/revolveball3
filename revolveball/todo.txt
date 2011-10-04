@@ -2,18 +2,15 @@ Revolve Ball v1.5
 -------------------------
 
 Planned new features
-	* Reworked vector-style graphics
-	* Reworked icon
+	* Reworked vector-style graphics [DONE]
+	* Reworked icon [DONE]
 	* New music
 	* "Lite" version with 5 demo levels
 	* Updated level select
 	* "How to play" graphic on first run
-	* Additional "info" scene with rate/more games/reset data buttons
+	* Additional "info" scene with rate/more games/reset data buttons [DONE]
 	* Rework "ending"
 	* Add "Choose world" text to hub level
-
-Remove
-	* "Appirator" rating crap
 
 Change
 	* Start playing music on start of level, then pause, then unpause to see if that fixes lag
@@ -21,4 +18,13 @@ Change
 	* Add "choose level" text to hub stage
 	* Add "reset data" option
 	* Genius idea - Crib level select from Nonogram Madness, display each completed level as a slowly rotating TMX
-	* Title screen - have ball fall into place then start spinning slowly
+	* Title screen - have ball fall into place then start spinning slowly [DONE]
+
+TO DO
+-----
+* Create HD versions of three font files
+* Create a method that checks game completion status
+* Finalize layout of "Upgrade" scene
+* Finalize layout of "Info" scene
+* Add "data reset" option to Info scene
+* Create "choose world" text to add to hub level

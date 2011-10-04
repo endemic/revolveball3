@@ -59,7 +59,7 @@
 		[self addChild:background z:0];
 		
 		// Add "back" and "leaderboard" buttons
-		CCMenuItemImage *backButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"back-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"back-button-selected%@.png", hdSuffix] block:^(id sender) {
+		CCMenuItemImage *backButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"back-hub-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"back-hub-button-selected%@.png", hdSuffix] block:^(id sender) {
 			// Play SFX
 			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
 			
@@ -123,12 +123,12 @@
 			case 4: worldTitleString = @"World 4"; break;
 		}
 		
-		CCLabelBMFont *worldTitle = [CCLabelBMFont labelWithString:worldTitleString fntFile:[NSString stringWithFormat:@"yoster-48%@.fnt", hdSuffix]];
+		CCLabelBMFont *worldTitle = [CCLabelBMFont labelWithString:worldTitleString fntFile:[NSString stringWithFormat:@"megalopolis-50%@.fnt", hdSuffix]];
 		worldTitle.position = ccp(windowSize.width / 2, windowSize.height / 1.3);
 		[self addChild:worldTitle];
 		
 		// Add instructional text
-		CCLabelBMFont *instructions = [CCLabelBMFont labelWithString:@"Tap to select a level" fntFile:[NSString stringWithFormat:@"yoster-24%@.fnt", hdSuffix]];
+		CCLabelBMFont *instructions = [CCLabelBMFont labelWithString:@"Tap to select a level" fntFile:[NSString stringWithFormat:@"megalopolis-24%@.fnt", hdSuffix]];
 		[instructions setPosition:ccp(windowSize.width / 2, worldTitle.position.y - instructions.contentSize.height * 1.5)];
 		[self addChild:instructions];
 		
@@ -199,16 +199,16 @@
 		[ball runAction:[CCRepeatForever actionWithAction:[CCRotateBy actionWithDuration:2.0 angle:360.0]]];
 		
 		// Add descriptive labels that show level info, such as title, best time, etc.
-		levelTitle = [CCLabelBMFont labelWithString:@"Level Name" fntFile:[NSString stringWithFormat:@"yoster-24%@.fnt", hdSuffix]];
+		levelTitle = [CCLabelBMFont labelWithString:@"Level Name" fntFile:[NSString stringWithFormat:@"megalopolis-24%@.fnt", hdSuffix]];
 		[levelTitle setPosition:ccp(windowSize.width / 2, windowSize.height / 3)];
 		[self addChild:levelTitle];
 		
-		levelBestTime = [CCLabelBMFont labelWithString:@"Best Time: --:--" fntFile:[NSString stringWithFormat:@"yoster-24%@.fnt", hdSuffix]];
+		levelBestTime = [CCLabelBMFont labelWithString:@"Best Time: --:--" fntFile:[NSString stringWithFormat:@"megalopolis-24%@.fnt", hdSuffix]];
 		// Set the position based on the label above it
 		[levelBestTime setPosition:ccp(windowSize.width / 2, levelTitle.position.y - levelBestTime.contentSize.height)];
 		[self addChild:levelBestTime];
 		
-		levelTimeLimit = [CCLabelBMFont labelWithString:@"Limit: --:--" fntFile:[NSString stringWithFormat:@"yoster-24%@.fnt", hdSuffix]];
+		levelTimeLimit = [CCLabelBMFont labelWithString:@"Limit: --:--" fntFile:[NSString stringWithFormat:@"megalopolis-24%@.fnt", hdSuffix]];
 		// Set the position based on the label above it
 		[levelTimeLimit setPosition:ccp(windowSize.width / 2, levelBestTime.position.y - levelTimeLimit.contentSize.height)];
 		[self addChild:levelTimeLimit];
@@ -322,7 +322,18 @@
 	[mapFile appendString:@".tmx"];
 	
 	// Create map obj so we can get its' name + time limit
-	CCTMXTiledMap *map = [CCTMXTiledMap tiledMapWithTMXFile:mapFile];
+	map = [CCTMXTiledMap tiledMapWithTMXFile:mapFile];
+	
+	// Create map obj and add to layer
+	map.position = ccp(windowSize.width / 2, windowSize.height / 2);
+	map.scale = 0.075;		// Make it really small!
+	map.anchorPoint = ccp(0.5, 0.5);		// Try to set rotation point in the center of the map
+	
+	if (map.parent != self)
+	{
+		[map runAction:[CCRepeatForever actionWithAction:[CCRotateBy actionWithDuration:6.0 angle:360]]];
+		[self addChild:map z:3];
+	}
 	
 	int minutes, seconds;
 	int currentLevelIndex = (([GameSingleton sharedGameSingleton].currentWorld - 1) * 10) + ([GameSingleton sharedGameSingleton].currentLevel - 1);

@@ -116,19 +116,23 @@
 		// Create/add ball
 		ball = [CCSprite spriteWithFile:[NSString stringWithFormat:@"ball%@.png", hdSuffix]];
 		[ball setPosition:ccp(windowSize.width / 2, windowSize.height / 2)];
-		[ball.texture setAliasTexParameters];
 		[self addChild:ball z:2];
 		
 		// Add background to layer
 		CCSprite *background = [CCSprite spriteWithFile:[NSString stringWithFormat:@"background-%i%@.png", [GameSingleton sharedGameSingleton].currentWorld, hdSuffix]];
 		[background setPosition:ccp(windowSize.width / 2, windowSize.height / 2)];
-		[background.texture setAliasTexParameters];
 		[self addChild:background z:0];
 		
 		// Set up pause button
 		CCMenuItem *pauseButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"pause-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"pause-button%@.png", hdSuffix] block:^(id sender) {
 			// Play SFX
 			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
+			
+			// Show the overlay the first time the pause button is pressed
+			if (pauseOverlay.visible == NO)
+			{
+				pauseOverlay.visible = YES;
+			}
 			
 			if (paused)
 			{
@@ -171,7 +175,7 @@
 		[self addChild:pauseOverlay z:3];
 		
 		// Create "paused" label
-		CCLabelBMFont *pauseText = [CCLabelBMFont labelWithString:@"PAUSED" fntFile:[NSString stringWithFormat:@"yoster-48%@.fnt", hdSuffix]];
+		CCLabelBMFont *pauseText = [CCLabelBMFont labelWithString:@"PAUSED" fntFile:[NSString stringWithFormat:@"megalopolis-50%@.fnt", hdSuffix]];
 		[pauseText setPosition:ccp(pauseOverlay.contentSize.width / 2, pauseOverlay.contentSize.height / 1.5)];
 		[pauseOverlay addChild:pauseText];
 		
@@ -226,6 +230,9 @@
 		// Hide map until "countdown" method fires
 		[map setVisible:NO];
 		
+		// Store the collidable tiles
+		border = [[map layerNamed:@"Border"] retain];
+		
 		// Set up timer
 		if ([map propertyNamed:@"time"])
 		{
@@ -239,7 +246,7 @@
 		int minutes = floor(secondsLeft / 60);
 		int seconds = secondsLeft % 60;
 		
-		timerLabel = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%i:%02d", minutes, seconds] fntFile:[NSString stringWithFormat:@"yoster-16%@.fnt", hdSuffix]];
+		timerLabel = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%i:%02d", minutes, seconds] fntFile:[NSString stringWithFormat:@"megalopolis-16%@.fnt", hdSuffix]];
 		[timerLabel setPosition:ccp(windowSize.width - timerLabel.contentSize.width, windowSize.height - timerLabel.contentSize.height)];
 		[self addChild:timerLabel z:2];
 		
@@ -252,9 +259,6 @@
 			// Run a method which limits access to certain areas
 			[self blockHubEntrances];
 		}
-		
-		// Store the collidable tiles
-		border = [[map layerNamed:@"Border"] retain];
 		
 		// Create Box2D world
 		b2Vec2 gravity(sin(CC_DEGREES_TO_RADIANS(map.rotation)) * 15, -cos(CC_DEGREES_TO_RADIANS(map.rotation)) * 15);
@@ -496,54 +500,32 @@
 - (void)countdown:(ccTime)dt
 {
 	if (![map visible])
+	{
 		[map setVisible:YES];
+	}
 	
-	// If we're on the hub level
-	if ([GameSingleton sharedGameSingleton].currentWorld == 0 && [GameSingleton sharedGameSingleton].currentLevel == 0)
-	{
-		NSString *text;
-		if (countdownTime == 0)
-			text = @"Select a world";
-		else if (countdownTime == 1)
-			text = @"Touch to rotate!";
-		else 
-			text = @"";
-		//text = [NSString stringWithFormat:@"%i", countdownTime];
-		
-		CCLabelBMFont *label = [CCLabelBMFont labelWithString:text fntFile:[NSString stringWithFormat:@"yoster-24%@.fnt", hdSuffix]];
-		[label setPosition:ccp(windowSize.width / 2, windowSize.height / 2)];
-		[self addChild:label z:2];
-		
-		// Move and fade actions
-		id moveAction = [CCMoveTo actionWithDuration:3 position:ccp(ball.position.x, ball.position.y + 64)];
-		id fadeAction = [CCFadeOut actionWithDuration:1];
-		id removeAction = [CCCallFuncN actionWithTarget:self selector:@selector(removeSpriteFromParent:)];
-		
-		[label runAction:[CCSequence actions:[CCSpawn actions:moveAction, fadeAction, nil], removeAction, nil]];
-	}
-	// Otherwise, do "normal" actions
+	NSString *text;
+	if (countdownTime == 0)
+		text = @"Go!";
+	else if (countdownTime == 1)
+		text = @"Ready?";
 	else 
-	{
-		NSString *text;
-		if (countdownTime == 0)
-			text = @"GO";
-		else if (countdownTime == 1)
-			text = @"READY";
-		else 
-			text = @"";
-		//text = [NSString stringWithFormat:@"%i", countdownTime];
-		
-		CCLabelBMFont *label = [CCLabelBMFont labelWithString:text fntFile:[NSString stringWithFormat:@"yoster-48%@.fnt", hdSuffix]];
-		[label setPosition:ccp(windowSize.width / 2, windowSize.height / 2)];
-		[self addChild:label z:2];
-		
-		// Move and fade actions
-		id moveAction = [CCMoveTo actionWithDuration:1 position:ccp(ball.position.x, ball.position.y + 64)];
-		id fadeAction = [CCFadeOut actionWithDuration:1];
-		id removeAction = [CCCallFuncN actionWithTarget:self selector:@selector(removeSpriteFromParent:)];
-		
-		[label runAction:[CCSequence actions:[CCSpawn actions:moveAction, fadeAction, nil], removeAction, nil]];
-	}
+		text = @"";
+	
+	CCLabelBMFont *label = [CCLabelBMFont labelWithString:text fntFile:[NSString stringWithFormat:@"megalopolis-50%@.fnt", hdSuffix]];
+	label.position = ccp(windowSize.width / 2, windowSize.height / 2);
+	label.opacity = 0;		// Hide initially
+	[self addChild:label z:2];
+	
+	id move = [CCMoveTo actionWithDuration:0.4 position:ccp(ball.position.x, ball.position.y + 64 * fontMultiplier)];
+	id ease = [CCEaseBackOut actionWithAction:move];
+	id fadeIn = [CCFadeIn actionWithDuration:0.3];
+	id wait = [CCDelayTime actionWithDuration:0.6];
+	id fadeOut = [CCFadeOut actionWithDuration:0.2];
+	id remove = [CCCallFuncN actionWithTarget:self selector:@selector(removeSpriteFromParent:)];
+	
+	id sequence = [CCSequence actions:[CCSpawn actions:ease, fadeIn, nil], wait, fadeOut, remove, nil];
+	[label runAction:sequence];
 	
 	countdownTime--;
 	
@@ -1001,7 +983,7 @@
 	}
 	
 	// Add "Finish" label
-	CCLabelBMFont *finishLabel = [CCLabelBMFont labelWithString:@"FINISH!" fntFile:[NSString stringWithFormat:@"yoster-48%@.fnt", hdSuffix]];
+	CCLabelBMFont *finishLabel = [CCLabelBMFont labelWithString:@"FINISH!" fntFile:[NSString stringWithFormat:@"megalopolis-50%@.fnt", hdSuffix]];
 	[finishLabel setPosition:ccp(windowSize.width / 2, windowSize.height / 2)];
 	[self addChild:finishLabel z:4];
 	
@@ -1009,7 +991,7 @@
 	int seconds = currentTime % 60;
 
 	// Add "your time" label
-	CCLabelBMFont *yourTimeLabel = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"Current: %02d:%02d", minutes, seconds] fntFile:[NSString stringWithFormat:@"yoster-32%@.fnt", hdSuffix]];
+	CCLabelBMFont *yourTimeLabel = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"Current: %02d:%02d", minutes, seconds] fntFile:[NSString stringWithFormat:@"megalopolis-24%@.fnt", hdSuffix]];
 	[yourTimeLabel setPosition:ccp(windowSize.width / 2, finishLabel.position.y - yourTimeLabel.contentSize.height * 1.5)];
 	[self addChild:yourTimeLabel z:1];
 	
@@ -1017,13 +999,12 @@
 	seconds = bestSavedTime % 60;
 	
 	// Add "best time" label
-	CCLabelBMFont *bestTimeLabel = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"Best: %02d:%02d", minutes, seconds] fntFile:[NSString stringWithFormat:@"yoster-32%@.fnt", hdSuffix]];
+	CCLabelBMFont *bestTimeLabel = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"Best: %02d:%02d", minutes, seconds] fntFile:[NSString stringWithFormat:@"megalopolis-24%@.fnt", hdSuffix]];
 	[bestTimeLabel setPosition:ccp(windowSize.width / 2, yourTimeLabel.position.y - bestTimeLabel.contentSize.height)];
 	[self addChild:bestTimeLabel z:1];
 	
 	// Add button which takes us back to level select
-	// TODO: Just have one button, "continue"
-	CCMenuItem *continueButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"next-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"next-button-selected%@.png", hdSuffix] block:^(id sender) {
+	CCMenuItem *continueButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"continue-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"continue-button-selected%@.png", hdSuffix] block:^(id sender) {
 		// Play SFX
 		[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
 		
@@ -1063,7 +1044,7 @@
 	[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
 	
 	// Add "FAIL" label
-	CCLabelBMFont *finishLabel = [CCLabelBMFont labelWithString:@"FAILURE!" fntFile:[NSString stringWithFormat:@"yoster-48%@.fnt", hdSuffix]];
+	CCLabelBMFont *finishLabel = [CCLabelBMFont labelWithString:@"FAILURE!" fntFile:[NSString stringWithFormat:@"megalopolis-50%@.fnt", hdSuffix]];
 	[finishLabel setPosition:ccp(windowSize.width / 2, windowSize.height / 2)];
 	[self addChild:finishLabel z:4];
 	
@@ -1109,17 +1090,17 @@
 	
 	// Create a label that shows how much time you lost
 	NSString *s = [NSString stringWithFormat:@"-%i seconds", seconds];
-	CCLabelBMFont *label = [CCLabelBMFont labelWithString:s fntFile:[NSString stringWithFormat:@"yoster-16%@.fnt", hdSuffix]];
-	[label setPosition:ccp(ball.position.x, ball.position.y + 16)];
+	CCLabelBMFont *label = [CCLabelBMFont labelWithString:s fntFile:[NSString stringWithFormat:@"megalopolis-16%@.fnt", hdSuffix]];
+	[label setPosition:ccp(ball.position.x, ball.position.y + 16 * fontMultiplier)];
 	[self addChild:label z:5];
 
 	// Move and fade actions
-	id moveAction = [CCMoveTo actionWithDuration:1 position:ccp(ball.position.x, ball.position.y + 64)];
-	id fadeAction = [CCFadeOut actionWithDuration:1];
-	id removeAction = [CCCallFuncN actionWithTarget:self selector:@selector(removeSpriteFromParent:)];
+	id move = [CCMoveTo actionWithDuration:1.0 position:ccp(ball.position.x, ball.position.y + 64 * fontMultiplier)];
+	id fade = [CCFadeOut actionWithDuration:1.3];
+	id remove = [CCCallFuncN actionWithTarget:self selector:@selector(removeSpriteFromParent:)];
 	
 	//[deductedTimeLabel runAction:[CCSequence actions:[CCSpawn actions:moveAction, fadeAction, nil], removeAction, nil]];
-	[label runAction:[CCSequence actions:[CCSpawn actions:moveAction, fadeAction, nil], removeAction, nil]];
+	[label runAction:[CCSequence actions:[CCSpawn actions:move, fade, nil], remove, nil]];
 	
 	if (secondsLeft <= 0)
 		[self loseGame];
@@ -1282,104 +1263,91 @@
 		[self unschedule:@selector(inertialRotation:)];
 }
 
-- (void)blockHubEntrances
+- (float)percentComplete
 {
-	// Check player progress here - probably by checking to see if a particular level has a "best time"
-	NSMutableArray *levelData = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"levelData"]];
-	Boolean block = NO;
-	Boolean showArrow = YES;
+	// Check player progress
+	NSArray *levelData = [NSArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"levelData"]];
+	float levelCount = [levelData count];
+	float completedLevels = 0;
 	
-	// Check to see whether all levels are complete
-	for (int i = 30; i < 40; i++)
+	for (int i = 0; i < levelCount; i++)
 	{
+		// If level was beaten, increment the "completed levels" counter
 		NSDictionary *d = [levelData objectAtIndex:i];
-		if (![[d objectForKey:@"complete"] boolValue])
-			block = YES;
+		if ([[d objectForKey:@"complete"] boolValue] == YES)
+		{
+			completedLevels++;
+		}
 	}
 	
-	// This condition signifies that all levels are complete - show arrows pointing to all "worlds"
-	if (block == NO)
+	return completedLevels / levelCount * 100;
+}
+
+/**
+ * Creates obstacles to prevent access to later areas in the hub world until each "world" is completed
+ */
+- (void)blockHubEntrances
+{
+	float complete = [self percentComplete];
+	
+	if (complete == 100)
 	{
+		// Show all directional arrows, 'cos the player can now go anywhere!
 		[border setTileGID:kLeftArrow at:ccp(46, 50)];
 		[border setTileGID:kDownArrow at:ccp(50, 54)];
 		[border setTileGID:kRightArrow at:ccp(54, 50)];
 		[border setTileGID:kUpArrow at:ccp(50, 46)];
-		showArrow = NO;
 	}
-	
-	block = NO;
-	
-	// Block Cave world
-	for (int i = 20; i < 30; i++)
+	else if (complete >= 75)
 	{
-		NSDictionary *d = [levelData objectAtIndex:i];
-		if (![[d objectForKey:@"complete"] boolValue])
-			block = YES;
+		// Arrow pointing to "caves"
+		[border setTileGID:kUpArrow at:ccp(50, 46)];
 	}
-	
-	// Block the entrance if player hasn't made it that far yet
-	if (block)
+	else if (complete >= 50)
 	{
+		// Block "caves"
 		[border setTileGID:kPeg at:ccp(49, 46)];
 		[border setTileGID:kPeg at:ccp(50, 46)];
 		[border setTileGID:kPeg at:ccp(51, 46)];
+		
+		// Arrow pointing to "mountains"
+		[border setTileGID:kRightArrow at:ccp(54, 50)];
 	}
-	// Otherwise, show an arrow to indicate where the player should go next
-	else if (showArrow)
+	else if (complete >= 25)
 	{
-		[border setTileGID:kUpArrow at:ccp(50, 46)];
-		showArrow = NO;
-	}
-	
-	block = NO;
-	
-	// Block Mountain world
-	for (int i = 10; i < 20; i++)
-	{
-		NSDictionary *d = [levelData objectAtIndex:i];
-		if (![[d objectForKey:@"complete"] boolValue])
-			block = YES;
-	}
-	
-	if (block)
-	{
+		// Block "caves"
+		[border setTileGID:kPeg at:ccp(49, 46)];
+		[border setTileGID:kPeg at:ccp(50, 46)];
+		[border setTileGID:kPeg at:ccp(51, 46)];
+		
+		// Block "mountains"
 		[border setTileGID:kPeg at:ccp(54, 49)];
 		[border setTileGID:kPeg at:ccp(54, 50)];
 		[border setTileGID:kPeg at:ccp(54, 51)];
+		
+		// Arrow pointing to "woods"
+		[border setTileGID:kDownArrow at:ccp(50, 54)];
 	}
-	// Otherwise, show an arrow to indicate where the player should go next
-	else if (showArrow)
+	else
 	{
-		[border setTileGID:kRightArrow at:ccp(54, 50)];
-		showArrow = NO;
-	}
-	
-	block = NO;
-	
-	// Block Forest world
-	for (int i = 0; i < 10; i++)
-	{
-		NSDictionary *d = [levelData objectAtIndex:i];
-		if (![[d objectForKey:@"complete"] boolValue])
-			block = YES;
-	}
-	
-	if (block)
-	{
+		// Block "caves"
+		[border setTileGID:kPeg at:ccp(49, 46)];
+		[border setTileGID:kPeg at:ccp(50, 46)];
+		[border setTileGID:kPeg at:ccp(51, 46)];
+		
+		// Block "mountains"
+		[border setTileGID:kPeg at:ccp(54, 49)];
+		[border setTileGID:kPeg at:ccp(54, 50)];
+		[border setTileGID:kPeg at:ccp(54, 51)];
+		
+		// Block "woods"
 		[border setTileGID:kPeg at:ccp(49, 54)];
 		[border setTileGID:kPeg at:ccp(50, 54)];
 		[border setTileGID:kPeg at:ccp(51, 54)];
-	}
-	// Otherwise, show an arrow to indicate where the player should go next
-	else if (showArrow)
-	{
-		[border setTileGID:kDownArrow at:ccp(50, 54)];
-		showArrow = NO;
-	}
-	
-	// Finally, put an arrow pointing to the first world if no other progress has been made
-	if (showArrow)
+		
+		// Put an arrow pointing to the first world if no other progress has been made
 		[border setTileGID:kLeftArrow at:ccp(46, 50)];
+	}
 }
 
 - (void)retryButtonAction:(id)sender
@@ -1400,17 +1368,22 @@
 	// Play SFX
 	[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
 	
-	[pauseOverlay setVisible:NO];
-	[map setVisible:NO];
+	pauseOverlay.visible = NO;
+	map.visible = NO;
 	
 	// Increment level counter
-	[GameSingleton sharedGameSingleton].currentLevel++;
+	//[GameSingleton sharedGameSingleton].currentLevel++;
 	
 	int levelsPerWorld = 10;
 	int lastWorld = 4;
 	CCTransitionRotoZoom *transition;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
+#if kLiteVersion
+	
+#else
+	
+#endif
 	// If the player has finished the game
 	if ([GameSingleton sharedGameSingleton].currentLevel > levelsPerWorld && [GameSingleton sharedGameSingleton].currentWorld == lastWorld && [defaults boolForKey:@"completedGame"] == NO)
 	{
@@ -1558,14 +1531,14 @@
 
 - (void)removeSpriteFromParent:(CCNode *)sprite
 {
-	//[sprite.parent removeChild:sprite cleanup:YES];
+	[sprite.parent removeChild:sprite cleanup:YES];
 	
 	// Trying this from forum post http://www.cocos2d-iphone.org/forum/topic/981#post-5895
 	// Apparently fixes a memory error?
-	CCNode *parent = sprite.parent;
-	[sprite retain];
-	[parent removeChild:sprite cleanup:YES];
-	[sprite autorelease];
+//	CCNode *parent = sprite.parent;
+//	[sprite retain];
+//	[parent removeChild:sprite cleanup:YES];
+//	[sprite autorelease];
 }
 
 - (void)dealloc

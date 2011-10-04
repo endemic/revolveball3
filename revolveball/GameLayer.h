@@ -80,4 +80,5 @@
 - (void)gainTime:(int)seconds;
 - (void)blockHubEntrances;	// Used in hub level; checks player progress and inserts barriers to prevent access to higher levels
 - (void)createParticleEmitterAt:(CGPoint)position;
+- (float)percentComplete;
 @end

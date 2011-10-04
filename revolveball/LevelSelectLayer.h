@@ -23,6 +23,9 @@
 	// Rotating ball icon which represents current level selection
 	CCSprite *ball;
 	
+	// Testing out showing a rotating map of the level
+	CCTMXTiledMap *map;
+	
 	// String to be appended to sprite filenames if required to use a high-rez file (e.g. iPhone 4 assests on iPad)
 	NSString *hdSuffix;
 	int fontMultiplier;
