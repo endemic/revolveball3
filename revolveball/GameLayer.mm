@@ -94,7 +94,7 @@
 		}
 		
 		// Determine if the player is on the "hub" level
-		if ([GameSingleton sharedGameSingleton].currentWorld != 0 && [GameSingleton sharedGameSingleton].currentLevel != 0)
+		if ([GameSingleton sharedGameSingleton].currentWorld == 0 && [GameSingleton sharedGameSingleton].currentLevel == 0)
 		{
 			isHubLevel = YES;
 		}
@@ -247,7 +247,7 @@
 		if (isHubLevel == YES)
 		{
 			// Hide the timer
-			[timerLabel setVisible:NO];
+			timerLabel.visible = NO;
 			
 			// Run a method which limits access to certain areas
 			[self blockHubEntrances];
@@ -475,6 +475,20 @@
 		// Schedule countdown timer
 		countdownTime = 2;
 		[self schedule:@selector(countdown:) interval:1.0];
+		
+		// Start playing BGM
+		if (isHubLevel == YES)
+		{
+			// Start playing music if it's not already playing
+			if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
+			{
+				[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"2.mp3"];
+			}
+		}
+		else
+		{
+			[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"gameplay.mp3"];
+		}
 	}
 	return self;
 }
@@ -543,19 +557,6 @@
 		
 		// Schedule timer function for 1 second intervals
 		[self schedule:@selector(timer:) interval:1];
-		
-		// Start playing BGM
-		if ([GameSingleton sharedGameSingleton].currentWorld == 0 && [GameSingleton sharedGameSingleton].currentLevel == 0)
-		{
-			// Start playing music if it's not already playing
-			if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
-				[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"level-select.mp3"];
-		}
-		else
-		{
-			[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"gameplay.mp3"];
-		}
-
 	}
 }
 
@@ -1022,10 +1023,21 @@
 	
 	// Add button which takes us back to level select
 	// TODO: Just have one button, "continue"
-	CCMenuItem *nextButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"next-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"next-button-selected%@.png", hdSuffix] target:self selector:@selector(nextButtonAction:)];
-	CCMenuItem *retryButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"retry-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"retry-button-selected%@.png", hdSuffix] target:self selector:@selector(retryButtonAction:)];
-	CCMenu *menu = [CCMenu menuWithItems:nextButton, retryButton, nil];
-	[menu alignItemsVertically];
+	CCMenuItem *continueButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"next-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"next-button-selected%@.png", hdSuffix] block:^(id sender) {
+		// Play SFX
+		[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
+		
+		[pauseOverlay setVisible:NO];
+		[map setVisible:NO];
+		
+		// Stop the background music, if playing
+		[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+		
+		// Load the level select screen
+		CCTransitionRotoZoom *transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[LevelSelectLayer scene]];
+		[[CCDirector sharedDirector] replaceScene:transition];
+	}];
+	CCMenu *menu = [CCMenu menuWithItems:continueButton, nil];
 	[menu setPosition:ccp(windowSize.width / 2, windowSize.height / 6)];
 	[self addChild:menu z:1];
 }
@@ -1056,10 +1068,32 @@
 	[self addChild:finishLabel z:4];
 	
 	// Add button which takes us back to level select
-	// TODO: Change these buttons to "retry" and "quit"
-	CCMenuItem *nextButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"wide-back-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"wide-back-button-selected%@.png", hdSuffix] target:self selector:@selector(backButtonAction:)];
-	CCMenuItem *retryButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"retry-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"retry-button-selected%@.png", hdSuffix] target:self selector:@selector(retryButtonAction:)];
-	CCMenu *menu = [CCMenu menuWithItems:nextButton, retryButton, nil];
+	CCMenuItem *quitButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"quit-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"quit-button-selected%@.png", hdSuffix] block:^(id sender) {
+		// Play SFX
+		[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
+		
+		[pauseOverlay setVisible:NO];
+		[map setVisible:NO];
+		
+		// Stop the background music, if playing
+		[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+		
+		// Load the level select screen
+		CCTransitionRotoZoom *transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[LevelSelectLayer scene]];
+		[[CCDirector sharedDirector] replaceScene:transition];
+	}];
+	CCMenuItem *retryButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"retry-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"retry-button-selected%@.png", hdSuffix] block:^(id sender) {
+		// Play SFX
+		[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
+		
+		[pauseOverlay setVisible:NO];
+		[map setVisible:NO];
+		
+		// Reload the same scene/level
+		CCTransitionRotoZoom *transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[GameLayer scene]];
+		[[CCDirector sharedDirector] replaceScene:transition];
+	}];
+	CCMenu *menu = [CCMenu menuWithItems:retryButton, quitButton, nil];
 	[menu alignItemsVertically];
 	[menu setPosition:ccp(windowSize.width / 2, windowSize.height / 6)];
 	[self addChild:menu z:1];
@@ -1417,7 +1451,7 @@
 	[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
 	
 	// Load the level select screen
-	CCTransitionRotoZoom *transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[LevelSelectLayer node]];
+	CCTransitionRotoZoom *transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[LevelSelectLayer scene]];
 	[[CCDirector sharedDirector] replaceScene:transition];
 }
 

@@ -57,18 +57,18 @@
 		[self addChild:bg z:0];
 		
 		// Create/add title
-		CCSprite *title = [CCSprite spriteWithFile:[NSString stringWithFormat:@"thanks-title%@.png", hdSuffix]];
+		CCSprite *title = [CCSprite spriteWithFile:[NSString stringWithFormat:@"thanks%@.png", hdSuffix]];
 		title.position = ccp(windowSize.width / 2, windowSize.height - title.contentSize.height * 2);
 		[self addChild:title z:1];
 		
 		// create and initialize a Label
 		CCLabelTTF *label = [CCLabelTTF labelWithString:@"I hope you enjoyed this lite version of Revolve Ball.\n\nGet the full version for:\n\t* 40 unique new levels\n\t* Game Center leaderboards" dimensions:CGSizeMake(windowSize.width - (20 * fontMultiplier), 175 * fontMultiplier) alignment:CCTextAlignmentLeft fontName:@"Helvetica" fontSize:14 * fontMultiplier];
-		label.color = ccc3(255, 255, 255);
+		label.color = ccc3(0, 0, 0);
 		label.position = ccp(windowSize.width / 2, title.position.y - label.contentSize.height / 1.35);
 		[self addChild:label z:1];
 		
 		// Create "Upgrade" button
-		CCMenuItemImage *buyButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"upgrade-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"upgrade-button-selected%@.png", hdSuffix] block:^(id sender) {
+		CCMenuItemImage *upgradeButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"upgrade-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"upgrade-button-selected%@.png", hdSuffix] block:^(id sender) {
 			// Play SFX
 			[[SimpleAudioEngine sharedEngine] playEffect:@"button.caf"];
 			
@@ -91,9 +91,9 @@
 			[[CCDirector sharedDirector] replaceScene:transition];
 		}];
 		
-		CCMenu *iTunesMenu = [CCMenu menuWithItems:buyButton, noThanksButton, nil];
+		CCMenu *iTunesMenu = [CCMenu menuWithItems:upgradeButton, noThanksButton, nil];
 		[iTunesMenu alignItemsVerticallyWithPadding:11];
-		iTunesMenu.position = ccp(windowSize.width / 2, buyButton.contentSize.height * 2);
+		iTunesMenu.position = ccp(windowSize.width / 2, upgradeButton.contentSize.height * 2);
 		[self addChild:iTunesMenu z:1];
 	}
 	return self;

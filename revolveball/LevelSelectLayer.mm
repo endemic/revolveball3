@@ -146,10 +146,10 @@
 			CCSprite *s = [CCSprite spriteWithFile:[NSString stringWithFormat:@"level-icon%@.png", hdSuffix]];
 			
 			// Add number to level icon
-			CCLabelBMFont *num = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%i", i + 1] fntFile:[NSString stringWithFormat:@"munro-small-20%@.fnt", hdSuffix]];
-			
+//			CCLabelBMFont *num = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%i", i + 1] fntFile:[NSString stringWithFormat:@"munro-small-20%@.fnt", hdSuffix]];
+			CCLabelTTF *num = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%i", i + 1] fontName:@"Helvetica" fontSize:18 * fontMultiplier];
 			// Attempt to position the number based on sprite/label widths
-			[num setPosition:ccp(s.contentSize.width - num.contentSize.width, s.contentSize.height - num.contentSize.height / 1.2)];
+			[num setPosition:ccp(s.contentSize.width - num.contentSize.width / 0.9, s.contentSize.height - num.contentSize.height / 1.2)];
 			[s addChild:num];
 			
 			// Some default positioning variables

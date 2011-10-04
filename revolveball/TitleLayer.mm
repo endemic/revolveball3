@@ -48,10 +48,31 @@
 		background.position = ccp(windowSize.width / 2, windowSize.height / 2);
 		[self addChild:background];
 		
-		
+		// Create logo
 		CCSprite *logo = [CCSprite spriteWithFile:[NSString stringWithFormat:@"logo%@.png", hdSuffix]];
 		[logo setPosition:ccp(windowSize.width / 2, windowSize.height - logo.contentSize.height / 1.5)];
 		[self addChild:logo z:1];
+		
+		// Create the "ball" that will drop in on the logo
+		CCSprite *ball = [CCSprite spriteWithFile:[NSString stringWithFormat:@"logo-ball%@.png", hdSuffix]];
+		ball.position = ccp(logo.position.x + 90 * fontMultiplier, windowSize.height + ball.contentSize.height);
+		[self addChild:ball z:1];
+		
+		// Hide initially, so the sprite doesn't appear during the scene transition
+		ball.opacity = 0;
+		
+		// Wait until the rotation transition has happened, then fade in quickly and drop into place
+		// When the drop animation is finished, rotate the ball indefinitely
+		id wait = [CCDelayTime actionWithDuration:1.0];
+		id show = [CCFadeIn actionWithDuration:0.1];
+		id move = [CCMoveTo actionWithDuration:1.0 position:ccp(logo.position.x + 90 * fontMultiplier, logo.position.y - 35 * fontMultiplier)];
+		id ease = [CCEaseBounceOut actionWithAction:move];
+		id callback = [CCCallBlockN actionWithBlock:^(CCNode *node) {
+			id spin = [CCRepeatForever actionWithAction:[CCRotateBy actionWithDuration:2.0 angle:360.0]];
+			[(CCSprite *)node runAction:spin];
+		}];
+		
+		[ball runAction:[CCSequence actions:wait, show, ease, callback, nil]];
 		
 		// Add button which takes us to game scene
 		CCMenuItem *startButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"start-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"start-button-selected%@.png", hdSuffix] block:^(id sender) {
@@ -70,8 +91,10 @@
 		[self addChild:titleMenu z:1];
 		
 		// Add copyright text
-		CCLabelBMFont *copyright = [CCLabelBMFont labelWithString:@"©2011 Ganbaru Games" fntFile:[NSString stringWithFormat:@"munro-small-20%@.fnt", hdSuffix]];
+//		CCLabelBMFont *copyright = [CCLabelBMFont labelWithString:@"©2011 Ganbaru Games" fntFile:[NSString stringWithFormat:@"munro-small-20%@.fnt", hdSuffix]];
+		CCLabelTTF *copyright = [CCLabelTTF labelWithString:@"©2011 Ganbaru Games" fontName:@"Helvetica" fontSize:14 * fontMultiplier];
 		copyright.position = ccp(windowSize.width / 2, copyright.contentSize.height);
+		copyright.color = ccc3(0, 0, 0);
 		[self addChild:copyright z:1];
 				
 		[self preloadAudio];
@@ -105,7 +128,8 @@
 	[[SimpleAudioEngine sharedEngine] preloadEffect:@"level-fail.caf"];
 	
 	// Preload music - eventually do this based on the "world" that is selected
-	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"level-select.mp3"];
+//	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"level-select.mp3"];
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"2.mp3"];
 	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"gameplay.mp3"];
 	
 	// Set BGM volume
