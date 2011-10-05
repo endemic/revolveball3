@@ -12,19 +12,12 @@ Planned new features
 	* Rework "ending"
 	* Add "Choose world" text to hub level
 
-Change
-	* Start playing music on start of level, then pause, then unpause to see if that fixes lag
-	* Add "ready" "go" beeps
-	* Add "choose level" text to hub stage
-	* Add "reset data" option
-	* Genius idea - Crib level select from Nonogram Madness, display each completed level as a slowly rotating TMX
-	* Title screen - have ball fall into place then start spinning slowly [DONE]
 
 TO DO
 -----
-* Create HD versions of three font files
-* Create a method that checks game completion status
-* Finalize layout of "Upgrade" scene
-* Finalize layout of "Info" scene
 * Add "data reset" option to Info scene
 * Create "choose world" text to add to hub level
+* Determine new level select layout
+* Add "ready" "go" beeps
+* Start playing music on start of level, then pause, then unpause to see if that fixes lag
+* Genius idea - Crib level select from Nonogram Madness, display each completed level as a slowly rotating TMX

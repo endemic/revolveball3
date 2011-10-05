@@ -517,10 +517,10 @@
 	label.opacity = 0;		// Hide initially
 	[self addChild:label z:2];
 	
-	id move = [CCMoveTo actionWithDuration:0.4 position:ccp(ball.position.x, ball.position.y + 64 * fontMultiplier)];
+	id move = [CCMoveTo actionWithDuration:0.4 position:ccp(ball.position.x, ball.position.y + 32 * fontMultiplier)];
 	id ease = [CCEaseBackOut actionWithAction:move];
 	id fadeIn = [CCFadeIn actionWithDuration:0.3];
-	id wait = [CCDelayTime actionWithDuration:0.6];
+	id wait = [CCDelayTime actionWithDuration:0.4];
 	id fadeOut = [CCFadeOut actionWithDuration:0.2];
 	id remove = [CCCallFuncN actionWithTarget:self selector:@selector(removeSpriteFromParent:)];
 	

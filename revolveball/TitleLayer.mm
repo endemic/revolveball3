@@ -114,23 +114,20 @@
 #endif
 		
 		// Add "info" button
-		CCMenuItemImage *infoButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"info-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"info-button-selected%@.png", hdSuffix] block:^(id sender) {
+		CCMenuItemImage *infoButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"info-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"info-button%@.png", hdSuffix] block:^(id sender) {
 			// Play SFX
 			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
 			
 			// Transition to info scene
-//			CCTransitionTurnOffTiles *transition = [CCTransitionTurnOffTiles transitionWithDuration:0.5 scene:[InfoLayer scene]];
 			CCTransitionFlipX *transition = [CCTransitionFlipX transitionWithDuration:0.5 scene:[InfoLayer scene]];
 			[[CCDirector sharedDirector] replaceScene:transition];
 		}];
 		
 		CCMenu *infoMenu = [CCMenu menuWithItems:infoButton, nil];
-		infoMenu.position = ccp(windowSize.width - infoButton.contentSize.width / 2, infoButton.contentSize.height / 2);
+		infoMenu.position = ccp(windowSize.width - infoButton.contentSize.width / 1.5, infoButton.contentSize.height / 1.5);
 		[self addChild:infoMenu z:1];
 		
 		// Add copyright text
-//		CCLabelTTF *copyright = [CCLabelTTF labelWithString:@"©2011 Ganbaru Games" fontName:@"MEgalopolisExtra.otf" fontSize:16 * fontMultiplier];
-//		copyright.color = ccc3(0, 0, 0);
 		CCLabelBMFont *copyright = [CCLabelBMFont labelWithString:@"©2011 Ganbaru Games" fntFile:[NSString stringWithFormat:@"megalopolis-16%@.fnt", hdSuffix]];
 		copyright.position = ccp(windowSize.width / 2, copyright.contentSize.height);
 		[self addChild:copyright z:1];
@@ -195,7 +192,7 @@
 #else
 			// they want to buy it
 			//[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=386461624"]];
-			[self openReferralURL:[NSURL URLWithString:@"http://click.linksynergy.com/fs-bin/stat?id=0VdnAOV054A&offerid=146261&type=3&subid=0&tmpid=1826&RD_PARM1=http%253A%252F%252Fitunes.apple.com%252Fus%252Fapp%252Fnonogram-madness%252Fid386461624%253Fmt%253D8%2526uo%253D4%2526partnerId%253D30"]];
+			[self openReferralURL:[NSURL URLWithString:@"http://click.linksynergy.com/fs-bin/click?id=0VdnAOV054A&offerid=146261.409351780&type=2&subid=0"]];
 #endif
 			break;
 		default:

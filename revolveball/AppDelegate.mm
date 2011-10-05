@@ -92,7 +92,7 @@
 	//
 	[director setDeviceOrientation:kCCDeviceOrientationPortrait];
 	[director setAnimationInterval:1.0/60];
-	[director setDisplayFPS:YES];
+	[director setDisplayFPS:NO];
 	
 	
 	// make the OpenGLView a child of the view controller
@@ -107,7 +107,6 @@
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
 	// You can change anytime.
 	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
-
 	
 	// Removes the startup flicker
 	[self removeStartupFlicker];
@@ -115,8 +114,6 @@
 	// Load default defaults
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults registerDefaults:[NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"UserDefaults" ofType:@"plist"]]];
-	
-	//CCLOG(@"GAME_AUTOROTATION: %i", GAME_AUTOROTATION);
 	
 	// Run the intro Scene
 	[[CCDirector sharedDirector] runWithScene:[LogoLayer scene]];

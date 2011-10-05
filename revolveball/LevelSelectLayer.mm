@@ -326,13 +326,13 @@
 	
 	// Create map obj and add to layer
 	map.position = ccp(windowSize.width / 2, windowSize.height / 2);
-	map.scale = 0.075;		// Make it really small!
+	map.scale = 0.05 * fontMultiplier;		// Make it really small!
 	map.anchorPoint = ccp(0.5, 0.5);		// Try to set rotation point in the center of the map
 	
 	if (map.parent != self)
 	{
-		[map runAction:[CCRepeatForever actionWithAction:[CCRotateBy actionWithDuration:6.0 angle:360]]];
-		[self addChild:map z:3];
+		[map runAction:[CCRepeatForever actionWithAction:[CCRotateBy actionWithDuration:10.0 angle:360]]];
+		[self addChild:map z:1];	// Have the map rotate behind other objects
 	}
 	
 	int minutes, seconds;

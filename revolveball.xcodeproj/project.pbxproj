@@ -22,8 +22,6 @@
 		7D2952A1143AA16E00F13B37 /* upgrade-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D295297143AA16E00F13B37 /* upgrade-button.png */; };
 		7D2952A3143AA78300F13B37 /* 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7D2952A2143AA78300F13B37 /* 2.mp3 */; };
 		7D2952A9143B454900F13B37 /* info-button-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D2952A5143B454900F13B37 /* info-button-hd.png */; };
-		7D2952AA143B454900F13B37 /* info-button-selected-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D2952A6143B454900F13B37 /* info-button-selected-hd.png */; };
-		7D2952AB143B454900F13B37 /* info-button-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D2952A7143B454900F13B37 /* info-button-selected.png */; };
 		7D2952AC143B454900F13B37 /* info-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D2952A8143B454900F13B37 /* info-button.png */; };
 		7D2952AF143B481500F13B37 /* about-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D2952AD143B481500F13B37 /* about-hd.png */; };
 		7D2952B0143B481500F13B37 /* thanks-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D2952AE143B481500F13B37 /* thanks-hd.png */; };
@@ -180,11 +178,25 @@
 		7D31B7F7142D0C360020E8B6 /* LogoLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7D31B7EC142D0C360020E8B6 /* LogoLayer.mm */; };
 		7D31B7F8142D0C360020E8B6 /* MyContactListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7D31B7EE142D0C360020E8B6 /* MyContactListener.mm */; };
 		7D31B7F9142D0C360020E8B6 /* TitleLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7D31B7F1142D0C360020E8B6 /* TitleLayer.mm */; };
+		7D356291143CA03A0013B69B /* reset-button-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D35628D143CA03A0013B69B /* reset-button-hd.png */; };
+		7D356292143CA03A0013B69B /* reset-button-selected-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D35628E143CA03A0013B69B /* reset-button-selected-hd.png */; };
+		7D356293143CA03A0013B69B /* reset-button-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D35628F143CA03A0013B69B /* reset-button-selected.png */; };
+		7D356294143CA03A0013B69B /* reset-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D356290143CA03A0013B69B /* reset-button.png */; };
+		7D356299143CE0CA0013B69B /* next-button-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D356295143CE0CA0013B69B /* next-button-hd.png */; };
+		7D35629A143CE0CA0013B69B /* next-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D356296143CE0CA0013B69B /* next-button.png */; };
+		7D35629B143CE0CA0013B69B /* prev-button-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D356297143CE0CA0013B69B /* prev-button-hd.png */; };
+		7D35629C143CE0CA0013B69B /* prev-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D356298143CE0CA0013B69B /* prev-button.png */; };
 		7D36B3C9143B51A600891FE2 /* MEgalopolisExtra.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7D36B3C8143B51A600891FE2 /* MEgalopolisExtra.otf */; };
 		7D36B3CF143B587100891FE2 /* megalopolis-16.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 7D36B3CB143B587100891FE2 /* megalopolis-16.fnt */; };
 		7D36B3D0143B587100891FE2 /* megalopolis-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D36B3CC143B587100891FE2 /* megalopolis-16.png */; };
 		7D36B3D1143B587100891FE2 /* megalopolis-50.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 7D36B3CD143B587100891FE2 /* megalopolis-50.fnt */; };
 		7D36B3D2143B587100891FE2 /* megalopolis-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D36B3CE143B587100891FE2 /* megalopolis-50.png */; };
+		7D36B3D9143B9CC800891FE2 /* megalopolis-16-hd.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 7D36B3D3143B9CC800891FE2 /* megalopolis-16-hd.fnt */; };
+		7D36B3DA143B9CC800891FE2 /* megalopolis-24-hd.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 7D36B3D4143B9CC800891FE2 /* megalopolis-24-hd.fnt */; };
+		7D36B3DB143B9CC800891FE2 /* megalopolis-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D36B3D5143B9CC800891FE2 /* megalopolis-32.png */; };
+		7D36B3DC143B9CC800891FE2 /* megalopolis-48.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D36B3D6143B9CC800891FE2 /* megalopolis-48.png */; };
+		7D36B3DD143B9CC800891FE2 /* megalopolis-50-hd.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 7D36B3D7143B9CC800891FE2 /* megalopolis-50-hd.fnt */; };
+		7D36B3DE143B9CC800891FE2 /* megalopolis-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D36B3D8143B9CC800891FE2 /* megalopolis-100.png */; };
 		7D55454214364A2E00407983 /* InfoLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7D55453F14364A2E00407983 /* InfoLayer.mm */; };
 		7D568EF51434EF79001AB0E3 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D568EF31434EF6C001AB0E3 /* GameKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7D936786143B498600FCCA57 /* about.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D936784143B498600FCCA57 /* about.png */; };
@@ -408,8 +420,6 @@
 		7D2952A2143AA78300F13B37 /* 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 2.mp3; sourceTree = "<group>"; };
 		7D2952A4143B430200F13B37 /* InfoLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoLayer.h; sourceTree = "<group>"; };
 		7D2952A5143B454900F13B37 /* info-button-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info-button-hd.png"; sourceTree = "<group>"; };
-		7D2952A6143B454900F13B37 /* info-button-selected-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info-button-selected-hd.png"; sourceTree = "<group>"; };
-		7D2952A7143B454900F13B37 /* info-button-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info-button-selected.png"; sourceTree = "<group>"; };
 		7D2952A8143B454900F13B37 /* info-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info-button.png"; sourceTree = "<group>"; };
 		7D2952AD143B481500F13B37 /* about-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-hd.png"; sourceTree = "<group>"; };
 		7D2952AE143B481500F13B37 /* thanks-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thanks-hd.png"; sourceTree = "<group>"; };
@@ -728,11 +738,25 @@
 		7D31B7EF142D0C360020E8B6 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
 		7D31B7F0142D0C360020E8B6 /* TitleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleLayer.h; sourceTree = "<group>"; };
 		7D31B7F1142D0C360020E8B6 /* TitleLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TitleLayer.mm; sourceTree = "<group>"; };
+		7D35628D143CA03A0013B69B /* reset-button-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reset-button-hd.png"; sourceTree = "<group>"; };
+		7D35628E143CA03A0013B69B /* reset-button-selected-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reset-button-selected-hd.png"; sourceTree = "<group>"; };
+		7D35628F143CA03A0013B69B /* reset-button-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reset-button-selected.png"; sourceTree = "<group>"; };
+		7D356290143CA03A0013B69B /* reset-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reset-button.png"; sourceTree = "<group>"; };
+		7D356295143CE0CA0013B69B /* next-button-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next-button-hd.png"; sourceTree = "<group>"; };
+		7D356296143CE0CA0013B69B /* next-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next-button.png"; sourceTree = "<group>"; };
+		7D356297143CE0CA0013B69B /* prev-button-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prev-button-hd.png"; sourceTree = "<group>"; };
+		7D356298143CE0CA0013B69B /* prev-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prev-button.png"; sourceTree = "<group>"; };
 		7D36B3C8143B51A600891FE2 /* MEgalopolisExtra.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MEgalopolisExtra.otf; sourceTree = "<group>"; };
 		7D36B3CB143B587100891FE2 /* megalopolis-16.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "megalopolis-16.fnt"; sourceTree = "<group>"; };
 		7D36B3CC143B587100891FE2 /* megalopolis-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "megalopolis-16.png"; sourceTree = "<group>"; };
 		7D36B3CD143B587100891FE2 /* megalopolis-50.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "megalopolis-50.fnt"; sourceTree = "<group>"; };
 		7D36B3CE143B587100891FE2 /* megalopolis-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "megalopolis-50.png"; sourceTree = "<group>"; };
+		7D36B3D3143B9CC800891FE2 /* megalopolis-16-hd.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "megalopolis-16-hd.fnt"; sourceTree = "<group>"; };
+		7D36B3D4143B9CC800891FE2 /* megalopolis-24-hd.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "megalopolis-24-hd.fnt"; sourceTree = "<group>"; };
+		7D36B3D5143B9CC800891FE2 /* megalopolis-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "megalopolis-32.png"; sourceTree = "<group>"; };
+		7D36B3D6143B9CC800891FE2 /* megalopolis-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "megalopolis-48.png"; sourceTree = "<group>"; };
+		7D36B3D7143B9CC800891FE2 /* megalopolis-50-hd.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "megalopolis-50-hd.fnt"; sourceTree = "<group>"; };
+		7D36B3D8143B9CC800891FE2 /* megalopolis-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "megalopolis-100.png"; sourceTree = "<group>"; };
 		7D55453F14364A2E00407983 /* InfoLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InfoLayer.mm; sourceTree = "<group>"; };
 		7D55454014364A2E00407983 /* UpgradeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpgradeScene.h; sourceTree = "<group>"; };
 		7D568EF31434EF6C001AB0E3 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
@@ -1500,11 +1524,17 @@
 			children = (
 				7D36B3CB143B587100891FE2 /* megalopolis-16.fnt */,
 				7D36B3CC143B587100891FE2 /* megalopolis-16.png */,
-				7D36B3CD143B587100891FE2 /* megalopolis-50.fnt */,
-				7D36B3CE143B587100891FE2 /* megalopolis-50.png */,
-				7D36B3C8143B51A600891FE2 /* MEgalopolisExtra.otf */,
+				7D36B3D3143B9CC800891FE2 /* megalopolis-16-hd.fnt */,
+				7D36B3D5143B9CC800891FE2 /* megalopolis-32.png */,
 				7D936791143B4D9700FCCA57 /* megalopolis-24.fnt */,
 				7D936792143B4D9700FCCA57 /* megalopolis-24.png */,
+				7D36B3D4143B9CC800891FE2 /* megalopolis-24-hd.fnt */,
+				7D36B3D6143B9CC800891FE2 /* megalopolis-48.png */,
+				7D36B3CD143B587100891FE2 /* megalopolis-50.fnt */,
+				7D36B3CE143B587100891FE2 /* megalopolis-50.png */,
+				7D36B3D7143B9CC800891FE2 /* megalopolis-50-hd.fnt */,
+				7D36B3D8143B9CC800891FE2 /* megalopolis-100.png */,
+				7D36B3C8143B51A600891FE2 /* MEgalopolisExtra.otf */,
 			);
 			name = fonts;
 			path = Resources/fonts;
@@ -1568,13 +1598,19 @@
 		7DBE3640143645B200E30B89 /* buttons */ = {
 			isa = PBXGroup;
 			children = (
+				7D356295143CE0CA0013B69B /* next-button-hd.png */,
+				7D356296143CE0CA0013B69B /* next-button.png */,
+				7D356297143CE0CA0013B69B /* prev-button-hd.png */,
+				7D356298143CE0CA0013B69B /* prev-button.png */,
+				7D35628D143CA03A0013B69B /* reset-button-hd.png */,
+				7D35628E143CA03A0013B69B /* reset-button-selected-hd.png */,
+				7D35628F143CA03A0013B69B /* reset-button-selected.png */,
+				7D356290143CA03A0013B69B /* reset-button.png */,
 				7D936789143B4A9B00FCCA57 /* back-title-button-hd.png */,
 				7D93678A143B4A9B00FCCA57 /* back-title-button-selected-hd.png */,
 				7D93678B143B4A9B00FCCA57 /* back-title-button-selected.png */,
 				7D93678C143B4A9B00FCCA57 /* back-title-button.png */,
 				7D2952A5143B454900F13B37 /* info-button-hd.png */,
-				7D2952A6143B454900F13B37 /* info-button-selected-hd.png */,
-				7D2952A7143B454900F13B37 /* info-button-selected.png */,
 				7D2952A8143B454900F13B37 /* info-button.png */,
 				7D29528E143AA16E00F13B37 /* continue-button-selected.png */,
 				7D29528F143AA16E00F13B37 /* continue-button.png */,
@@ -2043,8 +2079,6 @@
 				7D2952A1143AA16E00F13B37 /* upgrade-button.png in Resources */,
 				7D2952A3143AA78300F13B37 /* 2.mp3 in Resources */,
 				7D2952A9143B454900F13B37 /* info-button-hd.png in Resources */,
-				7D2952AA143B454900F13B37 /* info-button-selected-hd.png in Resources */,
-				7D2952AB143B454900F13B37 /* info-button-selected.png in Resources */,
 				7D2952AC143B454900F13B37 /* info-button.png in Resources */,
 				7D2952AF143B481500F13B37 /* about-hd.png in Resources */,
 				7D2952B0143B481500F13B37 /* thanks-hd.png in Resources */,
@@ -2061,6 +2095,20 @@
 				7D36B3D0143B587100891FE2 /* megalopolis-16.png in Resources */,
 				7D36B3D1143B587100891FE2 /* megalopolis-50.fnt in Resources */,
 				7D36B3D2143B587100891FE2 /* megalopolis-50.png in Resources */,
+				7D36B3D9143B9CC800891FE2 /* megalopolis-16-hd.fnt in Resources */,
+				7D36B3DA143B9CC800891FE2 /* megalopolis-24-hd.fnt in Resources */,
+				7D36B3DB143B9CC800891FE2 /* megalopolis-32.png in Resources */,
+				7D36B3DC143B9CC800891FE2 /* megalopolis-48.png in Resources */,
+				7D36B3DD143B9CC800891FE2 /* megalopolis-50-hd.fnt in Resources */,
+				7D36B3DE143B9CC800891FE2 /* megalopolis-100.png in Resources */,
+				7D356291143CA03A0013B69B /* reset-button-hd.png in Resources */,
+				7D356292143CA03A0013B69B /* reset-button-selected-hd.png in Resources */,
+				7D356293143CA03A0013B69B /* reset-button-selected.png in Resources */,
+				7D356294143CA03A0013B69B /* reset-button.png in Resources */,
+				7D356299143CE0CA0013B69B /* next-button-hd.png in Resources */,
+				7D35629A143CE0CA0013B69B /* next-button.png in Resources */,
+				7D35629B143CE0CA0013B69B /* prev-button-hd.png in Resources */,
+				7D35629C143CE0CA0013B69B /* prev-button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

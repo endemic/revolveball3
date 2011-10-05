@@ -58,14 +58,29 @@
 		
 		// Create/add title
 		CCSprite *title = [CCSprite spriteWithFile:[NSString stringWithFormat:@"about%@.png", hdSuffix]];
-		title.position = ccp(windowSize.width / 2, windowSize.height - title.contentSize.height * 2);
+		title.position = ccp(windowSize.width / 2, windowSize.height - title.contentSize.height * 1.5);
 		[self addChild:title z:1];
 		
-		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Designed and programmed\nby Nathan Demick" dimensions:CGSizeMake(windowSize.width, 100 * fontMultiplier) alignment:CCTextAlignmentCenter fontName:@"MEgalopolisExtra.otf" fontSize:20 * fontMultiplier];
-		label.color = ccc3(255, 255, 255);
-		label.position = ccp(windowSize.width / 2, title.position.y - label.contentSize.height);
+		// Create "credits" label
+		CCLabelBMFont *label = [CCLabelBMFont labelWithString:@"Designed and programmed\n         by Nathan Demick" fntFile:[NSString stringWithFormat:@"megalopolis-16%@.fnt", hdSuffix]];
+		label.position = ccp(windowSize.width / 2, title.position.y - title.contentSize.height * 1.5);
 		[self addChild:label z:1];
+		
+		// Add buttons to modal
+		CCMenuItemImage *dataResetButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"reset-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"reset-button-selected%@.png", hdSuffix] block:^(id sender) {
+
+			// Play SFX
+			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
+			
+			// Create "go to App Store?" alert
+			UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"Reset data?"
+																 message:@"Your saved times will be lost!"
+																delegate:self
+													   cancelButtonTitle:@"Cancel"
+													   otherButtonTitles:@"OK", nil] autorelease];
+			[alertView setTag:0];
+			[alertView show];
+		}];
 		
 		// Create "rate on App Store" button
 		CCMenuItemImage *rateButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"feedback-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"feedback-button-selected%@.png", hdSuffix] block:^(id sender) {
@@ -97,9 +112,9 @@
 			[alertView show];
 		}];
 		
-		CCMenu *iTunesMenu = [CCMenu menuWithItems:rateButton, moreGamesButton, nil];
-		[iTunesMenu alignItemsVerticallyWithPadding:11];
-		iTunesMenu.position = ccp(windowSize.width / 2, rateButton.contentSize.height * 2);
+		CCMenu *iTunesMenu = [CCMenu menuWithItems:rateButton, moreGamesButton, dataResetButton, nil];
+		[iTunesMenu alignItemsVerticallyWithPadding:15];
+		iTunesMenu.position = ccp(windowSize.width / 2, rateButton.contentSize.height * 3);
 		[self addChild:iTunesMenu z:1];
 		
 		// Create back button/menu
@@ -108,7 +123,6 @@
 			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
 			
 			// Transition to title screen
-//			CCTransitionTurnOffTiles *transition = [CCTransitionTurnOffTiles transitionWithDuration:0.5 scene:[TitleLayer scene]];
 			CCTransitionFlipX *transition = [CCTransitionFlipX transitionWithDuration:0.5 scene:[TitleLayer scene]];
 			[[CCDirector sharedDirector] replaceScene:transition];
 		}];
@@ -125,8 +139,27 @@
  */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+	// Reset saved data
+	if (alertView.tag == 0)
+	{
+//		// Get user defaults
+//		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//		
+//		// Re-save scores array to user defaults
+//		[defaults setObject:[NSArray arrayWithObjects:[NSNumber numberWithInt:0],
+//							 [NSNumber numberWithInt:0],
+//							 [NSNumber numberWithInt:0],
+//							 [NSNumber numberWithInt:0],
+//							 [NSNumber numberWithInt:0],
+//							 nil] forKey:@"scores"];
+//		
+//		// Show the gameplay intro "tutorial" again
+//		[defaults setObject:[NSNumber numberWithBool:YES] forKey:@"showInstructions"];
+//		
+//		[defaults synchronize];
+	}
 	// "Rate" alert
-	if (alertView.tag == 1)
+	else if (alertView.tag == 1)
 	{
 		switch (buttonIndex) 
 		{
