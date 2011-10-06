@@ -15,13 +15,12 @@ Planned new features
 
 TO DO
 -----
-* TEST "data reset" functionality
 * TEST ending scene
 * Start playing music on start of level, then pause, then unpause to see if that fixes lag
 * Insert callback for playing the level complete sound
 * Test "lite" version
-* Add some sort of indicator to levels to show they are completed
-* Update levels to have a center anchor point
+* Create disabled prev/next level buttons
+* Fix sprite bleeding around "peg" object
 
 Version Info
 ------------

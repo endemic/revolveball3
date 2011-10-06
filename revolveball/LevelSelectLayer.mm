@@ -29,6 +29,8 @@
 {
 	if ((self = [super init]))
 	{
+		CCLOG(@"Trying to init the level select layer!");
+		
 		// Get window size
 		windowSize = [CCDirector sharedDirector].winSize;
 		
@@ -94,12 +96,10 @@
 		CCMenu *topMenu = [CCMenu menuWithItems:backButton, leaderboardButton, nil];
 		topMenu.position = ccp(windowSize.width / 2, windowSize.height - backButton.contentSize.height);
 		[topMenu alignItemsHorizontallyWithPadding:backButton.contentSize.width / 1.5];
-		[self addChild:topMenu];
+		[self addChild:topMenu z:2];
 		
 		// Set up the previous/next buttons
 		prevButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"prev-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"prev-button%@.png", hdSuffix] disabledImage:[NSString stringWithFormat:@"prev-button%@.png", hdSuffix] block:^(id sender) {
-			// TODO: Trigger animations that slide in levels from off screen
-			
 			[GameSingleton sharedGameSingleton].currentLevel--;
 			
 			// Disable the previous button if we're at the end of the line
@@ -122,8 +122,6 @@
 		}];
 		
 		nextButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"next-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"next-button%@.png", hdSuffix] disabledImage:[NSString stringWithFormat:@"next-button%@.png", hdSuffix] block:^(id sender) {
-			// TODO: Trigger animations that slide in levels from off screen
-			
 			[GameSingleton sharedGameSingleton].currentLevel++;
 			
 			// Disable the next button if we're at the end of the line
@@ -164,20 +162,20 @@
 		}];
 		CCMenu *playButtonMenu = [CCMenu menuWithItems:playButton, nil];
 		playButtonMenu.position = ccp(windowSize.width / 2, windowSize.height / 10);
-		[self addChild:playButtonMenu];
+		[self addChild:playButtonMenu z:2];
 		
 		// Add large "world title" text
 		NSString *worldTitleString;
 		switch ([GameSingleton sharedGameSingleton].currentWorld) 
 		{
-//			case 1: worldTitleString = @"Clouds"; break;
-//			case 2: worldTitleString = @"Forest"; break;
-//			case 3: worldTitleString = @"Mountains"; break;
-//			case 4: worldTitleString = @"Caves"; break;
-			case 1: worldTitleString = @"World 1"; break;
-			case 2: worldTitleString = @"World 2"; break;
-			case 3: worldTitleString = @"World 3"; break;
-			case 4: worldTitleString = @"World 4"; break;
+			case 1: worldTitleString = @"Clouds"; break;
+			case 2: worldTitleString = @"Forest"; break;
+			case 3: worldTitleString = @"Mountains"; break;
+			case 4: worldTitleString = @"Caves"; break;
+//			case 1: worldTitleString = @"World 1"; break;
+//			case 2: worldTitleString = @"World 2"; break;
+//			case 3: worldTitleString = @"World 3"; break;
+//			case 4: worldTitleString = @"World 4"; break;
 		}
 		
 		CCLabelBMFont *worldTitle = [CCLabelBMFont labelWithString:worldTitleString fntFile:[NSString stringWithFormat:@"megalopolis-50%@.fnt", hdSuffix]];
@@ -185,9 +183,9 @@
 		[self addChild:worldTitle z:2];
 		
 		// Add instructional text
-//		CCLabelBMFont *instructions = [CCLabelBMFont labelWithString:@"Tap to select a level" fntFile:[NSString stringWithFormat:@"megalopolis-24%@.fnt", hdSuffix]];
-//		[instructions setPosition:ccp(windowSize.width / 2, worldTitle.position.y - instructions.contentSize.height * 1.5)];
-//		[self addChild:instructions];
+		CCLabelBMFont *instructions = [CCLabelBMFont labelWithString:@"Select a level" fntFile:[NSString stringWithFormat:@"megalopolis-24%@.fnt", hdSuffix]];
+		[instructions setPosition:ccp(windowSize.width / 2, worldTitle.position.y - instructions.contentSize.height * 1.2)];
+		[self addChild:instructions z:2];
 		
 		// Array of map objects
 		maps = [[NSMutableArray arrayWithCapacity:levelsPerWorld] retain];
@@ -200,7 +198,7 @@
 			
 			CCTMXTiledMap *map = [CCTMXTiledMap tiledMapWithTMXFile:mapFile];
 			map.position = ccp(windowSize.width / 2, windowSize.height / 1.75);
-			map.scale = 0.05 * fontMultiplier;		// Make it really small!
+			map.scale = 0.10 * fontMultiplier;		// Make it really small!
 			map.anchorPoint = ccp(0.5, 0.5);		// Try to set rotation point in the center of the map
 			
 			// Create map obj so we can get its' name + time limit
@@ -211,6 +209,12 @@
 		levelTitle = [CCLabelBMFont labelWithString:@"Level Name" fntFile:[NSString stringWithFormat:@"megalopolis-24%@.fnt", hdSuffix]];
 		[levelTitle setPosition:ccp(windowSize.width / 2, windowSize.height / 3)];
 		[self addChild:levelTitle z:2];
+		
+		// Add level completion status indicator
+		checkmark = [CCSprite spriteWithFile:[NSString stringWithFormat:@"checkmark-small%@.png", hdSuffix]];
+		checkmark.position = ccp(levelTitle.position.x + levelTitle.contentSize.width / 2 + checkmark.contentSize.width / 2, levelTitle.position.y + checkmark.contentSize.height / 3);
+		checkmark.opacity = 0;	// Hide initially
+		[self addChild:checkmark z:2];
 		
 		levelBestTime = [CCLabelBMFont labelWithString:@"Best Time: --:--" fntFile:[NSString stringWithFormat:@"megalopolis-24%@.fnt", hdSuffix]];
 		// Set the position based on the label above it
@@ -245,7 +249,7 @@
 	
 	// Create map obj so we can get its' name + time limit
 	CCTMXTiledMap *map = [maps objectAtIndex:[GameSingleton sharedGameSingleton].currentLevel - 1];
-	[map runAction:[CCRepeatForever actionWithAction:[CCRotateBy actionWithDuration:10.0 angle:360]]];
+	[map runAction:[CCRepeatForever actionWithAction:[CCRotateBy actionWithDuration:14.0 angle:360]]];
 	[self addChild:map z:1];	// Have the map rotate behind other objects
 	
 	int minutes, seconds;
@@ -259,14 +263,31 @@
 	minutes = floor(bestTimeInSeconds / 60);
 	seconds = bestTimeInSeconds % 60;
 	
+	// Set the map name field
+	if ([map propertyNamed:@"name"])
+	{
+		[levelTitle setString:[map propertyNamed:@"name"]];
+	}
+	else
+	{
+		[levelTitle setString:[NSString stringWithFormat:@"Level %i", [GameSingleton sharedGameSingleton].currentLevel]];
+	}
+	
 	// If the level is complete, display the best time... otherwise, just show "--:--"
 	if ([[[levelData objectAtIndex:currentLevelIndex] objectForKey:@"complete"] boolValue])
 	{
 		[levelBestTime setString:[NSString stringWithFormat:@"Best Time: %02d:%02d", minutes, seconds]];
+		
+		// Also show the "completed" indicator
+		checkmark.position = ccp(levelTitle.position.x + levelTitle.contentSize.width / 2 + checkmark.contentSize.width / 2, levelTitle.position.y + checkmark.contentSize.height / 3);
+		checkmark.opacity = 255;
 	}
 	else
 	{
 		[levelBestTime setString:@"Best Time: --:--"];
+		
+		// Hide the "completed" indicator
+		checkmark.opacity = 0;
 	}
 	
 	// Populate time limit field
@@ -277,16 +298,6 @@
 		seconds = timeLimitInSeconds % 60;
 		
 		[levelTimeLimit setString:[NSString stringWithFormat:@"Limit: %02d:%02d", minutes, seconds]];
-	}
-	
-	// Set the map name field
-	if ([map propertyNamed:@"name"])
-	{
-		[levelTitle setString:[map propertyNamed:@"name"]];
-	}
-	else
-	{
-		[levelTitle setString:[NSString stringWithFormat:@"Level %i", [GameSingleton sharedGameSingleton].currentLevel]];
 	}
 }
 

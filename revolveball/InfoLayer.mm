@@ -151,18 +151,20 @@
 			{
 				// Reset level times/completion status w/ defaults
 				NSDictionary *d = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"UserDefaults" ofType:@"plist"]];
-				[[NSUserDefaults standardUserDefaults] setObject:d forKey:@"levelData"];
+				NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+				
+				[defaults setObject:[d objectForKey:@"levelData"] forKey:@"levelData"];
+				
+				NSLog(@"Level data: %@", [defaults objectForKey:@"levelData"]);
 				
 				// Reset game completion status
-				[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"completedGame"];
+				[defaults setBool:NO forKey:@"completedGame"];
 				
 				// Reset "show instructions" toggle
-				[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"showInstructions"];
+				[defaults setBool:YES forKey:@"showInstructions"];
 				
 				// Sync defaults
-				[[NSUserDefaults standardUserDefaults] synchronize];
-				
-				CCLOG(@"Trying to reset game data");
+				[defaults synchronize];
 			}
 				break;
 			default:

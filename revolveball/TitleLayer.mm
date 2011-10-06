@@ -70,6 +70,13 @@
 		id callback = [CCCallBlockN actionWithBlock:^(CCNode *node) {
 			id spin = [CCRepeatForever actionWithAction:[CCRotateBy actionWithDuration:2.0 angle:360.0]];
 			[(CCSprite *)node runAction:spin];
+			
+#if kLiteVersion
+			[GameSingleton sharedGameSingleton].hasGameCenter = NO;
+#else
+			// Authenticate with Game Center
+			[[GameSingleton sharedGameSingleton] authenticateLocalPlayer];
+#endif
 		}];
 		
 		[ball runAction:[CCSequence actions:wait, show, ease, callback, nil]];
@@ -83,8 +90,19 @@
 			[GameSingleton sharedGameSingleton].currentWorld = 0;
 			[GameSingleton sharedGameSingleton].currentLevel = 0;
 			
-			CCTransitionRotoZoom *transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[GameLayer scene]];
-			[[CCDirector sharedDirector] replaceScene:transition];
+			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+			if ([defaults boolForKey:@"showInstructions"] == YES)
+			{
+				// Show instructions if they haven't been shown before
+				CCTransitionRotoZoom *transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[InstructionsLayer scene]];
+				[[CCDirector sharedDirector] replaceScene:transition];
+			}
+			else
+			{
+				// Otherwise, go to the hub level
+				CCTransitionRotoZoom *transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[GameLayer scene]];
+				[[CCDirector sharedDirector] replaceScene:transition];	
+			}
 		}];
 		
 #if kLiteVersion
@@ -133,13 +151,6 @@
 		[self addChild:copyright z:1];
 				
 		[self preloadAudio];
-		
-#if kLiteVersion
-		[GameSingleton sharedGameSingleton].hasGameCenter = NO;
-#else
-		// Authenticate with Game Center
-		[[GameSingleton sharedGameSingleton] authenticateLocalPlayer];
-#endif
 	}
 	return self;
 }

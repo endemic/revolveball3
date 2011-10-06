@@ -15,6 +15,8 @@
 #import "LogoLayer.h"
 #import "GameSingleton.h"
 
+#import "LevelSelectLayer.h"
+
 @implementation AppDelegate
 
 @synthesize window;
@@ -115,8 +117,10 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults registerDefaults:[NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"UserDefaults" ofType:@"plist"]]];
 	
+	[[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:0.3];
+	
 	// Run the intro Scene
-	[[CCDirector sharedDirector] runWithScene:[LogoLayer scene]];
+	[[CCDirector sharedDirector] runWithScene:[TitleLayer scene]];
 }
 
 

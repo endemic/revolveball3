@@ -22,6 +22,9 @@
 	
 	CCMenuItemImage *prevButton, *nextButton;
 	
+	// Indicator to show level completion status
+	CCSprite *checkmark;
+	
 	// Number of total levels in the "world"
 	int levelsPerWorld;
 	

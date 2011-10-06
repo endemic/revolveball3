@@ -782,7 +782,7 @@
 					map.visible = NO;
 					
 					// Transition to level select scene
-					[[CCDirector sharedDirector] replaceScene:[CCTransitionRotoZoom transitionWithDuration:1.0 scene:[LevelSelectLayer node]]];
+					[[CCDirector sharedDirector] replaceScene:[CCTransitionRotoZoom transitionWithDuration:1.0 scene:[LevelSelectLayer scene]]];
 				}
 				break;
 			case kForestLevelWarp:
@@ -799,7 +799,7 @@
 					map.visible = NO;
 					
 					// Transition to level select scene
-					[[CCDirector sharedDirector] replaceScene:[CCTransitionRotoZoom transitionWithDuration:1.0 scene:[LevelSelectLayer node]]];
+					[[CCDirector sharedDirector] replaceScene:[CCTransitionRotoZoom transitionWithDuration:1.0 scene:[LevelSelectLayer scene]]];
 				}
 				break;
 			case kMountainLevelWarp:
@@ -816,7 +816,7 @@
 					map.visible = NO;
 					
 					// Transition to level select scene
-					[[CCDirector sharedDirector] replaceScene:[CCTransitionRotoZoom transitionWithDuration:1.0 scene:[LevelSelectLayer node]]];
+					[[CCDirector sharedDirector] replaceScene:[CCTransitionRotoZoom transitionWithDuration:1.0 scene:[LevelSelectLayer scene]]];
 				}
 				break;
 			case kCaveLevelWarp:
@@ -833,7 +833,7 @@
 					map.visible = NO;
 					
 					// Transition to level select scene
-					[[CCDirector sharedDirector] replaceScene:[CCTransitionRotoZoom transitionWithDuration:1.0 scene:[LevelSelectLayer node]]];
+					[[CCDirector sharedDirector] replaceScene:[CCTransitionRotoZoom transitionWithDuration:1.0 scene:[LevelSelectLayer scene]]];
 				}
 				break;
 			default:
@@ -1390,116 +1390,6 @@
 		
 		// Put an arrow pointing to the first world if no other progress has been made
 		[border setTileGID:kLeftArrow at:ccp(46, 50)];
-	}
-}
-
-- (void)retryButtonAction:(id)sender
-{
-	// Play SFX
-	[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
-	
-	[pauseOverlay setVisible:NO];
-	[map setVisible:NO];
-	
-	// Reload the same scene/level
-	CCTransitionRotoZoom *transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[GameLayer scene]];
-	[[CCDirector sharedDirector] replaceScene:transition];
-}
-
-- (void)nextButtonAction:(id)sender
-{
-	// Play SFX
-	[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
-	
-	pauseOverlay.visible = NO;
-	map.visible = NO;
-	
-	// Increment level counter
-	//[GameSingleton sharedGameSingleton].currentLevel++;
-	
-	int levelsPerWorld = 10;
-	int lastWorld = 4;
-	CCTransitionRotoZoom *transition;
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
-#if kLiteVersion
-	
-#else
-	
-#endif
-	// If the player has finished the game
-	if ([GameSingleton sharedGameSingleton].currentLevel > levelsPerWorld && [GameSingleton sharedGameSingleton].currentWorld == lastWorld && [defaults boolForKey:@"completedGame"] == NO)
-	{
-		// Set "completed game" boolean
-		[defaults setBool:YES forKey:@"completedGame"];
-		[defaults synchronize];
-		
-		// Transition to "credits" scene
-		transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[CreditsLayer scene]];
-	}
-	// If player has just completed the 10th level in a world, take them back to the world select
-	else if ([GameSingleton sharedGameSingleton].currentLevel > levelsPerWorld)
-	{
-		// This signifies the world select "level"
-		[GameSingleton sharedGameSingleton].currentWorld = 0;
-		[GameSingleton sharedGameSingleton].currentLevel = 0;
-		
-		transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[GameLayer scene]];
-	}
-	// Otherwise just go back to level select
-	else
-	{
-		transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[LevelSelectLayer node]];
-	}
-	
-	[[CCDirector sharedDirector] replaceScene:transition];
-}
-
-- (void)backButtonAction:(id)sender
-{
-	// Play SFX
-	[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
-	
-	[pauseOverlay setVisible:NO];
-	[map setVisible:NO];
-	
-	// Stop the background music, if playing
-	[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
-	
-	// Load the level select screen
-	CCTransitionRotoZoom *transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[LevelSelectLayer scene]];
-	[[CCDirector sharedDirector] replaceScene:transition];
-}
-
-- (void)pauseButtonAction:(id)sender
-{
-	// Play SFX
-	[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
-
-	if (paused)
-	{
-		// Schedule regular game loop
-		[self schedule:@selector(update:)];
-		
-		// Schedule timer method for 1 second intervals
-		[self schedule:@selector(timer:) interval:1];
-		paused = NO;
-		
-		// Hide pause overlay
-		id action = [CCEaseBounce actionWithAction:[CCMoveTo actionWithDuration:0.1 position:ccp(windowSize.width / 2, windowSize.height + pauseOverlay.contentSize.height / 2)]];
-		[pauseOverlay runAction:action];
-	}
-	else 
-	{
-		// Unschedule the game loop & timer methods
-		[self unschedule:@selector(update:)];
-		[self unschedule:@selector(timer:)];
-		paused = YES;
-		
-		// Show pause overlay
-		[pauseOverlay setVisible:YES];
-		id action = [CCEaseBounce actionWithAction:[CCMoveTo actionWithDuration:0.1 position:ccp(windowSize.width / 2, windowSize.height / 2)]];
-		[pauseOverlay runAction:action];
 	}
 }
 

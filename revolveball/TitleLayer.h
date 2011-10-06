@@ -9,6 +9,8 @@
 #import "cocos2d.h"
 #import "GameLayer.h"
 #import "InfoLayer.h"
+#import "InstructionsLayer.h"
+
 #import "GameSingleton.h"
 #import "SimpleAudioEngine.h"
 
