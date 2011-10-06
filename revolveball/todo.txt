@@ -15,9 +15,11 @@ Planned new features
 
 TO DO
 -----
-* Add "data reset" option to Info scene
-* Create "choose world" text to add to hub level
-* Determine new level select layout
+* TEST "data reset" functionality
+* TEST ending scene
 * Add "ready" "go" beeps
 * Start playing music on start of level, then pause, then unpause to see if that fixes lag
-* Genius idea - Crib level select from Nonogram Madness, display each completed level as a slowly rotating TMX
+* Insert callback for playing the level complete sound
+* Test "lite" version
+* Add some sort of indicator to levels to show they are completed
+* Add code for end of game stuff

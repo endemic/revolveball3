@@ -18,6 +18,7 @@
 
 #import "LevelSelectLayer.h"
 #import "CreditsLayer.h"
+#import "UpgradeLayer.h"
 
 @interface GameLayer : CCLayer 
 {

@@ -125,38 +125,41 @@
 		
 		// Set up pause button
 		CCMenuItem *pauseButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"pause-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"pause-button%@.png", hdSuffix] block:^(id sender) {
-			// Play SFX
-			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
-			
-			// Show the overlay the first time the pause button is pressed
-			if (pauseOverlay.visible == NO)
+			if (levelComplete == NO)
 			{
-				pauseOverlay.visible = YES;
-			}
-			
-			if (paused)
-			{
-				// Schedule regular game loop
-				[self schedule:@selector(update:)];
+				// Play SFX
+				[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
 				
-				// Schedule timer method for 1 second intervals
-				[self schedule:@selector(timer:) interval:1];
-				paused = NO;
+				// Show the overlay the first time the pause button is pressed
+				if (pauseOverlay.visible == NO)
+				{
+					pauseOverlay.visible = YES;
+				}
 				
-				// Hide pause overlay
-				id action = [CCEaseBounce actionWithAction:[CCMoveTo actionWithDuration:0.1 position:ccp(windowSize.width / 2, windowSize.height + pauseOverlay.contentSize.height / 2)]];
-				[pauseOverlay runAction:action];
-			}
-			else 
-			{
-				// Unschedule the game loop & timer methods
-				[self unschedule:@selector(update:)];
-				[self unschedule:@selector(timer:)];
-				paused = YES;
-				
-				// Show pause overlay
-				id action = [CCEaseBounce actionWithAction:[CCMoveTo actionWithDuration:0.1 position:ccp(windowSize.width / 2, windowSize.height / 2)]];
-				[pauseOverlay runAction:action];
+				if (paused)
+				{
+					// Schedule regular game loop
+					[self schedule:@selector(update:)];
+					
+					// Schedule timer method for 1 second intervals
+					[self schedule:@selector(timer:) interval:1];
+					paused = NO;
+					
+					// Hide pause overlay
+					id action = [CCEaseBounce actionWithAction:[CCMoveTo actionWithDuration:0.1 position:ccp(windowSize.width / 2, windowSize.height + pauseOverlay.contentSize.height / 2)]];
+					[pauseOverlay runAction:action];
+				}
+				else 
+				{
+					// Unschedule the game loop & timer methods
+					[self unschedule:@selector(update:)];
+					[self unschedule:@selector(timer:)];
+					paused = YES;
+					
+					// Show pause overlay
+					id action = [CCEaseBounce actionWithAction:[CCMoveTo actionWithDuration:0.1 position:ccp(windowSize.width / 2, windowSize.height / 2)]];
+					[pauseOverlay runAction:action];
+				}
 			}
 		}];
 		CCMenu *pauseMenu = [CCMenu menuWithItems:pauseButton, nil];
@@ -491,7 +494,7 @@
 		}
 		else
 		{
-			[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"gameplay.mp3"];
+			[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"3.mp3"];
 		}
 	}
 	return self;
@@ -915,6 +918,9 @@
 
 - (void)winGame
 {
+	// Stop the BGM
+	[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+	
 	// Boolean which sets contact listeners to be ignored
 	levelComplete = YES;
 	
@@ -926,9 +932,6 @@
 	
 	// Play sound effect
 	[[SimpleAudioEngine sharedEngine] playEffect:@"level-complete.caf"];
-	
-	// Stop the BGM
-	[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
 	
 	int currentWorldIndex = ([GameSingleton sharedGameSingleton].currentWorld - 1) * 10;
 	int currentLevelIndex = currentWorldIndex + [GameSingleton sharedGameSingleton].currentLevel - 1;
@@ -977,8 +980,6 @@
 			
 			// Send time to Game Center leaderboards
 			[[GameSingleton sharedGameSingleton] reportScore:bestWorldTime forCategory:leaderboardCategory];
-			
-			// NSLog(@"Sending best world time of %i", bestWorldTime);
 		}
 	}
 	
@@ -1013,10 +1014,55 @@
 		
 		// Stop the background music, if playing
 		[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
-		
-		// Load the level select screen
-		CCTransitionRotoZoom *transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[LevelSelectLayer scene]];
+#if kLiteVersion
+		CCTransitionRotoZoom *transition;
+		// "Lite" version completed
+		if ([self percentComplete] >= 12.5)
+		{
+			// Go to the "upgrade" scene
+			transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[UpgradeLayer scene]];
+		}
+		else
+		{
+			// Otherwise go back to the level select
+			transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[LevelSelectLayer scene]];
+		}
 		[[CCDirector sharedDirector] replaceScene:transition];
+#else
+		// Load the level select screen
+		CCTransitionRotoZoom *transition;
+		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+		float percent = [self percentComplete];
+		
+		if (percent == 100 && [GameSingleton sharedGameSingleton].currentWorld == 4 && [defaults boolForKey:@"completedGame"] == NO)
+		{
+			// Set "completed game" boolean
+			[defaults setBool:YES forKey:@"completedGame"];
+			[defaults synchronize];
+			
+			// Transition to "credits" layer
+			transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[CreditsLayer scene]];	 
+		}
+		else if ( (percent == 75 && [GameSingleton sharedGameSingleton].currentWorld == 3) ||
+				  (percent == 50 && [GameSingleton sharedGameSingleton].currentWorld == 2) ||
+				  (percent == 25 && [GameSingleton sharedGameSingleton].currentWorld == 1) )
+		{
+			// This signifies the world select "level"
+			[GameSingleton sharedGameSingleton].currentWorld = 0;
+			[GameSingleton sharedGameSingleton].currentLevel = 0;
+			
+			// Go back to world select
+			transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[GameLayer scene]];
+		}
+		else
+		{
+			// Go back to level select
+			transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[LevelSelectLayer scene]];
+		}
+		
+		[[CCDirector sharedDirector] replaceScene:transition];
+#endif
+		
 	}];
 	CCMenu *menu = [CCMenu menuWithItems:continueButton, nil];
 	[menu setPosition:ccp(windowSize.width / 2, windowSize.height / 6)];
@@ -1027,6 +1073,9 @@
 {
 	// Boolean which ignores contact listeners
 	levelComplete = YES;
+
+	// Stop the BGM
+	[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
 	
 	// Disable touches so player can't move anymore
 	[self setIsTouchEnabled:NO];
@@ -1040,9 +1089,6 @@
 	// Play "you lose" sfx
 	[[SimpleAudioEngine sharedEngine] playEffect:@"level-fail.caf"];
 	
-	// Stop the BGM
-	[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
-	
 	// Add "FAIL" label
 	CCLabelBMFont *finishLabel = [CCLabelBMFont labelWithString:@"FAILURE!" fntFile:[NSString stringWithFormat:@"megalopolis-50%@.fnt", hdSuffix]];
 	[finishLabel setPosition:ccp(windowSize.width / 2, windowSize.height / 2)];
@@ -1055,9 +1101,6 @@
 		
 		[pauseOverlay setVisible:NO];
 		[map setVisible:NO];
-		
-		// Stop the background music, if playing
-		[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
 		
 		// Load the level select screen
 		CCTransitionRotoZoom *transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[LevelSelectLayer scene]];
@@ -1116,7 +1159,7 @@
 	
 	// Create a label that shows how much time you got
 	NSString *s = [NSString stringWithFormat:@"+%i seconds", seconds];
-	CCLabelBMFont *label = [CCLabelBMFont labelWithString:s fntFile:[NSString stringWithFormat:@"yoster-16%@.fnt", hdSuffix]];
+	CCLabelBMFont *label = [CCLabelBMFont labelWithString:s fntFile:[NSString stringWithFormat:@"megalopolis-16%@.fnt", hdSuffix]];
 	[label setPosition:ccp(ball.position.x, ball.position.y + 16)];
 	[self addChild:label z:5];
 	

@@ -1,18 +1,18 @@
 //
-//  UpgradeScene.m
+//  UpgradeLayer.m
 //  nonogrammadness
 //
 //  Created by Nathan Demick on 9/16/11.
 //  Copyright 2011 Ganbaru Games. All rights reserved.
 //
 
-#import "UpgradeScene.h"
+#import "UpgradeLayer.h"
 #import "LevelSelectLayer.h"
 
 #import "GameSingleton.h"
 #import "SimpleAudioEngine.h"
 
-@implementation UpgradeScene
+@implementation UpgradeLayer
 
 + (CCScene *)scene
 {
@@ -20,7 +20,7 @@
 	CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
-	UpgradeScene *layer = [UpgradeScene node];
+	UpgradeLayer *layer = [UpgradeLayer node];
 	
 	// add layer as a child to scene
 	[scene addChild:layer];

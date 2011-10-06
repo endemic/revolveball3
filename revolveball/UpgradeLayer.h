@@ -1,5 +1,5 @@
 //
-//  UpgradeScene.h
+//  UpgradeLayer.h
 //  nonogrammadness
 //
 //  Created by Nathan Demick on 9/16/11.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface UpgradeScene : CCLayer <UIAlertViewDelegate>
+@interface UpgradeLayer : CCLayer <UIAlertViewDelegate>
 {
 	NSURL *iTunesURL;
 	

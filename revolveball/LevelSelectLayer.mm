@@ -29,9 +29,6 @@
 {
 	if ((self = [super init]))
 	{
-		// Enable touches
-		[self setIsTouchEnabled:YES];
-		
 		// Get window size
 		windowSize = [CCDirector sharedDirector].winSize;
 		
@@ -50,8 +47,14 @@
 		// Start playing music if it's not already playing
 		if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
 		{
-			[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"level-select.mp3"];
+			[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"2.mp3"];
 		}
+		
+#if kLiteVersion
+		levelsPerWorld = 5;
+#else
+		levelsPerWorld = 10;
+#endif
 		
 		// Add background to layer
 		CCSprite *background = [CCSprite spriteWithFile:[NSString stringWithFormat:@"background-%i%@.png", [GameSingleton sharedGameSingleton].currentWorld, hdSuffix]];
@@ -88,10 +91,64 @@
 			leaderboardButton.visible = NO;
 		}
 		
-		CCMenu *backButtonMenu = [CCMenu menuWithItems:backButton, leaderboardButton, nil];
-		backButtonMenu.position = ccp(windowSize.width / 2, windowSize.height - backButton.contentSize.height);
-		[backButtonMenu alignItemsHorizontallyWithPadding:backButton.contentSize.width / 1.5];
-		[self addChild:backButtonMenu];
+		CCMenu *topMenu = [CCMenu menuWithItems:backButton, leaderboardButton, nil];
+		topMenu.position = ccp(windowSize.width / 2, windowSize.height - backButton.contentSize.height);
+		[topMenu alignItemsHorizontallyWithPadding:backButton.contentSize.width / 1.5];
+		[self addChild:topMenu];
+		
+		// Set up the previous/next buttons
+		prevButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"prev-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"prev-button%@.png", hdSuffix] disabledImage:[NSString stringWithFormat:@"prev-button%@.png", hdSuffix] block:^(id sender) {
+			// TODO: Trigger animations that slide in levels from off screen
+			
+			[GameSingleton sharedGameSingleton].currentLevel--;
+			
+			// Disable the previous button if we're at the end of the line
+			if ([GameSingleton sharedGameSingleton].currentLevel == 1)
+			{
+				prevButton.isEnabled = NO;
+			}
+			
+			// Enable the next button if it had been disabled previously
+			if (nextButton.isEnabled == NO)
+			{
+				nextButton.isEnabled = YES;
+			}
+			
+			// Update level info labels
+			[self displayLevelInfo];
+			
+			// Play SFX
+			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
+		}];
+		
+		nextButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"next-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"next-button%@.png", hdSuffix] disabledImage:[NSString stringWithFormat:@"next-button%@.png", hdSuffix] block:^(id sender) {
+			// TODO: Trigger animations that slide in levels from off screen
+			
+			[GameSingleton sharedGameSingleton].currentLevel++;
+			
+			// Disable the next button if we're at the end of the line
+			if ([GameSingleton sharedGameSingleton].currentLevel == levelsPerWorld)
+			{
+				nextButton.isEnabled = NO;
+			}
+			
+			// Enable the prev button if it had been disabled previously
+			if (prevButton.isEnabled == NO)
+			{
+				prevButton.isEnabled = YES;
+			}
+			
+			// Update level info labels
+			[self displayLevelInfo];
+			
+			// Play SFX
+			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
+		}];	
+		
+		CCMenu *prevNextMenu = [CCMenu menuWithItems:prevButton, nextButton, nil];
+		[prevNextMenu alignItemsHorizontallyWithPadding:220 * fontMultiplier];
+		prevNextMenu.position = ccp(windowSize.width / 2, windowSize.height / 1.75);
+		[self addChild:prevNextMenu z:2];
 		
 		// Add "play" button
 		CCMenuItemImage *playButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"start-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"start-button-selected%@.png", hdSuffix] block:^(id sender) {
@@ -113,7 +170,7 @@
 		NSString *worldTitleString;
 		switch ([GameSingleton sharedGameSingleton].currentWorld) 
 		{
-//			case 1: worldTitleString = @"Sky"; break;
+//			case 1: worldTitleString = @"Clouds"; break;
 //			case 2: worldTitleString = @"Forest"; break;
 //			case 3: worldTitleString = @"Mountains"; break;
 //			case 4: worldTitleString = @"Caves"; break;
@@ -125,93 +182,45 @@
 		
 		CCLabelBMFont *worldTitle = [CCLabelBMFont labelWithString:worldTitleString fntFile:[NSString stringWithFormat:@"megalopolis-50%@.fnt", hdSuffix]];
 		worldTitle.position = ccp(windowSize.width / 2, windowSize.height / 1.3);
-		[self addChild:worldTitle];
+		[self addChild:worldTitle z:2];
 		
 		// Add instructional text
-		CCLabelBMFont *instructions = [CCLabelBMFont labelWithString:@"Tap to select a level" fntFile:[NSString stringWithFormat:@"megalopolis-24%@.fnt", hdSuffix]];
-		[instructions setPosition:ccp(windowSize.width / 2, worldTitle.position.y - instructions.contentSize.height * 1.5)];
-		[self addChild:instructions];
+//		CCLabelBMFont *instructions = [CCLabelBMFont labelWithString:@"Tap to select a level" fntFile:[NSString stringWithFormat:@"megalopolis-24%@.fnt", hdSuffix]];
+//		[instructions setPosition:ccp(windowSize.width / 2, worldTitle.position.y - instructions.contentSize.height * 1.5)];
+//		[self addChild:instructions];
 		
-		// Create level icon objects
-		levelIcons = [[NSMutableArray alloc] init];
-
-#if kLiteVersion
-		int levelsPerWorld = 5;
-#else
-		int levelsPerWorld = 10;
-#endif
+		// Array of map objects
+		maps = [[NSMutableArray arrayWithCapacity:levelsPerWorld] retain];
+		
+		// Load TMX maps into array
 		for (int i = 0; i < levelsPerWorld; i++)
 		{
-			// Create level icon sprite
-			CCSprite *s = [CCSprite spriteWithFile:[NSString stringWithFormat:@"level-icon%@.png", hdSuffix]];
+			// Create string that is equal to map filename
+			NSString *mapFile = [NSString stringWithFormat:@"%i-%i.tmx", [GameSingleton sharedGameSingleton].currentWorld, i + 1];
 			
-			// Add number to level icon
-//			CCLabelBMFont *num = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%i", i + 1] fntFile:[NSString stringWithFormat:@"munro-small-20%@.fnt", hdSuffix]];
-			CCLabelTTF *num = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%i", i + 1] fontName:@"Helvetica" fontSize:18 * fontMultiplier];
-			// Attempt to position the number based on sprite/label widths
-			[num setPosition:ccp(s.contentSize.width - num.contentSize.width / 0.9, s.contentSize.height - num.contentSize.height / 1.2)];
-			[s addChild:num];
+			CCTMXTiledMap *map = [CCTMXTiledMap tiledMapWithTMXFile:mapFile];
+			map.position = ccp(windowSize.width / 2, windowSize.height / 1.75);
+			map.scale = 0.05 * fontMultiplier;		// Make it really small!
+			map.anchorPoint = ccp(0.5, 0.5);		// Try to set rotation point in the center of the map
 			
-			// Some default positioning variables
-			int levelIconYPos = windowSize.height * 0.6;
-			int levelIconXPos = windowSize.width / 2;
-			
-			// Place level icon sprite in scene
-			switch (i) 
-			{
-				// old Y values - 290, 226
-				
-				case 0: [s setPosition:ccp(levelIconXPos - s.contentSize.width * 4, levelIconYPos)]; break;
-				case 1: [s setPosition:ccp(levelIconXPos - s.contentSize.width * 4, levelIconYPos - s.contentSize.width * 2)]; break;
-				
-				case 2: [s setPosition:ccp(levelIconXPos - s.contentSize.width * 2, levelIconYPos - s.contentSize.width * 2)]; break;
-				case 3: [s setPosition:ccp(levelIconXPos - s.contentSize.width * 2, levelIconYPos)]; break;
-				
-				case 4: [s setPosition:ccp(levelIconXPos, levelIconYPos)]; break;
-				case 5: [s setPosition:ccp(levelIconXPos, levelIconYPos - s.contentSize.width * 2)]; break;
-				
-				case 6: [s setPosition:ccp(levelIconXPos + s.contentSize.width * 2, levelIconYPos - s.contentSize.width * 2)]; break;
-				case 7: [s setPosition:ccp(levelIconXPos + s.contentSize.width * 2, levelIconYPos)]; break;
-				
-				case 8: [s setPosition:ccp(levelIconXPos + s.contentSize.width * 4, levelIconYPos)]; break;
-				case 9: [s setPosition:ccp(levelIconXPos + s.contentSize.width * 4, levelIconYPos - s.contentSize.width * 2)]; break;
-			}
-			[self addChild:s z:2];
-			
-			// Add level icon sprite to NSMutableArray
-			[levelIcons addObject:s];
+			// Create map obj so we can get its' name + time limit
+			[maps addObject:map];
 		}
-		
-		// Draw "bridges" between completed levels
-		[self drawBridges];
-		
-		// Add rotating "ball" graphic to represent current level choice
-		ball = [CCSprite spriteWithFile:[NSString stringWithFormat:@"ball%@.png", hdSuffix]];
-		[self addChild:ball z:3];
-		
-		// Set ball's position
-		int currentLevelIndex = [GameSingleton sharedGameSingleton].currentLevel - 1;
-		CCSprite *currentLevelIcon = [levelIcons objectAtIndex:currentLevelIndex];
-		[ball setPosition:ccp(currentLevelIcon.position.x, currentLevelIcon.position.y)];
-		
-		// Tell ball to spin for-evah!
-		[ball setScale:0.8];
-		[ball runAction:[CCRepeatForever actionWithAction:[CCRotateBy actionWithDuration:2.0 angle:360.0]]];
 		
 		// Add descriptive labels that show level info, such as title, best time, etc.
 		levelTitle = [CCLabelBMFont labelWithString:@"Level Name" fntFile:[NSString stringWithFormat:@"megalopolis-24%@.fnt", hdSuffix]];
 		[levelTitle setPosition:ccp(windowSize.width / 2, windowSize.height / 3)];
-		[self addChild:levelTitle];
+		[self addChild:levelTitle z:2];
 		
 		levelBestTime = [CCLabelBMFont labelWithString:@"Best Time: --:--" fntFile:[NSString stringWithFormat:@"megalopolis-24%@.fnt", hdSuffix]];
 		// Set the position based on the label above it
 		[levelBestTime setPosition:ccp(windowSize.width / 2, levelTitle.position.y - levelBestTime.contentSize.height)];
-		[self addChild:levelBestTime];
+		[self addChild:levelBestTime z:2];
 		
 		levelTimeLimit = [CCLabelBMFont labelWithString:@"Limit: --:--" fntFile:[NSString stringWithFormat:@"megalopolis-24%@.fnt", hdSuffix]];
 		// Set the position based on the label above it
 		[levelTimeLimit setPosition:ccp(windowSize.width / 2, levelBestTime.position.y - levelTimeLimit.contentSize.height)];
-		[self addChild:levelTimeLimit];
+		[self addChild:levelTimeLimit z:2];
 		
 		// Update level info labels that we just created
 		[self displayLevelInfo];
@@ -219,121 +228,25 @@
 	return self;
 }
 
-- (void)moveLevelSelectCursor:(int)destination
-{
-	/* Holy shit, this is crufty */
-	
-	int currentLevelIndex = [GameSingleton sharedGameSingleton].currentLevel - 1;
-	
-	CCSprite *one = [levelIcons objectAtIndex:0];
-	CCSprite *two = [levelIcons objectAtIndex:1];
-	CCSprite *three = [levelIcons objectAtIndex:2];
-	CCSprite *four = [levelIcons objectAtIndex:3];
-	CCSprite *five = [levelIcons objectAtIndex:4];
-	CCSprite *six = [levelIcons objectAtIndex:5];
-	CCSprite *seven = [levelIcons objectAtIndex:6];
-	CCSprite *eight = [levelIcons objectAtIndex:7];
-	CCSprite *nine = [levelIcons objectAtIndex:8];
-	CCSprite *ten = [levelIcons objectAtIndex:9];
-	
-	NSArray *actions = [NSArray arrayWithObjects:
-						[CCMoveTo actionWithDuration:0.3 position:one.position],
-						[CCMoveTo actionWithDuration:0.3 position:two.position],
-						[CCMoveTo actionWithDuration:0.3 position:three.position],
-						[CCMoveTo actionWithDuration:0.3 position:four.position],
-						[CCMoveTo actionWithDuration:0.3 position:five.position],
-						[CCMoveTo actionWithDuration:0.3 position:six.position],
-						[CCMoveTo actionWithDuration:0.3 position:seven.position],
-						[CCMoveTo actionWithDuration:0.3 position:eight.position],
-						[CCMoveTo actionWithDuration:0.3 position:nine.position],
-						[CCMoveTo actionWithDuration:0.3 position:ten.position],
-						nil];
-	
-	CCSequence *seq = nil;
-	
-	if (currentLevelIndex < destination)
-		for (int i = currentLevelIndex + 1; i <= destination; i++)
-		{
-			if (!seq) 
-				seq = [actions objectAtIndex:i];
-			else 
-				seq = [CCSequence actionOne:seq two:[actions objectAtIndex:i]];
-				
-		}
-	else if (currentLevelIndex > destination)
-		for (int i = currentLevelIndex - 1; i >= destination; i--)
-		{
-			if (!seq) 
-				seq = [actions objectAtIndex:i];
-			else 
-				seq = [CCSequence actionOne:seq two:[actions objectAtIndex:i]];
-			
-		}
-	
-	if (seq)
-		[ball runAction:seq];
-}
 
-/* Draw "bridges" between level icons to indicate that the player can move between them */
-- (void)drawBridges
-{
-	// Cycle through level icons to determine which can have bridges drawn
-	for (uint i = 0; i < [levelIcons count] - 1; i++)
-	{
-		int currentLevelIndex = (([GameSingleton sharedGameSingleton].currentWorld - 1) * 10) + i;
-		//int previousLevelIndex = currentLevelIndex - 1 > -1 ? currentLevelIndex - 1 : 0;
-		
-		// Check to see if the player has completed the current level
-		NSMutableArray *levelData = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"levelData"]];
-		NSDictionary *d = [levelData objectAtIndex:currentLevelIndex];
-		
-		// If so, draw a bridge
-		if ([[d objectForKey:@"complete"] boolValue])
-		{
-			CCSprite *icon = [levelIcons objectAtIndex:i];
-			CCSprite *b = [CCSprite spriteWithFile:[NSString stringWithFormat:@"level-connector%@.png", hdSuffix]];
-			if (i % 2)	// Odd, means horizontal
-			{
-				[b setPosition:ccp(icon.position.x + b.contentSize.width / 2, icon.position.y)];
-			}
-			else
-			{
-				// Sprite is horizontal, so rotate to make vertical
-				[b setRotation:90.0];
-				
-				// The offset direction switches every other time
-				if (i == 0 || i == 4 || i == 8)
-					[b setPosition:ccp(icon.position.x, icon.position.y - b.contentSize.width / 2)];
-				else
-					[b setPosition:ccp(icon.position.x, icon.position.y + b.contentSize.width / 2)];
-			}
-			[self addChild:b z:1];
-		}
-	}
-}
 
 /* Updates labels that show best time/level title/etc. */
 - (void)displayLevelInfo
 {
-	// Create string that is equal to map filename
-	NSMutableString *mapFile = [NSMutableString stringWithFormat:@"%i-%i", [GameSingleton sharedGameSingleton].currentWorld, [GameSingleton sharedGameSingleton].currentLevel];
-	
-	// Append file format suffix
-	[mapFile appendString:@".tmx"];
+	// Loop through all maps and remove them from display if possible
+	for (int i = 0; i < [maps count]; i++)
+	{
+		CCTMXTiledMap *map = [maps objectAtIndex:i];
+		if (map.parent == self)
+		{
+			[self removeChild:map cleanup:YES];
+		}
+	}
 	
 	// Create map obj so we can get its' name + time limit
-	map = [CCTMXTiledMap tiledMapWithTMXFile:mapFile];
-	
-	// Create map obj and add to layer
-	map.position = ccp(windowSize.width / 2, windowSize.height / 2);
-	map.scale = 0.05 * fontMultiplier;		// Make it really small!
-	map.anchorPoint = ccp(0.5, 0.5);		// Try to set rotation point in the center of the map
-	
-	if (map.parent != self)
-	{
-		[map runAction:[CCRepeatForever actionWithAction:[CCRotateBy actionWithDuration:10.0 angle:360]]];
-		[self addChild:map z:1];	// Have the map rotate behind other objects
-	}
+	CCTMXTiledMap *map = [maps objectAtIndex:[GameSingleton sharedGameSingleton].currentLevel - 1];
+	[map runAction:[CCRepeatForever actionWithAction:[CCRotateBy actionWithDuration:10.0 angle:360]]];
+	[self addChild:map z:1];	// Have the map rotate behind other objects
 	
 	int minutes, seconds;
 	int currentLevelIndex = (([GameSingleton sharedGameSingleton].currentWorld - 1) * 10) + ([GameSingleton sharedGameSingleton].currentLevel - 1);
@@ -348,10 +261,13 @@
 	
 	// If the level is complete, display the best time... otherwise, just show "--:--"
 	if ([[[levelData objectAtIndex:currentLevelIndex] objectForKey:@"complete"] boolValue])
+	{
 		[levelBestTime setString:[NSString stringWithFormat:@"Best Time: %02d:%02d", minutes, seconds]];
+	}
 	else
+	{
 		[levelBestTime setString:@"Best Time: --:--"];
-	
+	}
 	
 	// Populate time limit field
 	if ([map propertyNamed:@"time"])
@@ -374,60 +290,10 @@
 	}
 }
 
-- (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-	UITouch *touch = [touches anyObject];
-	
-	if (touch)
-	{
-		// Convert location
-		CGPoint touchPoint = [touch locationInView:[touch view]];
-
-		// Cycle through level icons and determine a touch
-		for (uint i = 0; i < [levelIcons count]; i++)
-		{
-			CCSprite *icon = [levelIcons objectAtIndex:i];
-			
-			// Additional padding around the hit box
-			int padding = 16;
-			
-			// CGRect origin is upper left, so offset the center
-			CGRect iconRect = CGRectMake(icon.position.x - (icon.contentSize.width / 2) - (padding / 2), windowSize.height - icon.position.y - (icon.contentSize.height / 2) - (padding / 2), icon.contentSize.width + padding, icon.contentSize.height + padding);
-			
-			//NSLog(@"iconRect: %@", NSStringFromCGRect(iconRect));
-			
-			if (CGRectContainsPoint(iconRect, touchPoint))
-			{
-				int currentLevelIndex = (([GameSingleton sharedGameSingleton].currentWorld - 1) * 10) + i;
-				int previousLevelIndex = currentLevelIndex - 1 > -1 ? currentLevelIndex - 1 : 0;
-				
-				// Check to see if the player has completed the previous level
-				NSMutableArray *levelData = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"levelData"]];
-				NSDictionary *d = [levelData objectAtIndex:previousLevelIndex];
-				
-				// If the level is complete and the ball isn't moving already, move to the tapped location
-				if ([[d objectForKey:@"complete"] boolValue] && [ball numberOfRunningActions] < 2)
-				{
-					// Move ball icon over the appropriate icon
-					[self moveLevelSelectCursor:i];
-					
-					// Set level
-					[GameSingleton sharedGameSingleton].currentLevel = i + 1;
-					
-					// Update level info labels
-					[self displayLevelInfo];
-					
-					// Play SFX
-					[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
-				}
-			}
-		}
-	}
-}
-
 - (void)dealloc
 {
-	[levelIcons release];
+//	[levelIcons release];
+	[maps release];
 	[super dealloc];
 }
 @end

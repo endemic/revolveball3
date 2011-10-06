@@ -142,21 +142,32 @@
 	// Reset saved data
 	if (alertView.tag == 0)
 	{
-//		// Get user defaults
-//		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//		
-//		// Re-save scores array to user defaults
-//		[defaults setObject:[NSArray arrayWithObjects:[NSNumber numberWithInt:0],
-//							 [NSNumber numberWithInt:0],
-//							 [NSNumber numberWithInt:0],
-//							 [NSNumber numberWithInt:0],
-//							 [NSNumber numberWithInt:0],
-//							 nil] forKey:@"scores"];
-//		
-//		// Show the gameplay intro "tutorial" again
-//		[defaults setObject:[NSNumber numberWithBool:YES] forKey:@"showInstructions"];
-//		
-//		[defaults synchronize];
+		switch (buttonIndex) 
+		{
+			case 0:
+				// Do nothing - dismiss
+				break;
+			case 1:
+			{
+				// Reset level times/completion status w/ defaults
+				NSDictionary *d = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"UserDefaults" ofType:@"plist"]];
+				[[NSUserDefaults standardUserDefaults] setObject:d forKey:@"levelData"];
+				
+				// Reset game completion status
+				[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"completedGame"];
+				
+				// Reset "show instructions" toggle
+				[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"showInstructions"];
+				
+				// Sync defaults
+				[[NSUserDefaults standardUserDefaults] synchronize];
+				
+				CCLOG(@"Trying to reset game data");
+			}
+				break;
+			default:
+				break;
+		}
 	}
 	// "Rate" alert
 	else if (alertView.tag == 1)

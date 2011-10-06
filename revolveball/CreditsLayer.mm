@@ -43,68 +43,41 @@
 			hdSuffix = @"";
 			fontMultiplier = 1;
 		}
-		
-		// < Back
-		// Thanks for playing!
-		// You are a Revolve Ball Master!
-		// Try to get even faster times on your favorite levels.
-		// Created by Nathan Demick
-		// (more games)
-		
-		
+				
 		// Add background to layer
 		CCSprite *background = [CCSprite spriteWithFile:[NSString stringWithFormat:@"background-0%@.png", hdSuffix]];
 		[background setPosition:ccp(windowSize.width / 2, windowSize.height / 2)];
 		[background.texture setAliasTexParameters];
 		[self addChild:background z:0];
 		
-		// Add "back" button
-		CCMenuItemImage *backButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"back-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"back-button-selected%@.png", hdSuffix] block:^(id sender) {
-			// Play SFX
+		
+		// Create back button/menu
+		CCMenuItemImage *backButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"back-title-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"back-title-button-selected%@.png", hdSuffix] block:^(id sender) {
+			// Play sound effect
 			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
 			
-			CCTransitionRotoZoom *transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[TitleLayer scene]];
+			// Transition to title screen
+			CCTransitionFlipX *transition = [CCTransitionFlipX transitionWithDuration:0.5 scene:[TitleLayer scene]];
 			[[CCDirector sharedDirector] replaceScene:transition];
 		}];
-		CCMenu *backButtonMenu = [CCMenu menuWithItems:backButton, nil];
-		[backButtonMenu setPosition:ccp(backButton.contentSize.width / 1.5, windowSize.height - backButton.contentSize.height)];
-		[self addChild:backButtonMenu];
 		
-		// Add "more games" button
-		CCMenuItemImage *moreGamesButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"more-games-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"more-games-button-selected%@.png", hdSuffix] block:^(id sender) {
-			// Go to iTunes
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.com/apps/ganbarugames"]];
-		}];
-		CCMenu *moreGamesButtonMenu = [CCMenu menuWithItems:moreGamesButton, nil];
-		moreGamesButtonMenu.position = ccp(windowSize.width / 2, windowSize.height / 10);
-		[self addChild:moreGamesButtonMenu];
+		CCMenu *topMenu = [CCMenu menuWithItems:backButton, nil];
+		topMenu.position = ccp(backButton.contentSize.width / 1.5, windowSize.height - backButton.contentSize.height);
+		[self addChild:topMenu z:1];
 		
-		CCLabelBMFont *lineOne = [CCLabelBMFont labelWithString:@"Thanks" fntFile:[NSString stringWithFormat:@"yoster-32%@.fnt", hdSuffix]];
-		CCLabelBMFont *lineTwo = [CCLabelBMFont labelWithString:@"for playing!" fntFile:[NSString stringWithFormat:@"yoster-32%@.fnt", hdSuffix]];
-		CCLabelBMFont *lineThree = [CCLabelBMFont labelWithString:@"You are a Revolve Ball master!" fntFile:[NSString stringWithFormat:@"yoster-16%@.fnt", hdSuffix]];
-		CCLabelBMFont *lineFour = [CCLabelBMFont labelWithString:@"Try to get even faster times" fntFile:[NSString stringWithFormat:@"yoster-16%@.fnt", hdSuffix]];
-		CCLabelBMFont *lineFive = [CCLabelBMFont labelWithString:@"on your favorite levels." fntFile:[NSString stringWithFormat:@"yoster-16%@.fnt", hdSuffix]];
-		CCLabelBMFont *lineSix = [CCLabelBMFont labelWithString:@"Game created by" fntFile:[NSString stringWithFormat:@"yoster-16%@.fnt", hdSuffix]];
-		CCLabelBMFont *lineSeven = [CCLabelBMFont labelWithString:@"Nathan Demick" fntFile:[NSString stringWithFormat:@"yoster-16%@.fnt", hdSuffix]];
+		// Create/add title
+		CCSprite *title = [CCSprite spriteWithFile:[NSString stringWithFormat:@"thanks%@.png", hdSuffix]];
+		title.position = ccp(windowSize.width / 2, windowSize.height - title.contentSize.height * 1.5);
+		[self addChild:title z:1];
 		
-		[lineOne setPosition:ccp(windowSize.width / 2, windowSize.height / 1.3)];
-		[lineTwo setPosition:ccp(windowSize.width / 2, lineOne.position.y - lineTwo.contentSize.height)];
-		
-		[lineThree setPosition:ccp(windowSize.width / 2, lineTwo.position.y - lineTwo.contentSize.height * 2)];
-		[lineFour setPosition:ccp(windowSize.width / 2, lineThree.position.y - lineThree.contentSize.height)];
-		[lineFive setPosition:ccp(windowSize.width / 2, lineFour.position.y - lineFour.contentSize.height)];
-		
-		[lineSix setPosition:ccp(windowSize.width / 2, lineFive.position.y - lineFive.contentSize.height * 2)];
-		[lineSeven setPosition:ccp(windowSize.width / 2, lineSix.position.y - lineSix.contentSize.height)];
-		
-		
-		[self addChild:lineOne];
-		[self addChild:lineTwo];
-		[self addChild:lineThree];
-		[self addChild:lineFour];
-		[self addChild:lineFive];
-		[self addChild:lineSix];
-		[self addChild:lineSeven];
+		// Thanks for playing!
+		// You are a Revolve Ball 
+		// expert! Try to get even 
+		// faster times on your 
+		// favorite levels.
+		CCLabelBMFont *label = [CCLabelBMFont labelWithString:@"Thanks for playing!\nYou are a Revolve Ball\nexpert! Try to get even\nfaster times on your\nfavorite levels." fntFile:[NSString stringWithFormat:@"megalopolis-16%@.fnt", hdSuffix]];
+		label.position = ccp(windowSize.width / 2, title.position.y - title.contentSize.height * 1.5);
+		[self addChild:label z:1];
 		
 		// Play sound effect =]
 		[[SimpleAudioEngine sharedEngine] playEffect:@"level-complete.caf"];

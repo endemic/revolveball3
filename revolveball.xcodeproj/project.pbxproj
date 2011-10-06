@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7D03ED2C1437E994009688CA /* UpgradeScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7D03ED2B1437E994009688CA /* UpgradeScene.mm */; };
+		7D03ED2C1437E994009688CA /* UpgradeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7D03ED2B1437E994009688CA /* UpgradeLayer.mm */; };
 		7D29528B143AA15F00F13B37 /* logo-ball-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D295289143AA15F00F13B37 /* logo-ball-hd.png */; };
 		7D29528C143AA15F00F13B37 /* logo-ball.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D29528A143AA15F00F13B37 /* logo-ball.png */; };
 		7D295298143AA16E00F13B37 /* continue-button-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D29528E143AA16E00F13B37 /* continue-button-selected.png */; };
@@ -197,6 +197,8 @@
 		7D36B3DC143B9CC800891FE2 /* megalopolis-48.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D36B3D6143B9CC800891FE2 /* megalopolis-48.png */; };
 		7D36B3DD143B9CC800891FE2 /* megalopolis-50-hd.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 7D36B3D7143B9CC800891FE2 /* megalopolis-50-hd.fnt */; };
 		7D36B3DE143B9CC800891FE2 /* megalopolis-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D36B3D8143B9CC800891FE2 /* megalopolis-100.png */; };
+		7D50747B143DAC8B004BC5F9 /* 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7D50747A143DAC8B004BC5F9 /* 3.mp3 */; };
+		7D50747E143DEB15004BC5F9 /* UserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D50747D143DEB15004BC5F9 /* UserDefaults.plist */; };
 		7D55454214364A2E00407983 /* InfoLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7D55453F14364A2E00407983 /* InfoLayer.mm */; };
 		7D568EF51434EF79001AB0E3 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D568EF31434EF6C001AB0E3 /* GameKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7D936786143B498600FCCA57 /* about.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D936784143B498600FCCA57 /* about.png */; };
@@ -404,7 +406,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7D03ED2B1437E994009688CA /* UpgradeScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UpgradeScene.mm; sourceTree = "<group>"; };
+		7D03ED2B1437E994009688CA /* UpgradeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UpgradeLayer.mm; sourceTree = "<group>"; };
 		7D295289143AA15F00F13B37 /* logo-ball-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-ball-hd.png"; sourceTree = "<group>"; };
 		7D29528A143AA15F00F13B37 /* logo-ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-ball.png"; sourceTree = "<group>"; };
 		7D29528E143AA16E00F13B37 /* continue-button-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "continue-button-selected.png"; sourceTree = "<group>"; };
@@ -757,8 +759,10 @@
 		7D36B3D6143B9CC800891FE2 /* megalopolis-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "megalopolis-48.png"; sourceTree = "<group>"; };
 		7D36B3D7143B9CC800891FE2 /* megalopolis-50-hd.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "megalopolis-50-hd.fnt"; sourceTree = "<group>"; };
 		7D36B3D8143B9CC800891FE2 /* megalopolis-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "megalopolis-100.png"; sourceTree = "<group>"; };
+		7D50747A143DAC8B004BC5F9 /* 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 3.mp3; sourceTree = "<group>"; };
+		7D50747D143DEB15004BC5F9 /* UserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UserDefaults.plist; sourceTree = "<group>"; };
 		7D55453F14364A2E00407983 /* InfoLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InfoLayer.mm; sourceTree = "<group>"; };
-		7D55454014364A2E00407983 /* UpgradeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpgradeScene.h; sourceTree = "<group>"; };
+		7D55454014364A2E00407983 /* UpgradeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; path = UpgradeLayer.h; sourceTree = "<group>"; };
 		7D568EF31434EF6C001AB0E3 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		7D568EF61434F32E001AB0E3 /* GameSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSingleton.h; sourceTree = "<group>"; };
 		7D936784143B498600FCCA57 /* about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about.png; sourceTree = "<group>"; };
@@ -1049,8 +1053,8 @@
 				7DBE360B1435FB4300E30B89 /* LevelSelectLayer.mm */,
 				7D2952A4143B430200F13B37 /* InfoLayer.h */,
 				7D55453F14364A2E00407983 /* InfoLayer.mm */,
-				7D55454014364A2E00407983 /* UpgradeScene.h */,
-				7D03ED2B1437E994009688CA /* UpgradeScene.mm */,
+				7D55454014364A2E00407983 /* UpgradeLayer.h */,
+				7D03ED2B1437E994009688CA /* UpgradeLayer.mm */,
 			);
 			path = revolveball;
 			sourceTree = "<group>";
@@ -1074,6 +1078,7 @@
 				7D31B616142D0BDE0020E8B6 /* Icon.png */,
 				7D31B618142D0BDE0020E8B6 /* Icon@2x.png */,
 				7D31B61A142D0BDE0020E8B6 /* Info.plist */,
+				7D50747D143DEB15004BC5F9 /* UserDefaults.plist */,
 				7D31B61B142D0BDF0020E8B6 /* iTunesArtwork */,
 			);
 			name = Resources;
@@ -1760,6 +1765,7 @@
 		7DBE36DF143645B300E30B89 /* music */ = {
 			isa = PBXGroup;
 			children = (
+				7D50747A143DAC8B004BC5F9 /* 3.mp3 */,
 				7D2952A2143AA78300F13B37 /* 2.mp3 */,
 				7DBE36E0143645B300E30B89 /* gameplay.mp3 */,
 				7DBE36E1143645B300E30B89 /* level-select.mp3 */,
@@ -2109,6 +2115,8 @@
 				7D35629A143CE0CA0013B69B /* next-button.png in Resources */,
 				7D35629B143CE0CA0013B69B /* prev-button-hd.png in Resources */,
 				7D35629C143CE0CA0013B69B /* prev-button.png in Resources */,
+				7D50747B143DAC8B004BC5F9 /* 3.mp3 in Resources */,
+				7D50747E143DEB15004BC5F9 /* UserDefaults.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2259,7 +2267,7 @@
 				7DBE360D1435FB4300E30B89 /* LevelSelectLayer.mm in Sources */,
 				7DBE360F1435FBC000E30B89 /* GameSingleton.mm in Sources */,
 				7D55454214364A2E00407983 /* InfoLayer.mm in Sources */,
-				7D03ED2C1437E994009688CA /* UpgradeScene.mm in Sources */,
+				7D03ED2C1437E994009688CA /* UpgradeLayer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
