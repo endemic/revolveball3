@@ -181,8 +181,13 @@
 #if TARGET_IPHONE_SIMULATOR
 				CCLOG(@"App Store is not supported on the iOS simulator. Unable to open App Store page.");
 #else
-				// they want to rate it
-				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=467395560"]];
+#if kLiteVersion
+				// they want to rate it - lite
+				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=468133493"]];
+#else
+				// they want to rate it - full
+				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=409351780"]];
+#endif
 #endif
 				break;
 			default:

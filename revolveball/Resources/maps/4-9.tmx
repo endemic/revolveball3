@@ -4,17 +4,17 @@
   <property name="name" value="More Spikes"/>
   <property name="time" value="30"/>
  </properties>
- <tileset firstgid="1" name="world-4-tileset" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="texture" tilewidth="32" tileheight="32">
   <image source="world-4-tileset.png"/>
  </tileset>
  <layer name="Border" width="100" height="100">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3ZywrDIBAFULtp/6CPZf7/J0topVmUUKOJgz0H3AUjcxnNIyUAAAAAAAAAAACA/k6BBq86XAMMebzMdbj3XkSSRyaPWKLUIco6eiutw6NytFrHqErrcEt1z1Df9sY8J+XPnzW1y3lMDef8F3vm0XLO0fToj6Wpcs7RbD0/tt5Lf6xb1uHyw/XOj33pj1hK389b5pH7RB4fPfNoMedo5jqUvmM7P/Zz5L8K/RHL2t7oP9bxWn7bP7+HPLaTRyw1e5L9CgAAAAAAAAAAAAAAAAAAAAAAAACA0T0B2jw9tECcAAA=
+   H4sIAAAAAAAAA+3ZywrDIBAFULtp/6CPZf7/J0tIpVmUUKOpgz0H3AUjcxnNIyUAAAAAAAAAAAAAAABYnAINljpcAwx5LOY63HsvIskjk0csUeoQZR29ldbhUTlarWNUpXW4pbpnqE97Y56T8ufPmtrlPKaGc/6LI/NoOedoevTH2lQ552j2nh9776U/tq3rcPnieufHsfRHLKXv5y3zyH0ij7eeebSYczRzHUrfsZ0fx/nlvwr9EcvW3ug/1u+1/LZ/fg157CePWGr2JPsVAAAAAAAAAAAAAAAAAAAAAADAcZ6nnjV4QJwAAA==
   </data>
  </layer>
  <layer name="Extras" width="100" height="100">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3OQQkAAAgEMN/av68pRDi2BKsCAAAAAAAAAAAAAOBCfwcAAIB48x0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAItSzDF7VAnAAA
+   H4sIAAAAAAAAA+3OQQkAAAgEMN/av68lBOHYEqwKAAAAAAAAAAAAAAAAAHL1dwAAAIg33wEAAAAAAAAAAAAAAAAAAAAAAAAAAADg3AIuwK2uQJwAAA==
   </data>
  </layer>
 </map>

@@ -17,9 +17,19 @@ TO DO
 -----
 * TEST "data reset" functionality
 * TEST ending scene
-* Add "ready" "go" beeps
 * Start playing music on start of level, then pause, then unpause to see if that fixes lag
 * Insert callback for playing the level complete sound
 * Test "lite" version
 * Add some sort of indicator to levels to show they are completed
-* Add code for end of game stuff
+* Update levels to have a center anchor point
+
+Version Info
+------------
+
+Lite - v1.0
+Bundle ID: com.ganbarugames.revolveballlite
+Apple ID: 468133493
+
+Full - v1.2
+Bundle ID: com.ganbarugames.revolveball
+Apple ID: 409351780
