@@ -76,7 +76,7 @@
 		// faster times on your 
 		// favorite levels.
 		CCLabelBMFont *label = [CCLabelBMFont labelWithString:@"Thanks for playing!\nYou are a Revolve Ball\nexpert! Try to get even\nfaster times on your\nfavorite levels." fntFile:[NSString stringWithFormat:@"megalopolis-16%@.fnt", hdSuffix]];
-		label.position = ccp(windowSize.width / 2, title.position.y - title.contentSize.height * 1.5);
+		label.position = ccp(windowSize.width / 2, title.position.y - title.contentSize.height * 2);
 		[self addChild:label z:1];
 		
 		// Play sound effect =]

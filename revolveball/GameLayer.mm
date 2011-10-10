@@ -258,9 +258,10 @@
 		{
 			// Hide the timer
 			timerLabel.visible = NO;
-			
+#if !kDebug
 			// Run a method which limits access to certain areas
 			[self blockHubEntrances];
+#endif
 		}
 		
 		// Create Box2D world
@@ -384,13 +385,13 @@
 							{
 								b2Vec2 verts[] = 
 								{
-									b2Vec2(-0.17f, 0.17f),
+									b2Vec2(-0.20f, 0.20f),
 									b2Vec2(-0.25f, 0.0f),
-									b2Vec2(-0.17f, -0.17f),
+									b2Vec2(-0.20f, -0.20f),
 									b2Vec2(0.0f, -0.25f),
-									b2Vec2(0.17f, -0.17f),
+									b2Vec2(0.20f, -0.20f),
 									b2Vec2(0.25f, 0.0f),
-									b2Vec2(0.17f, 0.17f),
+									b2Vec2(0.20f, 0.20f),
 									b2Vec2(0.0f, 0.25f)
 								};
 								
@@ -487,15 +488,18 @@
 		if (isHubLevel == YES)
 		{
 			// Start playing music if it's not already playing
-			if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
+			if ([[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying] == NO)
 			{
 				[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"3.mp3"];
 			}
 		}
 		else
 		{
-			[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
-			[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"2.mp3"];
+			// Start playing music if it's not already playing
+			if ([[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying] == NO)
+			{
+				[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"2.mp3"];
+			}
 		}
 	}
 	return self;

@@ -158,6 +158,13 @@
 		[self addChild:copyright z:1];
 				
 		[self preloadAudio];
+		
+		// Play random music track
+		if ([[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying] == NO)
+		{
+			int trackNumber = (float)(arc4random() % 100) / 100 * 2 + 1;	// 1 - 3
+			[[SimpleAudioEngine sharedEngine] playBackgroundMusic:[NSString stringWithFormat:@"%i.mp3", trackNumber]];
+		}
 	}
 	return self;
 }

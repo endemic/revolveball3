@@ -45,9 +45,9 @@
 		}
 		
 		// Start playing music if it's not already playing
-		if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
+		if ([[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying] == NO)
 		{
-			[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"2.mp3"];
+//			[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"2.mp3"];
 		}
 		
 #if kLiteVersion
@@ -161,12 +161,12 @@
 			// Play SFX
 			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
 			
+			// Stop the BGM
+			[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+			
 			// Load current level stored in singleton variables
 			CCTransitionRotoZoom *transition = [CCTransitionRotoZoom transitionWithDuration:1.0 scene:[GameLayer scene]];
 			[[CCDirector sharedDirector] replaceScene:transition];
-			
-			// Stop the BGM
-			[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
 		}];
 		CCMenu *playButtonMenu = [CCMenu menuWithItems:playButton, nil];
 		playButtonMenu.position = ccp(windowSize.width / 2, windowSize.height / 10);

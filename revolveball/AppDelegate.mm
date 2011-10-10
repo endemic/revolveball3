@@ -16,6 +16,7 @@
 #import "GameSingleton.h"
 
 #import "LevelSelectLayer.h"
+#import "CreditsLayer.h"
 
 @implementation AppDelegate
 
@@ -117,10 +118,11 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults registerDefaults:[NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"UserDefaults" ofType:@"plist"]]];
 	
-	[[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:0.3];
+	[[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:0.2];
 	
 	// Run the intro Scene
-	[[CCDirector sharedDirector] runWithScene:[TitleLayer scene]];
+	[[CCDirector sharedDirector] runWithScene:[LogoLayer scene]];
+//	[[CCDirector sharedDirector] runWithScene:[CreditsLayer scene]];
 }
 
 

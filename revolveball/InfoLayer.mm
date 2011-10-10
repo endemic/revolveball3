@@ -155,8 +155,6 @@
 				
 				[defaults setObject:[d objectForKey:@"levelData"] forKey:@"levelData"];
 				
-				NSLog(@"Level data: %@", [defaults objectForKey:@"levelData"]);
-				
 				// Reset game completion status
 				[defaults setBool:NO forKey:@"completedGame"];
 				

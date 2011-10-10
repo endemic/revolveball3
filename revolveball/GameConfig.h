@@ -43,4 +43,5 @@
 
 #endif // __GAME_CONFIG_H
 
-#define kLiteVersion 1
+#define kLiteVersion 0
+#define kDebug 1
