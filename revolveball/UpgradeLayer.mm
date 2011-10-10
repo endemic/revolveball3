@@ -52,7 +52,7 @@
 		}
 		
 		// Create/add background
-		CCSprite *bg = [CCSprite spriteWithFile:[NSString stringWithFormat:@"background-0%@.png", hdSuffix]];
+		CCSprite *bg = [CCSprite spriteWithFile:[NSString stringWithFormat:@"background-1%@.png", hdSuffix]];
 		bg.position = ccp(windowSize.width / 2, windowSize.height / 2);
 		[self addChild:bg z:0];
 		
@@ -88,7 +88,7 @@
 			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
 			
 			// Go back to level select
-			CCTransitionTurnOffTiles *transition = [CCTransitionTurnOffTiles transitionWithDuration:0.5 scene:[LevelSelectLayer scene]];
+			CCTransitionRotoZoom *transition = [CCTransitionRotoZoom transitionWithDuration:0.5 scene:[LevelSelectLayer scene]];
 			[[CCDirector sharedDirector] replaceScene:transition];
 		}];
 		

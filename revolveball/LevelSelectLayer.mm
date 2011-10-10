@@ -28,9 +28,7 @@
 - (id)init
 {
 	if ((self = [super init]))
-	{
-		CCLOG(@"Trying to init the level select layer!");
-		
+	{		
 		// Get window size
 		windowSize = [CCDirector sharedDirector].winSize;
 		
@@ -99,7 +97,7 @@
 		[self addChild:topMenu z:2];
 		
 		// Set up the previous/next buttons
-		prevButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"prev-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"prev-button%@.png", hdSuffix] disabledImage:[NSString stringWithFormat:@"prev-button%@.png", hdSuffix] block:^(id sender) {
+		prevButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"prev-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"prev-button%@.png", hdSuffix] disabledImage:[NSString stringWithFormat:@"prev-button-disabled%@.png", hdSuffix] block:^(id sender) {
 			[GameSingleton sharedGameSingleton].currentLevel--;
 			
 			// Disable the previous button if we're at the end of the line
@@ -121,7 +119,7 @@
 			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
 		}];
 		
-		nextButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"next-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"next-button%@.png", hdSuffix] disabledImage:[NSString stringWithFormat:@"next-button%@.png", hdSuffix] block:^(id sender) {
+		nextButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"next-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"next-button%@.png", hdSuffix] disabledImage:[NSString stringWithFormat:@"next-button-disabled%@.png", hdSuffix] block:^(id sender) {
 			[GameSingleton sharedGameSingleton].currentLevel++;
 			
 			// Disable the next button if we're at the end of the line
@@ -141,7 +139,17 @@
 			
 			// Play SFX
 			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
-		}];	
+		}];
+		
+		if ([GameSingleton sharedGameSingleton].currentLevel == levelsPerWorld)
+		{
+			nextButton.isEnabled = NO;
+		}
+		else if ([GameSingleton sharedGameSingleton].currentLevel == 1)
+		{
+			// We start off at level 1, so "previous" button is disabled
+			prevButton.isEnabled = NO;
+		}
 		
 		CCMenu *prevNextMenu = [CCMenu menuWithItems:prevButton, nextButton, nil];
 		[prevNextMenu alignItemsHorizontallyWithPadding:220 * fontMultiplier];
@@ -190,19 +198,28 @@
 		// Array of map objects
 		maps = [[NSMutableArray arrayWithCapacity:levelsPerWorld] retain];
 		
-		// Load TMX maps into array
+		// Load TMX map into array
 		for (int i = 0; i < levelsPerWorld; i++)
 		{
-			// Create string that is equal to map filename
-			NSString *mapFile = [NSString stringWithFormat:@"%i-%i.tmx", [GameSingleton sharedGameSingleton].currentWorld, i + 1];
-			
-			CCTMXTiledMap *map = [CCTMXTiledMap tiledMapWithTMXFile:mapFile];
-			map.position = ccp(windowSize.width / 2, windowSize.height / 1.75);
-			map.scale = 0.10 * fontMultiplier;		// Make it really small!
-			map.anchorPoint = ccp(0.5, 0.5);		// Try to set rotation point in the center of the map
-			
-			// Create map obj so we can get its' name + time limit
-			[maps addObject:map];
+			// Only load the currently displayed level
+			if ([GameSingleton sharedGameSingleton].currentLevel == i + 1)
+			{
+				// Create string that is equal to map filename
+				NSString *mapFile = [NSString stringWithFormat:@"%i-%i.tmx", [GameSingleton sharedGameSingleton].currentWorld, i + 1];
+				
+				CCTMXTiledMap *map = [CCTMXTiledMap tiledMapWithTMXFile:mapFile];
+				map.position = ccp(windowSize.width / 2, windowSize.height / 1.75);
+				map.scale = 0.10 * fontMultiplier;		// Make it really small!
+				map.anchorPoint = ccp(0.5, 0.5);		// Try to set rotation point in the center of the map
+				
+				// Create map obj so we can get its' name + time limit
+				[maps addObject:map];
+			}
+			// Otherwise, just add a null obj
+			else
+			{
+				[maps addObject:[NSNull null]];
+			}
 		}
 		
 		// Add descriptive labels that show level info, such as title, best time, etc.
@@ -237,13 +254,29 @@
 /* Updates labels that show best time/level title/etc. */
 - (void)displayLevelInfo
 {
+	if ([maps objectAtIndex:[GameSingleton sharedGameSingleton].currentLevel - 1] == [NSNull null])
+	{
+		// Create string that is equal to map filename
+		NSString *mapFile = [NSString stringWithFormat:@"%i-%i.tmx", [GameSingleton sharedGameSingleton].currentWorld, [GameSingleton sharedGameSingleton].currentLevel];
+		
+		CCTMXTiledMap *m = [CCTMXTiledMap tiledMapWithTMXFile:mapFile];
+		m.position = ccp(windowSize.width / 2, windowSize.height / 1.75);
+		m.scale = 0.10 * fontMultiplier;		// Make it really small!
+		m.anchorPoint = ccp(0.5, 0.5);		// Try to set rotation point in the center of the map
+		
+		[maps replaceObjectAtIndex:[GameSingleton sharedGameSingleton].currentLevel - 1 withObject:m];
+	}
+	
 	// Loop through all maps and remove them from display if possible
 	for (int i = 0; i < [maps count]; i++)
 	{
-		CCTMXTiledMap *map = [maps objectAtIndex:i];
-		if (map.parent == self)
+		if ([maps objectAtIndex:i] != [NSNull null])
 		{
-			[self removeChild:map cleanup:YES];
+			CCTMXTiledMap *map = [maps objectAtIndex:i];
+			if (map.parent == self)
+			{
+				[self removeChild:map cleanup:YES];
+			}
 		}
 	}
 	

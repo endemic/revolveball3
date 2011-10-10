@@ -53,6 +53,13 @@
 		[logo setPosition:ccp(windowSize.width / 2, windowSize.height - logo.contentSize.height / 1.5)];
 		[self addChild:logo z:1];
 		
+		// Create "lite" logo addition
+#if kLiteVersion
+		CCSprite *lite = [CCSprite spriteWithFile:[NSString stringWithFormat:@"lite-label%@.png", hdSuffix]];
+		[lite setPosition:ccp(windowSize.width / 2 - lite.contentSize.width * 1.2, logo.position.y - lite.contentSize.height * 2.3)];
+		[self addChild:lite z:1];
+#endif
+		
 		// Create the "ball" that will drop in on the logo
 		CCSprite *ball = [CCSprite spriteWithFile:[NSString stringWithFormat:@"logo-ball%@.png", hdSuffix]];
 		ball.position = ccp(logo.position.x + 90 * fontMultiplier, windowSize.height + ball.contentSize.height);

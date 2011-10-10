@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="32" tileheight="32">
  <properties>
-  <property name="name" value="Switched Again"/>
-  <property name="time" value="45"/>
+  <property name="name" value="Pegs"/>
+  <property name="time" value="90"/>
  </properties>
  <tileset firstgid="1" name="texture" tilewidth="32" tileheight="32">
   <image source="world-4-tileset.png"/>
  </tileset>
  <layer name="Border" width="100" height="100">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3ZW2rDMBAF0PT9H+gCQqGl+99gMUlxMJJlyZJqqnNABGNlMHOxJ4/TCQAAAAAAAAAAAAAAeOiw2G7q10vFel+B+mzXul/yyCOPY1n2q/a8MFPyhPqX2pNTb+k5s95ofnvzvjgO7cmpt3fPqHrfH7n1RjP15uNulcyEtXOxPYSlenNOvKfkfpBHXOs8PgN75BHn/jiWqTfnu5U7T0rmhTziavcq9P1CHtu16JU8ysnjWEK9Ws6Tkt+sco6Z1eidPOqRx7HI41i29M786KdF70oy5uov8kjtH1ntPJ4iNb4zrmFkJc/+vfMkdQ0j6zGL9+Y1kl551K75X7V8Xl1W3rM8z1WtZ/v0X8nrbeX2Vx6zvXm83V7X8rgkjuUxm3rxGDkX+uwa4/6oY+s8aL0AAAAAAAAAAAAAAAAAAID+fgA9+YraQJwAAA==
+   H4sIAAAAAAAAA+2ajU6sMBBG8arX5yDx/Z/RECWSZij9mWk/4ZykYdll6TLHmZbissBoXowGcziLPU7mgA8tjnH/OHkfxkF+6LBmPsPHWFIXzK/mkbrI5QnEgotYrHu5XDvi7eLpNa/nmr1dWOd7Wu61+hjhIqovZVp8RLp4XX5r1b/APlWxxoOa8cOz/9dkP3XyhPEkvcbR15zGv/bzu4EPLZR8vC3X9evuzPaxcRyrdyfWeHX1287G/Nr3Z6LgY8OKTY2PNdm2vp/2X7P1QMXHxtn65HG/5HutbnLHXm294mb5aFk38SKNv7V/bO+Hz9eO12mdbMEjVj1xjfCT85Ejol7V5kjJ77sivd61sJWcq4UWHxH16uw7LS5K+tnpiWHqJ8KHNd8qycuza8/9LUXVq5L+S85TOoZE+phFba0qybGz/RZysbmjj2P/pdsc3k68fZTUn9k+vPF0EuHD45i/hpeTY2xWYz89puZ8Pcf8RTyc5HxYx9Sez5pL39XHRq+TkvuCHh/W6zv72OhxYo2zPXN2fHyTOqi911gWnzjh45fIuW/NOT5/2tN9bETNfVvOgY9vatdGWsaJXN87+JgPPrTwuP+IyNun0nt/bo1/vfOUJ9PjIxd3nLTRep+TjjVWncOJH9a6jOXqql4xnvhQGkd8jAEferTel+JjHlu8Gc91aJkLQxxX9QrGks6LcTEX7+dj0Ac+tMCHFvjQAh9a4GM+uXV5nhOOpSbOOIlnj/HZOhVriWMhP7Qo+f+g1TgWYiA/tEjXDHOv8REP+aEF8ystyA8tmF9pQX5owfxKC/JDC+ZXWpAfWjC/0oL80IPng7rw/FwLfGiBDy3woQU+tMCHFvjQAh9a4GMM+/OLq8Z67hhaYouPOPChRbquXlu7wBfGaS3S/Cht5EsMPTnx/6eRV37gQ4tj7aFeAQAAAABALV/7V/geQJwAAA==
   </data>
  </layer>
  <layer name="Extras" width="100" height="100">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3UIQ4AIBADwZMQ/v9ffC0hR8iMq6vaKgAAAAAAAAAAAAAAADg3uw8AAAAAAAA8YMReLS8AuCnbnu0HAAAAAAAAAAAAAAAAAAAAAADgDxsS94aIQJwAAA==
+   H4sIAAAAAAAAA+3cwQ2AIBBFQY5qCZRg/wV6oQMDX9mZCl7CHiDZ0BoAAMB7dzoAAAAANnKkAwBgsjMdUEzybuGsoQ7vGKoy+8BKPR0AAAAAAJu40gEAAACD/SMAAAAAAAAAAAAAWMf+LgAAAABf4B8sAACAf3oAVY84NECcAAA=
   </data>
  </layer>
 </map>

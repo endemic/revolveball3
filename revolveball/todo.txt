@@ -18,9 +18,9 @@ TO DO
 * TEST ending scene
 * Start playing music on start of level, then pause, then unpause to see if that fixes lag
 * Insert callback for playing the level complete sound
-* Test "lite" version
-* Create disabled prev/next level buttons
-* Fix sprite bleeding around "peg" object
+* Fix music not playing in levels
+* Fix sprite bleeding around "peg" object?
+* Take screenshots for iTunes Connect
 
 Version Info
 ------------

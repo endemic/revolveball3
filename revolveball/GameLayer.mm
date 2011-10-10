@@ -489,12 +489,13 @@
 			// Start playing music if it's not already playing
 			if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
 			{
-				[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"2.mp3"];
+				[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"3.mp3"];
 			}
 		}
 		else
 		{
-			[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"3.mp3"];
+			[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+			[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"2.mp3"];
 		}
 	}
 	return self;
@@ -1399,7 +1400,7 @@
 - (void)createParticleEmitterAt:(CGPoint)position
 {
 	// Create quad particle system (faster on 3rd gen & higher devices, only slightly slower on 1st/2nd gen)
-	CCParticleSystemQuad *particleSystem = [[CCParticleSystemQuad alloc] initWithTotalParticles:4];
+	CCParticleSystemQuad *particleSystem = [[CCParticleSystemQuad alloc] initWithTotalParticles:20];
 	
 	// duration is for the emitter
 	[particleSystem setDuration:0.10f];
@@ -1434,9 +1435,12 @@
 	[particleSystem setLifeVar:0];
 	
 	// size, in pixels
-	[particleSystem setStartSize:16.0f];
-	[particleSystem setStartSizeVar:0.0f];
-	[particleSystem setEndSize:kCCParticleStartSizeEqualToEndSize];
+	[particleSystem setStartSize:16 * fontMultiplier];
+	[particleSystem setStartSizeVar:4 * fontMultiplier];
+	
+	[particleSystem setEndSize:8 * fontMultiplier];
+	[particleSystem setEndSizeVar:4 * fontMultiplier];
+	//[particleSystem setEndSize:kCCParticleStartSizeEqualToEndSize];
 	
 	// emits per second
 	[particleSystem setEmissionRate:[particleSystem totalParticles] / [particleSystem duration]];
