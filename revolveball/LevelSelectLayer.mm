@@ -47,7 +47,7 @@
 		// Start playing music if it's not already playing
 		if ([[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying] == NO)
 		{
-//			[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"2.mp3"];
+			[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"1.mp3"];
 		}
 		
 #if kLiteVersion

@@ -28,7 +28,6 @@
 }
 
 + (id)scene;
-- (void)preloadAudio;
 
 // Deals with redirects for a LinkShare referral
 - (void)openReferralURL:(NSURL *)referralURL;

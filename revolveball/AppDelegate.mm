@@ -15,9 +15,6 @@
 #import "LogoLayer.h"
 #import "GameSingleton.h"
 
-#import "LevelSelectLayer.h"
-#import "CreditsLayer.h"
-
 @implementation AppDelegate
 
 @synthesize window;
@@ -118,11 +115,31 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults registerDefaults:[NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"UserDefaults" ofType:@"plist"]]];
 	
-	[[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:0.2];
+	// Set audio mixer rate to lower level
+	[CDSoundEngine setMixerSampleRate:CD_SAMPLE_RATE_MID];
+	
+	// Preload some SFX
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"button-press.caf"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"spike-hit.caf"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"wall-hit.caf"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"wall-break.caf"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"peg-hit.caf"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"time-pickup.caf"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"toggle.caf"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"boost.caf"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"level-complete.caf"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"level-fail.caf"];
+	
+	// Preload music
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"1.mp3"];
+	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"2.mp3"];
+	
+	// Set BGM volume
+	[[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:0.5];
+//	NSLog(@"Current background music volume: %f", [[SimpleAudioEngine sharedEngine] backgroundMusicVolume]);
 	
 	// Run the intro Scene
 	[[CCDirector sharedDirector] runWithScene:[LogoLayer scene]];
-//	[[CCDirector sharedDirector] runWithScene:[CreditsLayer scene]];
 }
 
 

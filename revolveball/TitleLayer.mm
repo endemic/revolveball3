@@ -120,7 +120,7 @@
 			
 			// Create "go to App Store?" alert
 			UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"Go to App Store?"
-																 message:@"The full version has 35 more levels to beat, along with Game Center leaderboards!"
+																 message:@"The full version has 35 more levels to complete, along with Game Center leaderboards!"
 																delegate:self
 													   cancelButtonTitle:@"Cancel"
 													   otherButtonTitles:@"Go", nil] autorelease];
@@ -157,48 +157,13 @@
 		copyright.position = ccp(windowSize.width / 2, copyright.contentSize.height);
 		[self addChild:copyright z:1];
 				
-		[self preloadAudio];
-		
 		// Play random music track
 		if ([[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying] == NO)
 		{
-			int trackNumber = (float)(arc4random() % 100) / 100 * 2 + 1;	// 1 - 3
-			[[SimpleAudioEngine sharedEngine] playBackgroundMusic:[NSString stringWithFormat:@"%i.mp3", trackNumber]];
+			[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"1.mp3"];
 		}
 	}
 	return self;
-}
-
-- (void)preloadAudio
-{
-	// Info about running this method in background: http://stackoverflow.com/questions/2441856/iphone-sdk-leaking-memory-with-performselectorinbackground
-	//NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	
-	// Set audio mixer rate to lower level
-	[CDSoundEngine setMixerSampleRate:CD_SAMPLE_RATE_MID];
-	
-	// Preload some SFX
-	[[SimpleAudioEngine sharedEngine] preloadEffect:@"button-press.caf"];
-	[[SimpleAudioEngine sharedEngine] preloadEffect:@"spike-hit.caf"];
-	[[SimpleAudioEngine sharedEngine] preloadEffect:@"wall-hit.caf"];
-	[[SimpleAudioEngine sharedEngine] preloadEffect:@"wall-break.caf"];
-	[[SimpleAudioEngine sharedEngine] preloadEffect:@"peg-hit.caf"];
-	[[SimpleAudioEngine sharedEngine] preloadEffect:@"time-pickup.caf"];
-	[[SimpleAudioEngine sharedEngine] preloadEffect:@"toggle.caf"];
-	[[SimpleAudioEngine sharedEngine] preloadEffect:@"boost.caf"];
-	[[SimpleAudioEngine sharedEngine] preloadEffect:@"level-complete.caf"];
-	[[SimpleAudioEngine sharedEngine] preloadEffect:@"level-fail.caf"];
-	
-	// Preload music - eventually do this based on the "world" that is selected
-//	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"level-select.mp3"];
-	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"2.mp3"];
-	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"gameplay.mp3"];
-	
-	// Set BGM volume
-	//NSLog(@"Current background music volume: %f", [[SimpleAudioEngine sharedEngine] backgroundMusicVolume]);
-	[[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:0.75];
-	
-	//[pool release];
 }
 
 /**

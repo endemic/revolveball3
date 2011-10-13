@@ -490,7 +490,7 @@
 			// Start playing music if it's not already playing
 			if ([[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying] == NO)
 			{
-				[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"3.mp3"];
+				[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"1.mp3"];
 			}
 		}
 		else
@@ -1404,7 +1404,7 @@
 - (void)createParticleEmitterAt:(CGPoint)position
 {
 	// Create quad particle system (faster on 3rd gen & higher devices, only slightly slower on 1st/2nd gen)
-	CCParticleSystemQuad *particleSystem = [[CCParticleSystemQuad alloc] initWithTotalParticles:20];
+	CCParticleSystemQuad *particleSystem = [[CCParticleSystemQuad alloc] initWithTotalParticles:25];
 	
 	// duration is for the emitter
 	[particleSystem setDuration:0.10f];
@@ -1428,15 +1428,15 @@
 	
 	// angle
 	[particleSystem setAngle:map.rotation - 90];
-	[particleSystem setAngleVar:90];
+	[particleSystem setAngleVar:270];
 	
 	// emitter position
 	[particleSystem setPosition:position];
 	[particleSystem setPosVar:CGPointZero];
 	
 	// life is for particles particles - in seconds
-	[particleSystem setLife:0.35f];
-	[particleSystem setLifeVar:0];
+	[particleSystem setLife:0.4f];
+	[particleSystem setLifeVar:0.1f];
 	
 	// size, in pixels
 	[particleSystem setStartSize:16 * fontMultiplier];

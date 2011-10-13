@@ -50,9 +50,8 @@
 		[background.texture setAliasTexParameters];
 		[self addChild:background z:0];
 		
-		
 		// Create back button/menu
-		CCMenuItemImage *backButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"back-title-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"back-title-button-selected%@.png", hdSuffix] block:^(id sender) {
+		CCMenuItemImage *continueButton = [CCMenuItemImage itemFromNormalImage:[NSString stringWithFormat:@"continue-button%@.png", hdSuffix] selectedImage:[NSString stringWithFormat:@"continue-button-selected%@.png", hdSuffix] block:^(id sender) {
 			// Play sound effect
 			[[SimpleAudioEngine sharedEngine] playEffect:@"button-press.caf"];
 			
@@ -61,25 +60,16 @@
 			[[CCDirector sharedDirector] replaceScene:transition];
 		}];
 		
-		CCMenu *topMenu = [CCMenu menuWithItems:backButton, nil];
-		topMenu.position = ccp(backButton.contentSize.width / 1.5, windowSize.height - backButton.contentSize.height);
-		[self addChild:topMenu z:1];
+		CCMenu *menu = [CCMenu menuWithItems:continueButton, nil];
+		menu.position = ccp(windowSize.width / 2, continueButton.contentSize.height * 2);
+		[menu alignItemsVerticallyWithPadding:11];
+		[self addChild:menu z:1];
 		
-		// Create/add title
-		CCSprite *title = [CCSprite spriteWithFile:[NSString stringWithFormat:@"thanks%@.png", hdSuffix]];
-		title.position = ccp(windowSize.width / 2, windowSize.height - title.contentSize.height * 1.5);
-		[self addChild:title z:1];
+		CCSprite *creditsText = [CCSprite spriteWithFile:[NSString stringWithFormat:@"credits%@.png", hdSuffix]];
+		creditsText.position = ccp(windowSize.width / 2, windowSize.height / 2);
+		[self addChild:creditsText z:1];
 		
-		// Thanks for playing!
-		// You are a Revolve Ball 
-		// expert! Try to get even 
-		// faster times on your 
-		// favorite levels.
-		CCLabelBMFont *label = [CCLabelBMFont labelWithString:@"Thanks for playing!\nYou are a Revolve Ball\nexpert! Try to get even\nfaster times on your\nfavorite levels." fntFile:[NSString stringWithFormat:@"megalopolis-16%@.fnt", hdSuffix]];
-		label.position = ccp(windowSize.width / 2, title.position.y - title.contentSize.height * 2);
-		[self addChild:label z:1];
-		
-		// Play sound effect =]
+		// Play sound effect
 		[[SimpleAudioEngine sharedEngine] playEffect:@"level-complete.caf"];
 	}
 	return self;

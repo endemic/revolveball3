@@ -2,8 +2,8 @@ Revolve Ball v1.5
 -------------------------
 
 Planned new features
-	* Reworked vector-style graphics [DONE]
-	* Reworked icon [DONE]
+	* Reworked vector-style graphics
+	* Reworked icon
 	* New music
 	* "Lite" version with 5 demo levels
 	* Updated level select
@@ -15,12 +15,15 @@ Planned new features
 
 TO DO
 -----
-* TEST ending scene
-* Start playing music on start of level, then pause, then unpause to see if that fixes lag
-* Insert callback for playing the level complete sound
+* Fix sprite bleeding around "peg" object? Only on low-rez maps :/
+* Figure out "rating" link structure
+* Fix rotating ball on title screen (HD only)
 
-* Fix sprite bleeding around "peg" object?
 * Take screenshots for iTunes Connect
+	* iPhone (full) [DONE]
+	* iPhone (lite)
+	* iPad (full)
+	* iPad (lite)
 
 Version Info
 ------------
