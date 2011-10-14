@@ -35,4 +35,5 @@ maps.each { |filename|
     
   # Write the new file
   File.new(filename_base + '-hd.' + filename_extension, 'w').write document.to_xml unless document.validate
+  puts 'Writing ' + filename_base + '-hd.' + filename_extension + "\n"
 }

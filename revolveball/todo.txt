@@ -15,11 +15,7 @@ Planned new features
 
 TO DO
 -----
-* Fix sprite bleeding around "peg" object? Only on low-rez maps :/
-* Figure out "rating" link structure
-* Fix rotating ball on title screen (HD only)
-
-* Take screenshots for iTunes Connect
+* Create screenshots for iTunes Connect
 	* iPhone (full) [DONE]
 	* iPhone (lite)
 	* iPad (full)

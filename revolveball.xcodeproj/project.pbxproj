@@ -222,6 +222,7 @@
 		7D936790143B4A9B00FCCA57 /* back-title-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D93678C143B4A9B00FCCA57 /* back-title-button.png */; };
 		7D936793143B4D9700FCCA57 /* megalopolis-24.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 7D936791143B4D9700FCCA57 /* megalopolis-24.fnt */; };
 		7D936794143B4D9700FCCA57 /* megalopolis-24.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D936792143B4D9700FCCA57 /* megalopolis-24.png */; };
+		7D9494C21447E82F007DB2B2 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D9494C11447E82F007DB2B2 /* Default-Portrait~ipad.png */; };
 		7DA5E525143A5487001F5E35 /* continue-button-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DA5E51B143A5487001F5E35 /* continue-button-hd.png */; };
 		7DA5E526143A5487001F5E35 /* continue-button-selected-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DA5E51C143A5487001F5E35 /* continue-button-selected-hd.png */; };
 		7DA5E527143A5487001F5E35 /* feedback-button-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DA5E51D143A5487001F5E35 /* feedback-button-hd.png */; };
@@ -237,7 +238,6 @@
 		7DBE360C1435FB4300E30B89 /* GameLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7DBE36091435FB4300E30B89 /* GameLayer.mm */; };
 		7DBE360D1435FB4300E30B89 /* LevelSelectLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7DBE360B1435FB4300E30B89 /* LevelSelectLayer.mm */; };
 		7DBE360F1435FBC000E30B89 /* GameSingleton.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7DBE360E1435FBC000E30B89 /* GameSingleton.mm */; };
-		7DBE36FC143645B300E30B89 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DBE3615143645B200E30B89 /* Default-Portrait.png */; };
 		7DBE36FD143645B300E30B89 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DBE3616143645B200E30B89 /* Default@2x.png */; };
 		7DBE3719143645B300E30B89 /* background-0-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DBE3634143645B200E30B89 /* background-0-hd.png */; };
 		7DBE371A143645B300E30B89 /* background-0.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DBE3635143645B200E30B89 /* background-0.png */; };
@@ -799,6 +799,7 @@
 		7D93678C143B4A9B00FCCA57 /* back-title-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-title-button.png"; sourceTree = "<group>"; };
 		7D936791143B4D9700FCCA57 /* megalopolis-24.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "megalopolis-24.fnt"; sourceTree = "<group>"; };
 		7D936792143B4D9700FCCA57 /* megalopolis-24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "megalopolis-24.png"; sourceTree = "<group>"; };
+		7D9494C11447E82F007DB2B2 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "Resources/Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		7DA5E51B143A5487001F5E35 /* continue-button-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "continue-button-hd.png"; sourceTree = "<group>"; };
 		7DA5E51C143A5487001F5E35 /* continue-button-selected-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "continue-button-selected-hd.png"; sourceTree = "<group>"; };
 		7DA5E51D143A5487001F5E35 /* feedback-button-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedback-button-hd.png"; sourceTree = "<group>"; };
@@ -816,7 +817,6 @@
 		7DBE360A1435FB4300E30B89 /* LevelSelectLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelSelectLayer.h; sourceTree = "<group>"; };
 		7DBE360B1435FB4300E30B89 /* LevelSelectLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LevelSelectLayer.mm; sourceTree = "<group>"; };
 		7DBE360E1435FBC000E30B89 /* GameSingleton.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameSingleton.mm; sourceTree = "<group>"; };
-		7DBE3615143645B200E30B89 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait.png"; path = "Resources/Default-Portrait.png"; sourceTree = "<group>"; };
 		7DBE3616143645B200E30B89 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Resources/Default@2x.png"; sourceTree = "<group>"; };
 		7DBE3634143645B200E30B89 /* background-0-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-0-hd.png"; sourceTree = "<group>"; };
 		7DBE3635143645B200E30B89 /* background-0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-0.png"; sourceTree = "<group>"; };
@@ -1096,8 +1096,8 @@
 				7DBE36E2143645B300E30B89 /* sounds */,
 				7D31B60A142D0BDE0020E8B6 /* Default.png */,
 				7DBCA45C1446F2ED00F70A3F /* Default-hd.png */,
-				7DBE3615143645B200E30B89 /* Default-Portrait.png */,
 				7DBE3616143645B200E30B89 /* Default@2x.png */,
+				7D9494C11447E82F007DB2B2 /* Default-Portrait~ipad.png */,
 				7D31B60C142D0BDE0020E8B6 /* fps_images.png */,
 				7D31B60E142D0BDE0020E8B6 /* Icon-72.png */,
 				7D31B610142D0BDE0020E8B6 /* Icon-Small-50.png */,
@@ -1885,6 +1885,7 @@
 		7D31B5EB142D0BDE0020E8B6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Ganbaru Games";
 			};
 			buildConfigurationList = 7D31B5EE142D0BDE0020E8B6 /* Build configuration list for PBXProject "revolveball" */;
@@ -1919,7 +1920,6 @@
 				7D31B619142D0BDE0020E8B6 /* Icon@2x.png in Resources */,
 				7D31B61C142D0BDF0020E8B6 /* iTunesArtwork in Resources */,
 				7DAB91821430D8AB007CFB35 /* todo.txt in Resources */,
-				7DBE36FC143645B300E30B89 /* Default-Portrait.png in Resources */,
 				7DBE36FD143645B300E30B89 /* Default@2x.png in Resources */,
 				7DBE3719143645B300E30B89 /* background-0-hd.png in Resources */,
 				7DBE371A143645B300E30B89 /* background-0.png in Resources */,
@@ -2166,6 +2166,7 @@
 				7D4025B11446E11D00CB03AF /* credits-hd.png in Resources */,
 				7D4025B21446E11D00CB03AF /* credits.png in Resources */,
 				7DBCA45D1446F2ED00F70A3F /* Default-hd.png in Resources */,
+				7D9494C21447E82F007DB2B2 /* Default-Portrait~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2364,12 +2365,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = revolveball/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = revolveball/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_LDFLAGS = "-lz";
@@ -2385,18 +2391,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ganbaru Games, LLC";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ganbaru Games, LLC";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = revolveball/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = revolveball/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "2A91B7A7-7D07-4A3B-9141-317B1FCAAE1E";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2A91B7A7-7D07-4A3B-9141-317B1FCAAE1E";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "317941BD-0EA0-461D-B078-3C323E242616";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "\"revolveball/libs\"";
 				VALIDATE_PRODUCT = YES;
